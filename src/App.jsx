@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SessionExpired from "./pages/SessionExpired";
+import Bin from "./components/Admin/Bin";
 
 export const appName = "Placement Pro";
 export const appLogo = "P";
@@ -46,6 +47,7 @@ function App() {
         <Route path="/register/company" element={<CompanyRegister />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/session-expired" element={<SessionExpired />} />
+        
 
         <Route
           path="/dashboard/student/*"

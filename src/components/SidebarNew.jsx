@@ -40,7 +40,11 @@ export const SidebarNew = ({
         onClick={() => setIsMobileOpen(!isMobileOpen)}
         className="md:hidden fixed top-4 left-4 z-[60] p-3 bg-blue-600 text-white rounded-xl shadow-lg"
       >
-        {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        {isMobileOpen ? (
+          <X className="w-5 h-5" />
+        ) : (
+          <Menu className="w-5 h-5" />
+        )}
       </button>
 
       {/* Sidebar */}
@@ -140,7 +144,10 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (notificationRef.current && !notificationRef.current.contains(e.target))
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(e.target)
+      )
         setShowNotifications(false);
       if (profileRef.current && !profileRef.current.contains(e.target))
         setShowProfileMenu(false);
@@ -194,12 +201,12 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
           {showProfileMenu && (
             <div className="absolute right-0 mt-4 w-56 bg-white rounded-2xl shadow-lg border">
               <button
-                 onClick={() => {
-              sessionStorage.removeItem("token");
-              sessionStorage.removeItem("user");
-              onClose();
-              navigate("/");
-            }}
+                onClick={() => {
+                  sessionStorage.removeItem("token");
+                  sessionStorage.removeItem("user");
+                  onClose();
+                  navigate("/");
+                }}
                 className="w-full px-4 py-3 text-rose-600 font-black hover:bg-rose-50 text-left"
               >
                 <LogOut className="w-4 h-4 inline mr-2" />

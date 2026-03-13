@@ -20,6 +20,7 @@ import {
   Briefcase,
   Activity,
   Database,
+  Trash2,
 } from "lucide-react";
 
 // interface AdminDashboardProps {
@@ -41,13 +42,21 @@ import Reports from "../components/Admin/Reports";
 import { fetchUser } from "../services/studentService";
 import toast from "react-hot-toast";
 import { fetchAllJobs } from "../services/companyService";
-import allUsers from "../../utils/JSON/cpms_all_users.json"
+import allUsers from "../../utils/JSON/cpms_all_users.json";
+import Bin from "../components/Admin/Bin";
+import { fetchUserById } from "../services/authService";
 // import applications from "../../utils/JSON/cpms_apps.json"
 
 export const UserRole = {
   STUDENT: "STUDENT",
   COMPANY: "COMPANY",
   ADMIN: "ADMIN",
+};
+
+export const UserStatus = {
+  PENDING: "PENDING",
+  APPROVED: "APPROVED",
+  REJECTED: "REJECTED",
 };
 
 const AdminDashboard = ({
@@ -61,13 +70,26 @@ const AdminDashboard = ({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const currentPath = location.pathname.split("/").pop() || "overview";
   const [user, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
   const [jobs, setJobs] = useState([]);
+  // const user = JSON.parse(sessionStorage.getItem("user")) || {};
 
-  const getUserProfile = async () => {
+  const getUser = async () => {
     try {
       const res = await fetchUser();
       // console.log("res profile", res.count);
-      setUser(res.count);
+      setUsers(res.count);
+      // toast.success(res.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  };
+  const getUserProfile = async () => {
+    try {
+      const res = await fetchUserById();
+      // console.log("res profile", res.count);
+      console.log("profile :", res.user);
+      setUser(res.user);
       // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
@@ -85,6 +107,7 @@ const AdminDashboard = ({
   };
 
   useEffect(() => {
+    getUser();
     getUserProfile();
     getJobs();
   }, []);
@@ -109,17 +132,17 @@ const AdminDashboard = ({
     }
   };
 
-// const handleAction = async (id) => {
-//   try {
-//     await approveUser(id);
+  // const handleAction = async (id) => {
+  //   try {
+  //     await approveUser(id);
 
-//     // Remove user from list after approval
-//     setPending((prev) => prev.filter((u) => u._id !== id));
+  //     // Remove user from list after approval
+  //     setPending((prev) => prev.filter((u) => u._id !== id));
 
-//   } catch (error) {
-//     console.error("Approval failed", error);
-//   }
-// };
+  //   } catch (error) {
+  //     console.error("Approval failed", error);
+  //   }
+  // };
 
   const sidebarItems = [
     {
@@ -146,26 +169,39 @@ const AdminDashboard = ({
       active: currentPath === "companies",
       onClick: () => navigate("/dashboard/admin/companies"),
     },
-    {
-      icon: <Activity className="w-5 h-5" />,
-      label: "Live Activities",
-      active: currentPath === "activities",
-      onClick: () => navigate("/dashboard/admin/activities"),
-    },
+    // {
+    //   icon: <Activity className="w-5 h-5" />,
+    //   label: "Live Activities",
+    //   active: currentPath === "activities",
+    //   onClick: () => navigate("/dashboard/admin/activities"),
+    // },
     {
       icon: <PieChart className="w-5 h-5" />,
       label: "Reports",
       active: currentPath === "reports",
       onClick: () => navigate("/dashboard/admin/reports"),
     },
+    {
+      icon: <Trash2 className="w-5 h-5" />,
+      label: "Bin",
+      active: currentPath === "bin",
+      onClick: () => navigate("/dashboard/admin/bin"),
+    },
   ];
+
+  const logout = () => {
+    // console.log("Logout User");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    navigate("/");
+  };
 
   return (
     <div className="flex bg-slate-50 min-h-screen font-sans">
       <SidebarNew
         title="Admin Portal"
         userName="Principal Controller"
-        onLogout={onLogout}
+        onLogout={logout}
         items={sidebarItems}
         role="Institutional Access"
         isCollapsed={isCollapsed}
@@ -177,7 +213,7 @@ const AdminDashboard = ({
         <DashboardHeader
           title={`System Console / ${currentPath.toUpperCase()}`}
           user={user}
-          onLogout={onLogout}
+          onLogout={logout}
         />
         <div className="p-4  md:p-8 max-w-7xl mx-auto ">
           <Routes>
@@ -185,7 +221,7 @@ const AdminDashboard = ({
               path="overview"
               element={
                 <div className="space-y-8 animate-in fade-in duration-700">
-                  <div className="bg-[#0a0f1d] rounded-[3rem] p-10 md:p-14 text-white shadow-2xl relative overflow-hidden border border-white/5">
+                  <div className="bg-[#0a0f1d] rounded-[3rem] z-5 p-10 md:p-14 text-white shadow-2xl relative overflow-hidden border border-white/5">
                     <div className="relative z-10">
                       <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] border border-emerald-500/20 mb-8">
                         <ShieldCheck className="w-3.5 h-3.5" /> Core Status:
@@ -216,7 +252,7 @@ const AdminDashboard = ({
                       },
                       {
                         label: "Verified Students",
-                        value: user,
+                        value: users,
                         color: "text-indigo-600",
                         icon: <Users className="w-5 h-5" />,
                         bg: "bg-indigo-50",
@@ -265,17 +301,17 @@ const AdminDashboard = ({
               }
             />
 
-            <Route path="approvals" element={<Approvals />} />
-
             <Route path="*" element={<Navigate to="overview" />} />
+            <Route path="approvals" element={<Approvals />} />
 
             <Route path="students" element={<StudentDirectory />} />
 
             <Route path="companies" element={<HiringPartners />} />
 
-            <Route path="activities" element={<LiveActivities />} />
+            {/* <Route path="activities" element={<LiveActivities />} /> */}
 
             <Route path="reports" element={<Reports />} />
+            <Route path="bin" element={<Bin />} />
           </Routes>
         </div>
       </main>

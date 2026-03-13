@@ -2,7 +2,11 @@ import { CheckCircle2, XCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 // import allUsers from "../../../utils/JSON/cpms_all_users.json";
-import { approveUser, getPendingApprovals } from "../../services/adminService";
+import {
+  approveUser,
+  getPendingApprovals,
+  rejectUser,
+} from "../../services/adminService";
 import { UserRole } from "../../pages/AdminDashboard";
 
 // const pending = allUsers.filter(
@@ -26,12 +30,18 @@ export default function Approvals() {
   }, []);
 
   //ADD THE FUNCTION HERE
-  const handleAction = async (id, data) => {
+  const handleAction = async (id, action) => {
     try {
-      await approveUser(id, data);
+      if (action === "approve") {
+        await approveUser(id);
+      }
 
-      // remove approved user from UI
-      setPending((prev) => prev.filter((u) => u._id !== id));
+      if (action === "reject") {
+        await rejectUser(id);
+      }
+
+      // refresh pending list from backend
+      await fetchPendingUsers();
     } catch (error) {
       console.error("Approval failed", error);
     }
@@ -90,13 +100,13 @@ export default function Approvals() {
               <div className="flex gap-2 mt-4 md:mt-0">
                 <button
                   // onClick={() => handleAction(u._id, true)}
-                  onClick={() => handleAction(u._id)}
+                  onClick={() => handleAction(u._id, "approve")}
                   className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all active:scale-95"
                 >
                   <CheckCircle2 className="w-4 h-4" /> Verify
                 </button>
                 <button
-                  onClick={() => handleAction(u._id, false)}
+                  onClick={() => handleAction(u._id, "reject")}
                   // onClick={() => handleAction(u._id)}
                   className="flex items-center gap-2 bg-white border border-slate-200 text-rose-600 hover:bg-rose-50 px-5 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all active:scale-95"
                 >

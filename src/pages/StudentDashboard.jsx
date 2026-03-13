@@ -47,11 +47,12 @@ import { getStudentOverview } from "../services/studentService";
 
 const StudentDashboard = () => {
   const [jobs, setJobs] = useState([]);
-  useEffect(() => {
-    getJobs();
-    getOverview();
-  }, []);
-
+  
+  const [overview, setOverview] = useState([]);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const user = JSON.parse(sessionStorage.getItem("user")) || {};
   const getJobs = async () => {
     try {
       const res = await fetchAllJobs();
@@ -61,17 +62,16 @@ const StudentDashboard = () => {
       console.log(error);
     }
   };
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const user = JSON.parse(sessionStorage.getItem("user")) || {};
+  useEffect(() => {
+    getJobs();
+    getOverview();
+  }, []);
   // const studentApps = applications?.filter((a) => a.studentId === user.id);
 
   // const studentApps = (applications || []).filter(
   //   (a) => a.studentId === user.id,
   // );
 
-  const [overview, setOverview] = useState([]);
 
   const getOverview = async () => {
     const res = await getStudentOverview();
