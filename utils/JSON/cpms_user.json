@@ -1,0 +1,20 @@
+{
+  "id": "s_1770958504989",
+  "name": "hardik",
+  "email": "hardik@university.edu",
+  "password": "hardik123",
+  "role": "STUDENT",
+  "isApproved": true,
+  "profile": {
+    "university": "Our Tech University",
+    "department": "Information Technology",
+    "branch": "Information Technology",
+    "cgpa": "0.0",
+    "gradYear": "2026",
+    "phone": "",
+    "dob": "",
+    "skills": [],
+    "resumeUrl": "",
+    "enrollmentNumber": "123202689042"
+  }
+}

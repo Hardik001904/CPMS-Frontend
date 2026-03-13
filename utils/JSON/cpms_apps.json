@@ -1,0 +1,46 @@
+[
+  {
+    "id": "a1",
+    "jobId": "j1",
+    "jobTitle": "Software Engineer (L3)",
+    "studentName": "Alex Johnson",
+    "studentId": "s1",
+    "companyId": "c1",
+    "companyName": "Google",
+    "appliedDate": "2024-05-15",
+    "status": "Shortlisted"
+  },
+  {
+    "id": "a2",
+    "jobId": "j3",
+    "jobTitle": "Data Scientist I",
+    "studentName": "Sarah Chen",
+    "studentId": "s2",
+    "companyId": "c3",
+    "companyName": "Amazon",
+    "appliedDate": "2024-05-16",
+    "status": "Selected"
+  },
+  {
+    "id": "a3",
+    "jobId": "j2",
+    "jobTitle": "Azure Cloud Architect",
+    "studentName": "Alex Johnson",
+    "studentId": "s1",
+    "companyId": "c2",
+    "companyName": "Microsoft",
+    "appliedDate": "2024-05-17",
+    "status": "Applied"
+  },
+  {
+    "id": "a4",
+    "jobId": "j4",
+    "jobTitle": "Frontend Developer (React)",
+    "studentName": "Michael Ross",
+    "studentId": "s3",
+    "companyId": "c2",
+    "companyName": "Microsoft",
+    "appliedDate": "2024-05-18",
+    "status": "Rejected"
+  }
+]

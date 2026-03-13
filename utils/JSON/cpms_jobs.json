@@ -1,0 +1,50 @@
+[
+  {
+    "id": "j1",
+    "title": "Software Engineer (L3)",
+    "companyId": "c1",
+    "companyName": "Google",
+    "location": "Mountain View, CA",
+    "salary": "$165,000",
+    "description": "Work on large-scale distributed systems and core search infrastructure.",
+    "criteria": "CGPA > 8.5, Proficiency in C++, Java, or Go.",
+    "postedDate": "2024-05-10",
+    "status": "Open"
+  },
+  {
+    "id": "j2",
+    "title": "Azure Cloud Architect",
+    "companyId": "c2",
+    "companyName": "Microsoft",
+    "location": "Redmond, WA (Remote Friendly)",
+    "salary": "$145,000",
+    "description": "Design and implement cloud solutions for enterprise customers using Azure.",
+    "criteria": "CGPA > 8.0, Strong networking and virtualization knowledge.",
+    "postedDate": "2024-05-12",
+    "status": "Open"
+  },
+  {
+    "id": "j3",
+    "title": "Data Scientist I",
+    "companyId": "c3",
+    "companyName": "Amazon",
+    "location": "Seattle, WA",
+    "salary": "$130,000",
+    "description": "Apply machine learning models to optimize logistics and delivery routes.",
+    "criteria": "Strong Python and SQL skills. Experience with AWS is a plus.",
+    "postedDate": "2024-05-14",
+    "status": "Open"
+  },
+  {
+    "id": "j4",
+    "title": "Frontend Developer (React)",
+    "companyId": "c2",
+    "companyName": "Microsoft",
+    "location": "Remote",
+    "salary": "$125,000",
+    "description": "Build user-facing features for Microsoft Teams and Office 365.",
+    "criteria": "Experience with React, TypeScript, and modern CSS frameworks.",
+    "postedDate": "2024-05-16",
+    "status": "Open"
+  }
+]

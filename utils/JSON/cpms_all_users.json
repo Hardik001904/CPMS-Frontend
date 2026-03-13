@@ -1,0 +1,144 @@
+[
+  {
+    "id": "admin_1",
+    "name": "Placement Director",
+    "email": "admin@placement.edu",
+    "role": "ADMIN",
+    "isApproved": true
+  },
+  {
+    "id": "c1",
+    "name": "Google",
+    "email": "hiring@google.com",
+    "role": "COMPANY",
+    "isApproved": true,
+    "profile": {
+      "description": "Global leader in search, cloud, and advertising technology.",
+      "website": "https://careers.google.com",
+      "location": "Mountain View, CA",
+      "size": "100,000+"
+    }
+  },
+  {
+    "id": "c2",
+    "name": "Microsoft",
+    "email": "campus@microsoft.com",
+    "role": "COMPANY",
+    "isApproved": true,
+    "profile": {
+      "description": "Empowering every person and every organization on the planet to achieve more.",
+      "website": "https://microsoft.com/careers",
+      "location": "Redmond, WA",
+      "size": "150,000+"
+    }
+  },
+  {
+    "id": "c3",
+    "name": "Amazon",
+    "email": "jobs@amazon.com",
+    "role": "COMPANY",
+    "isApproved": true,
+    "profile": {
+      "description": "Earth's most customer-centric company.",
+      "website": "https://amazon.jobs",
+      "location": "Seattle, WA",
+      "size": "1,000,000+"
+    }
+  },
+  {
+    "id": "s1",
+    "name": "Alex Johnson",
+    "email": "alex.j@university.edu",
+    "role": "STUDENT",
+    "isApproved": true,
+    "profile": {
+      "university": "Tech Institute of Technology",
+      "department": "Computer Science",
+      "branch": "Computer Science",
+      "cgpa": "9.2",
+      "gradYear": "2026",
+      "phone": "+1 555-0101",
+      "dob": "2004-05-15",
+      "skills": ["React", "Node.js", "TypeScript", "Go"],
+      "resumeUrl": "#",
+      "enrollmentNumber": "TIT/2026/CS/042"
+    }
+  },
+  {
+    "id": "s2",
+    "name": "Sarah Chen",
+    "email": "sarah.c@university.edu",
+    "role": "STUDENT",
+    "isApproved": true,
+    "profile": {
+      "university": "Tech Institute of Technology",
+      "department": "Data Science",
+      "branch": "Data Science",
+      "cgpa": "8.8",
+      "gradYear": "2026",
+      "phone": "+1 555-0102",
+      "dob": "2004-08-22",
+      "skills": ["Python", "SQL", "TensorFlow", "Tableau"],
+      "resumeUrl": "#",
+      "enrollmentNumber": "TIT/2026/DS/015"
+    }
+  },
+  {
+    "id": "s3",
+    "name": "Michael Ross",
+    "email": "m.ross@university.edu",
+    "role": "STUDENT",
+    "isApproved": true,
+    "profile": {
+      "university": "Tech Institute of Technology",
+      "department": "Information Technology",
+      "branch": "Information Technology",
+      "cgpa": "7.5",
+      "gradYear": "2026",
+      "phone": "+1 555-0103",
+      "dob": "2003-12-10",
+      "skills": ["Java", "Spring Boot", "MySQL"],
+      "resumeUrl": "#",
+      "enrollmentNumber": "TIT/2026/IT/089"
+    }
+  },
+  {
+    "id": "s4",
+    "name": "Jordan Smith",
+    "email": "jordan.s@university.edu",
+    "role": "STUDENT",
+    "isApproved": false,
+    "profile": {
+      "university": "Tech Institute of Technology",
+      "department": "Electrical Engineering",
+      "branch": "Electrical Engineering",
+      "cgpa": "8.1",
+      "gradYear": "2026",
+      "phone": "+1 555-0104",
+      "dob": "2004-01-05",
+      "skills": ["MATLAB", "C++", "Circuit Design"],
+      "resumeUrl": "#",
+      "enrollmentNumber": "TIT/2026/EE/003"
+    }
+  },
+  {
+    "id": "s_1771053319554",
+    "name": "Hardik",
+    "email": "hardik@university.edu",
+    "password": "123",
+    "role": "STUDENT",
+    "isApproved": true,
+    "profile": {
+      "university": "Our Tech University",
+      "department": "Computer Science & Engineering",
+      "branch": "Computer Science & Engineering",
+      "cgpa": "0.0",
+      "gradYear": "2026",
+      "phone": "",
+      "dob": "",
+      "skills": [],
+      "resumeUrl": "",
+      "enrollmentNumber": "100202600042"
+    }
+  }
+]
