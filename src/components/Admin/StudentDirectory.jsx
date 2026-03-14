@@ -1,13 +1,30 @@
-import { Trash2 } from "lucide-react";
-import React from "react";
+import { Eye, Trash2 } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
-import allUsers from "../../../utils/JSON/cpms_all_users.json";
+// import allUsers from "../../../utils/JSON/cpms_all_users.json";
 import { UserRole } from "../../pages/AdminDashboard";
+import { fetchStudents } from "../../services/adminService";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentDirectory() {
-  const students = allUsers.filter(
-    (u) => u.role === UserRole.STUDENT && u.isApproved,
-  );
+  const [students, setStudents] = useState([]);
+  const navigate = useNavigate();
+
+  const loadstudents = async () => {
+    try {
+      const data = await fetchStudents();
+      setStudents(data);
+    } catch (error) {
+      console.log("Failed to fetch students", error);
+    }
+  };
+
+  useEffect(() => {
+    loadstudents();
+  }, []);
+  // const students = allUsers.filter(
+  //   (u) => u.role === UserRole.STUDENT && u.isApproved,
+  // );
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
       <h3 className="text-2xl font-black text-slate-900  tracking-tight">
@@ -33,7 +50,10 @@ export default function StudentDirectory() {
           </thead>
           <tbody className="divide-y divide-slate-50">
             {students.map((s) => (
-              <tr key={s.id} className="hover:bg-slate-50/50 transition-colors">
+              <tr
+                key={s._id}
+                className="hover:bg-slate-50/50 transition-colors"
+              >
                 <td className="px-6 py-4">
                   <p className="font-bold text-slate-900">{s.name}</p>
                   <p className="text-xs text-slate-500">{s.email}</p>
@@ -46,10 +66,12 @@ export default function StudentDirectory() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <button
-                    onClick={() => handleAction(s.id, false)}
-                    className="p-2 text-slate-300 hover:text-rose-500 transition-colors"
+                    onClick={() =>
+                      navigate(`/dashboard/admin/students/${s._id}`)
+                    }
+                    className="p-2 text-slate-300 hover:text-blue-500 transition-colors"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Eye className="w-4 h-4" />
                   </button>
                 </td>
               </tr>

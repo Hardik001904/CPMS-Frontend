@@ -54,3 +54,98 @@ export default function Reports() {
     </div>
   );
 }
+
+
+// import React, { useEffect, useState } from "react";
+// import { fetchSystemStats } from "../../services/adminService";
+
+// import {
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   Tooltip,
+//   ResponsiveContainer,
+//   PieChart,
+//   Pie,
+//   Cell,
+// } from "recharts";
+
+// export default function Reports() {
+
+//   const [stats, setStats] = useState(null);
+
+//   useEffect(() => {
+//     loadStats();
+//   }, []);
+
+//   const loadStats = async () => {
+//     const data = await fetchSystemStats();
+//     setStats(data);
+//   };
+
+//   if (!stats) return <p>Loading analytics...</p>;
+
+//   const barData = [
+//     { name: "Students", value: stats.students },
+//     { name: "Companies", value: stats.companies },
+//     { name: "Jobs", value: stats.jobs },
+//     { name: "Placed", value: stats.placedCount },
+//   ];
+
+//   const pieData = [
+//     { name: "Placed", value: stats.placedCount },
+//     { name: "Unplaced", value: stats.students - stats.placedCount },
+//   ];
+
+//   const COLORS = ["#2563eb", "#e5e7eb"];
+
+//   return (
+//     <div className="space-y-8">
+
+//       <h2 className="text-2xl font-bold text-slate-800">
+//         Placement Analytics
+//       </h2>
+
+//       {/* Bar Chart */}
+//       <div className="bg-white p-6 rounded-xl border shadow-sm">
+
+//         <h3 className="font-semibold mb-4">System Overview</h3>
+
+//         <ResponsiveContainer width="100%" height={300}>
+//           <BarChart data={barData}>
+//             <XAxis dataKey="name" />
+//             <YAxis />
+//             <Tooltip />
+//             <Bar dataKey="value" fill="#2563eb" radius={[6,6,0,0]} />
+//           </BarChart>
+//         </ResponsiveContainer>
+
+//       </div>
+
+//       {/* Pie Chart */}
+//       <div className="bg-white p-6 rounded-xl border shadow-sm">
+
+//         <h3 className="font-semibold mb-4">Placement Distribution</h3>
+
+//         <ResponsiveContainer width="100%" height={300}>
+//           <PieChart>
+//             <Pie
+//               data={pieData}
+//               dataKey="value"
+//               outerRadius={120}
+//               label
+//             >
+//               {pieData.map((entry, index) => (
+//                 <Cell key={index} fill={COLORS[index]} />
+//               ))}
+//             </Pie>
+//             <Tooltip />
+//           </PieChart>
+//         </ResponsiveContainer>
+
+//       </div>
+
+//     </div>
+//   );
+// }

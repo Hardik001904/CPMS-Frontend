@@ -53,7 +53,7 @@ const StudentRegister = () => {
       },
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
-        console.log(values);
+        // console.log(values);
         try {
           // Frontend validation for email domain
           if (!values.email.endsWith("@university.edu")) {

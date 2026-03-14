@@ -295,7 +295,7 @@ export const StudentProfileEdit = ({ profile }) => {
                     }
                   }}
                   onChange={(e) => {
-                    const count = parseInt(e.target.value) || 0;
+                    let count = parseInt(e.target.value) || 0;
                     if (count > 10) count = 10;
                     if (count < 0) count = 0;
 

@@ -45,6 +45,8 @@ import { fetchAllJobs } from "../services/companyService";
 import allUsers from "../../utils/JSON/cpms_all_users.json";
 import Bin from "../components/Admin/Bin";
 import { fetchUserById } from "../services/authService";
+import AdminStudentProfile from "../components/Admin/AdminStudentProfile";
+import { getAdminDashboard } from "../services/adminService";
 // import applications from "../../utils/JSON/cpms_apps.json"
 
 export const UserRole = {
@@ -60,7 +62,7 @@ export const UserStatus = {
 };
 
 const AdminDashboard = ({
-  onLogout,
+  
   onUpdateUsers,
 
   applications,
@@ -71,6 +73,7 @@ const AdminDashboard = ({
   const currentPath = location.pathname.split("/").pop() || "overview";
   const [user, setUser] = useState([]);
   const [users, setUsers] = useState([]);
+  const [overview, setOverview] = useState([]);
   const [jobs, setJobs] = useState([]);
   // const user = JSON.parse(sessionStorage.getItem("user")) || {};
 
@@ -96,6 +99,18 @@ const AdminDashboard = ({
     }
   };
 
+  const getAdminDashboardOverview = async () => {
+    try {
+      const res = await getAdminDashboard();
+      // console.log("res profile", res.count);
+      console.log("getAdminDashboardOverview :", res);
+      setOverview(res);
+      // toast.success(res.message);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  };
+
   const getJobs = async () => {
     try {
       const res = await fetchAllJobs();
@@ -110,6 +125,7 @@ const AdminDashboard = ({
     getUser();
     getUserProfile();
     getJobs();
+    getAdminDashboardOverview();
   }, []);
 
   const pending = allUsers?.filter(
@@ -121,7 +137,7 @@ const AdminDashboard = ({
   const companies = allUsers?.filter(
     (u) => u.role === UserRole.COMPANY && u.isApproved,
   );
-  // console.log("companies : ", companies);
+  console.log("companies : ", companies);
   const handleAction = (id) => {
     if (approve) {
       onUpdateUsers(
@@ -244,29 +260,29 @@ const AdminDashboard = ({
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {[
                       {
-                        label: "Live Mandates",
-                        value: jobs?.length,
+                        label: "Active Job Postings",
+                        value: overview.job,
                         color: "text-blue-600",
                         icon: <Briefcase className="w-5 h-5" />,
                         bg: "bg-blue-50",
                       },
                       {
-                        label: "Verified Students",
-                        value: users,
+                        label: "Total Students",
+                        value: overview.student,
                         color: "text-indigo-600",
                         icon: <Users className="w-5 h-5" />,
                         bg: "bg-indigo-50",
                       },
                       {
-                        label: "Industry Partners",
-                        value: companies?.length,
+                        label: "Total Companies",
+                        value: overview.company,
                         color: "text-purple-600",
                         icon: <Building2 className="w-5 h-5" />,
                         bg: "bg-purple-50",
                       },
                       {
                         label: "Pending Access",
-                        value: pending?.length,
+                        value: overview.pending,
                         color: "text-rose-600",
                         icon: <AlertTriangle className="w-5 h-5" />,
                         bg: "bg-rose-50",
@@ -305,6 +321,8 @@ const AdminDashboard = ({
             <Route path="approvals" element={<Approvals />} />
 
             <Route path="students" element={<StudentDirectory />} />
+
+            <Route path="students/:id" element={<AdminStudentProfile />} />
 
             <Route path="companies" element={<HiringPartners />} />
 

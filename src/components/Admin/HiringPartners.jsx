@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MapPin, Trash2, Users } from "lucide-react";
 
 import allUsers from "../../../utils/JSON/cpms_all_users.json";
 import { UserRole } from "../../pages/AdminDashboard";
+import { fetchCompanies, rejectUser } from "../../services/adminService";
 
 export default function HiringPartners() {
-  const companies = allUsers.filter(
-    (u) => u.role === UserRole.COMPANY && u.isApproved,
-  );
+  const [companies, setCompanies] = useState([]);
+  const loadCompanies = async () => {
+    try {
+      const data = await fetchCompanies();
+      setCompanies(data);
+    } catch (error) {
+      console.log("Failed to fetch companies", error);
+    }
+  }
+
+  useEffect(() => {
+    loadCompanies();
+  })
+
+  
+  const handleAction = async (id) => {
+    try {
+      await rejectUser(id);
+      setCompanies((prev) => prev.filter((c) => c._id !== id));
+    } catch (error) {
+      console.log("Delete failed", error);
+    }
+  };
+  // const companies = allUsers.filter(
+  //   (u) => u.role === UserRole.COMPANY && u.isApproved,
+  // );
 
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
@@ -17,7 +41,7 @@ export default function HiringPartners() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {companies.map((c) => (
           <div
-            key={c.id}
+            key={c._id}
             className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:border-blue-400 transition-all group"
           >
             <div className="flex justify-between items-start mb-6">
@@ -25,7 +49,7 @@ export default function HiringPartners() {
                 {c.name.charAt(0)}
               </div>
               <button
-                onClick={() => handleAction(c.id, false)}
+                onClick={() => handleAction(c._id, false)}
                 className="text-slate-300 hover:text-rose-500"
               >
                 <Trash2 className="w-4 h-4" />

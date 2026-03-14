@@ -79,3 +79,53 @@ export const deleteUserPermanently = async (id) => {
     throw error;
   }
 };
+
+export const fetchStudents = async () => {
+  try {
+    const res = await axios.get("/admin/students");
+    return res.data;
+  } catch (error) {
+    console.log("Fetch students failed", error);
+    throw error;
+  }
+};
+
+export const fetchStudentProfile = async (id) => {
+  try {
+    const res = await axios.get(`/admin/students/${id}`);
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchCompanies = async () => {
+  try {
+    const res = await axios.get("/admin/companies");
+    return res.data;
+  } catch (error) {
+    console.log("Fetch companies failed", error);
+    throw error;
+  }
+};
+
+
+//Reports stats
+export const fetchSystemStats = async () => {
+  try {
+    const res = await axios.get("/admin/stats");
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//Admin dashboard overview
+export const getAdminDashboard = async () => {
+try {
+  const res = await axios.get("/admin/overview");
+  return res.data;
+} catch (error) {
+  throw error;
+}
+}

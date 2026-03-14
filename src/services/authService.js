@@ -5,6 +5,7 @@ import axios from "./axios";
 
 export const login = async (data) => {
   try {
+    // console.log("inside api ", data);
     const res = await axios.post("/auth/login", data);
     sessionStorage.setItem("token", res.data.token);
     sessionStorage.setItem("user", JSON.stringify(res.data.user));
@@ -43,5 +44,4 @@ export const fetchUserById = async () => {
     throw error;
   }
 };
-
 
