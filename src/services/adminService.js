@@ -99,16 +99,32 @@ export const fetchStudentProfile = async (id) => {
   }
 };
 
-export const fetchCompanies = async () => {
+// export const fetchCompanies = async () => {
+//   try {
+//     const res = await axios.get("/admin/companies");
+    
+//     return res.data;
+//   } catch (error) {
+//     console.log("Fetch companies failed", error);
+//     throw error;
+//   }
+// };
+
+
+export const fetchCompanies = async ( search = "") => {
   try {
-    const res = await axios.get("/admin/companies");
+    const res = await axios.get("/admin/companies", {
+      params: {
+        search,
+      },
+    });
+
     return res.data;
   } catch (error) {
     console.log("Fetch companies failed", error);
     throw error;
   }
 };
-
 
 //Reports stats
 export const fetchSystemStats = async () => {

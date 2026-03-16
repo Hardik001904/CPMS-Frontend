@@ -209,7 +209,7 @@ export const StudentProfileEdit = ({ profile }) => {
                   Portfolio / Website Link
                 </label>
                 <div className="relative">
-                  <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <Globe className="absolute left-4 top-5.5 w-4 h-4 text-slate-400" />
                   <input
                     name="resumeUrl"
                     type="url"

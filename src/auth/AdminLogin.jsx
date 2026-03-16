@@ -114,7 +114,7 @@ const AdminLogin = ({ onLogin }) => {
                 Admin Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600" />
+                <Mail className="absolute left-5 top-5 w-5 h-5 text-slate-600" />
                 <input
                   required
                   type="email"
@@ -135,7 +135,7 @@ const AdminLogin = ({ onLogin }) => {
                 Security Key
               </label>
               <div className="relative">
-                <Lock className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-600" />
+                <Lock className="absolute left-5 top-4.5 w-5 h-5 text-slate-600" />
                 <input
                   required
                   type="password"
