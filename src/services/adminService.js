@@ -1,25 +1,5 @@
 import axios from "./axios";
 
-// // Get pending approvals
-// export const getPendingApprovals = async () => {
-//   try {
-//     const res = await axios.get(`/admin/approvals`);
-//     return res.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-// // Approve user
-// export const approveUser = async (id,data) => {
-//   try {
-//     const res = await axios.patch(`/admin/approve/${id}`,data);
-//     return res.data;
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
 // Get pending approvals
 export const getPendingApprovals = async () => {
   try {
@@ -99,17 +79,6 @@ export const fetchStudentProfile = async (id) => {
   }
 };
 
-// export const fetchCompanies = async () => {
-//   try {
-//     const res = await axios.get("/admin/companies");
-    
-//     return res.data;
-//   } catch (error) {
-//     console.log("Fetch companies failed", error);
-//     throw error;
-//   }
-// };
-
 
 export const fetchCompanies = async ( search = "") => {
   try {
@@ -145,3 +114,37 @@ try {
   throw error;
 }
 }
+
+
+// GET Masterstudents
+export const getMasterStudents = async () => {
+  try {
+    const res = await axios.get("/admin/students/master");
+    return res.data;
+  } catch (error) {
+    console.error(" getMasterStudents:", error);
+    throw error;
+  }
+};
+
+// ADD Masterstudents
+export const addMasterStudent = async (student) => {
+  try {
+    const res = await axios.post("/admin/students/master", student);
+    return res.data;
+  } catch (error) {
+    console.error(" addMasterStudent:", error);
+    throw error;
+  }
+};
+
+// DELETE Masterstudetns
+export const deleteMasterStudent = async (id) => {
+  try {
+    const res = await axios.delete(`/admin/students/master/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error(" deleteMasterStudent:", error);
+    throw error;
+  }
+};

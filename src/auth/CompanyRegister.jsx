@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // Fix: Ensured standard react-router-dom imports
 import { Link, useNavigate } from "react-router-dom";
-// import { User, UserRole, CompanyProfile } from '../types';
+
 import {
   Building2,
   Mail,
@@ -18,10 +18,6 @@ import { useFormik } from "formik";
 import { registercompany } from "../services/authService";
 import toast from "react-hot-toast";
 
-// interface Props {
-//   allUsers: User[];
-//   onUpdateUsers: (users: User[]) => void;
-// }
 
 const userValidationSchema = object({
   name: string().required("Name is required"),
@@ -35,6 +31,9 @@ const userValidationSchema = object({
 });
 
 const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
   const { handleSubmit, handleChange, errors, touched, handleBlur } = useFormik(
     {
       initialValues: {
@@ -48,7 +47,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
 
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
-        // addUser(values);
+   
         console.log(values);
         try {
           const res = await registercompany(values);
@@ -62,75 +61,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
       },
     },
   );
-
-  const navigate = useNavigate();
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   website: "",
-  //   hrName: "",
-  //   industry: "",
-  // });
-  const [showPassword, setShowPassword] = useState(false);
-
-  // const addUser = (e) => {
-  //   // e.preventDefault();
-  //   console.log(values);
-  //   if (allUsers.some((u) => u.email === formData.email)) {
-  //     alert("This corporate email is already registered.");
-  //     return;
-  //   }
-  //   const newUser = {
-  //     id: "c_" + Date.now(),
-  //     name: formData.name,
-  //     email: formData.email,
-  //     password: formData.password,
-  //     role: UserRole.COMPANY,
-  //     isApproved: false,
-  //     profile: {
-  //       website: formData.website,
-  //       hrName: formData.hrName,
-  //       industry: formData.industry,
-  //       description: "",
-  //       location: "",
-  //       size: "",
-  //     },
-  //   };
-  //   onUpdateUsers([...allUsers, newUser]);
-  //   alert(
-  //     "Registration request sent! Your account is now awaiting administrator approval.",
-  //   );
-  //   navigate("/login");
-  // };
-
-  const addUser = (values) => {
-    console.log(values); //
-
-    if (allUsers?.some((u) => u.email === values.email)) {
-      alert("This corporate email is already registered.");
-      return;
-    }
-
-    const newUser = {
-      id: "c_" + Date.now(),
-      name: values.name,
-      email: values.email,
-      password: values.password,
-      role: "COMPANY",
-      isApproved: false,
-      profile: {
-        website: values.website,
-        hrName: values.hrname,
-        industry: values.industry,
-      },
-    };
-
-    onUpdateUsers?.([...allUsers, newUser]);
-
-    alert("Registration request sent!");
-    navigate("/login");
-  };
 
   return (
     <div className="min-h-screen bg-slate-900 flex items-center justify-center p-6">
@@ -159,7 +89,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                 Organization Name
               </label>
               <div className="relative">
-                {/* <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
                 <Building2 className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -167,10 +96,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={formData.name}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, name: e.target.value })
-                  // }
+                 
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="Google Inc."
                 />
@@ -184,7 +110,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   HR Name
                 </label>
                 <div className="relative">
-                  {/* <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
+                 
                   <UserIcon className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                   <input
                     required
@@ -192,10 +118,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                     name="hrname"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    // value={formData.hrName}
-                    // onChange={(e) =>
-                    //   setFormData({ ...formData, hrName: e.target.value })
-                    // }
+                 
                     className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                     placeholder="John Smith"
                   />
@@ -209,7 +132,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   Industry
                 </label>
                 <div className="relative">
-                  {/* <Briefcase className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
+              
                   <Briefcase className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                   <input
                     required
@@ -217,10 +140,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                     name="industry"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    // value={formData.industry}
-                    // onChange={(e) =>
-                    //   setFormData({ ...formData, industry: e.target.value })
-                    // }
+                
                     className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                     placeholder="Tech / Finance"
                   />
@@ -236,7 +156,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                 Website URL
               </label>
               <div className="relative">
-                {/* <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
+                
                 <Globe className="absolute left-4 top-4  w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -244,10 +164,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="website"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={formData.website}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, website: e.target.value })
-                  // }
+                 
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="https://company.com"
                 />
@@ -262,7 +179,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                 HR Contact Email
               </label>
               <div className="relative">
-                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
+              
                 <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -270,10 +187,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={formData.email}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, email: e.target.value })
-                  // }
+                 
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="hiring@company.com"
                 />
@@ -286,7 +200,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                 Set Password
               </label>
               <div className="relative">
-                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
+                
                 <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -294,10 +208,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={formData.password}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, password: e.target.value })
-                  // }
+             
                   className="w-full pl-12 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="••••••••"
                 />

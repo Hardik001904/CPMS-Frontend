@@ -74,15 +74,6 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
     },
   );
 
-  // const addUser = (values) => {
-  //   // console.log(values);
-  //   alert("Institutional Identity Verified! You can now log in.");
-  //   navigate("/login");
-  // };
-
-  const handleSubmit2 = (e) => {
-    // e.preventDefault();
-  };
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">

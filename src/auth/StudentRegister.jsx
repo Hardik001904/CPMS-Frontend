@@ -1,7 +1,6 @@
 import React, { useEffect, useEffectEvent, useState } from "react";
 // Fix: Ensured standard react-router-dom imports
 import { Link, useNavigate } from "react-router-dom";
-// import { User, UserRole } from '../types';
 import {
   User as UserIcon,
   Mail,
@@ -82,7 +81,6 @@ const StudentRegister = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
-      {/* <div className="min-h-screen bg-slate-50  rounded-[2.5rem] flex items-center justify-center p-6"> */}
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
           <AppLogo />
@@ -110,7 +108,6 @@ const StudentRegister = () => {
                 Name (As per records)
               </label>
               <div className="relative">
-                {/* <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" /> */}
                 <UserIcon className="absolute left-4 top-3 w-4 h-4 text-slate-400" />
                 <input
                   required
@@ -118,10 +115,6 @@ const StudentRegister = () => {
                   name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={formData.name}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, name: e.target.value })
-                  // }
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 font-bold text-sm"
                   placeholder="John Doe"
                 />
@@ -141,13 +134,6 @@ const StudentRegister = () => {
                   name="enrollmentNumber"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={formData.enrollmentNumber}
-                  // onChange={(e) =>
-                  //   setFormData({
-                  //     ...formData,
-                  //     enrollmentNumber: e.target.value,
-                  //   })
-                  // }
                   className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 font-black text-sm"
                   placeholder="TIT/2026/..."
                 />
@@ -163,10 +149,6 @@ const StudentRegister = () => {
                 <select
                   name="department"
                   type="text"
-                  // value={formData.department}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, department: e.target.value })
-                  // }
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none font-bold text-sm appearance-none cursor-pointer"
@@ -185,16 +167,11 @@ const StudentRegister = () => {
                 Institutional Email
               </label>
               <div className="relative">
-                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" /> */}
                 <Mail className="absolute left-4 top-3.5 w-4 h-4 text-slate-400" />
                 <input
                   name="email"
                   type="email"
                   required
-                  // value={formData.email}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, email: e.target.value })
-                  // }
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 font-bold text-sm"
@@ -210,16 +187,11 @@ const StudentRegister = () => {
                 Security Password
               </label>
               <div className="relative">
-                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" /> */}
                 <Lock className="absolute left-4 top-3.5 w-4 h-4 text-slate-400" />
                 <input
                   name="password"
                   type={showPassword ? "text" : "password"}
                   required
-                  // value={formData.password}
-                  // onChange={(e) =>
-                  //   setFormData({ ...formData, password: e.target.value })
-                  // }
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 font-bold text-sm"

@@ -18,7 +18,6 @@ export const login = async (data) => {
 
 export const register = async (data) => {
   try {
-    // console.log("inside api ", data);
     const res = await axios.post("/auth/register/student", data);
     return res;
   } catch (error) {

@@ -91,7 +91,7 @@ const AdminDashboard = ({
     try {
       const res = await fetchUserById();
       // console.log("res profile", res.count);
-      console.log("profile :", res.user);
+      // console.log("profile :", res.user);
       setUser(res.user);
       // toast.success(res.message);
     } catch (error) {
@@ -103,7 +103,7 @@ const AdminDashboard = ({
     try {
       const res = await getAdminDashboard();
       // console.log("res profile", res.count);
-      console.log("getAdminDashboardOverview :", res);
+      // console.log("getAdminDashboardOverview :", res);
       setOverview(res);
       // toast.success(res.message);
     } catch (error) {
@@ -115,7 +115,7 @@ const AdminDashboard = ({
     try {
       const res = await fetchAllJobs();
       setJobs(res.data);
-      console.log("getJobs", res.data);
+      // console.log("getJobs", res.data);
     } catch (error) {
       console.log(error);
     }
@@ -137,7 +137,7 @@ const AdminDashboard = ({
   const companies = allUsers?.filter(
     (u) => u.role === UserRole.COMPANY && u.isApproved,
   );
-  console.log("companies : ", companies);
+  // console.log("companies : ", companies);
   const handleAction = (id) => {
     if (approve) {
       onUpdateUsers(
