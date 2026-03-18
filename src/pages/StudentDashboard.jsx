@@ -196,7 +196,7 @@ const StudentDashboard = () => {
                         </div>
                         <h3 className="text-4xl font-black mb-4 tracking-tighter ">
                           {/* Welcome, {user?.name.split(" ")[0]}! */}
-                          Welcome, <span>{name}</span> && {}
+                          Welcome, <span>{name}</span>
                           {overview.welcome}
                         </h3>
                         <div className="flex items-center gap-2 text-indigo-100 font-bold mb-8">
