@@ -43,13 +43,14 @@ import { StudentProfileEdit } from "../components/student/StudentProfileEdit";
 import { SidebarNew } from "../components/SidebarNew";
 import { fetchAllJobs } from "../services/companyService";
 import { getStudentOverview } from "../services/studentService";
-
+import axios from "../services/axios";
 
 const StudentDashboard = () => {
   const [jobs, setJobs] = useState([]);
-  
+
   const [overview, setOverview] = useState([]);
-  
+  const [sessions, setSessions] = useState([]);
+
   const navigate = useNavigate();
   const location = useLocation();
   const user = JSON.parse(sessionStorage.getItem("user")) || {};
@@ -71,7 +72,6 @@ const StudentDashboard = () => {
   // const studentApps = (applications || []).filter(
   //   (a) => a.studentId === user.id,
   // );
-
 
   const getOverview = async () => {
     const res = await getStudentOverview();
@@ -153,6 +153,15 @@ const StudentDashboard = () => {
     navigate("/");
   };
   const name = user.name.split(" ")[0];
+  useEffect(() => {
+    const fetchSessions = async () => {
+      const res = await axios.get("/auth/sessions");
+      console.log("fetchSessions : ",res.data);
+      setSessions(res.data);
+    };
+
+    fetchSessions();
+  }, []);
   return (
     <div className="flex bg-slate-50 min-h-screen font-sans">
       <SidebarNew
@@ -187,7 +196,7 @@ const StudentDashboard = () => {
                         </div>
                         <h3 className="text-4xl font-black mb-4 tracking-tighter ">
                           {/* Welcome, {user?.name.split(" ")[0]}! */}
-                          Welcome, <span>{name}</span>
+                          Welcome, <span>{name}</span> && {}
                           {overview.welcome}
                         </h3>
                         <div className="flex items-center gap-2 text-indigo-100 font-bold mb-8">
@@ -229,10 +238,7 @@ const StudentDashboard = () => {
                         Shortlists
                       </p>
                       <p className="text-4xl font-black text-emerald-600 mt-1">
-                        {
-                       
-                          overview.shortlists
-                        }
+                        {overview.shortlists}
                       </p>
                     </div>
                     <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all group">
@@ -250,7 +256,7 @@ const StudentDashboard = () => {
             <Route path="jobs" element={<JobListingView />} />
             <Route
               path="applications"
-              element={<ApplicationsView  />}
+              element={<ApplicationsView />}
               // element={<ApplicationsView studentApps={studentApps} />}
             />
             <Route

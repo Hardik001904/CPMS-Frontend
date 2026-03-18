@@ -119,7 +119,7 @@ try {
 // GET Masterstudents
 export const getMasterStudents = async () => {
   try {
-    const res = await axios.get("/admin/students/master");
+    const res = await axios.get("/admin/master");
     return res.data;
   } catch (error) {
     console.error(" getMasterStudents:", error);
@@ -130,7 +130,7 @@ export const getMasterStudents = async () => {
 // ADD Masterstudents
 export const addMasterStudent = async (student) => {
   try {
-    const res = await axios.post("/admin/students/master", student);
+    const res = await axios.post("/admin/master", student);
     return res.data;
   } catch (error) {
     console.error(" addMasterStudent:", error);
@@ -141,7 +141,7 @@ export const addMasterStudent = async (student) => {
 // DELETE Masterstudetns
 export const deleteMasterStudent = async (id) => {
   try {
-    const res = await axios.delete(`/admin/students/master/${id}`);
+    const res = await axios.delete(`/admin/master/${id}`);
     return res.data;
   } catch (error) {
     console.error(" deleteMasterStudent:", error);

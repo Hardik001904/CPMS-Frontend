@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 // import "./App.css";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import StudentRegister from "./auth/StudentRegister";
 import CompanyRegister from "./auth/CompanyRegister";
 import LoginPage from "./auth/LoginPage";
@@ -35,6 +35,52 @@ export const AppLogo = () => {
 function App() {
   const [count, setCount] = useState(0);
 
+  const navigate = useNavigate();
+  useEffect(() => {
+    let timer;
+
+    const logout = () => {
+      localStorage.removeItem("token");
+      navigate("/login");
+    };
+
+    const resetTimer = () => {
+      console.log("resetTimer");
+      clearTimeout(timer);
+      timer = setTimeout(logout, 15 * 60 * 1000); // 15 min
+    };
+
+    // events to detect activity
+    window.addEventListener("mousemove", resetTimer);
+    window.addEventListener("keydown", resetTimer);
+    window.addEventListener("click", resetTimer);
+
+    resetTimer(); // start timer
+    return () => {
+      window.removeEventListener("mousemove", resetTimer);
+      window.removeEventListener("keydown", resetTimer);
+      window.removeEventListener("click", resetTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+console.log("/api/ping")
+    if (!token) return;
+
+    const interval = setInterval(
+      () => {
+        fetch("/api/ping", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      },
+      15 * 60 * 1000,
+    ); // every 5 min
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
       <Toaster position="top-center" />
@@ -47,7 +93,6 @@ function App() {
         <Route path="/register/company" element={<CompanyRegister />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/session-expired" element={<SessionExpired />} />
-        
 
         <Route
           path="/dashboard/student/*"

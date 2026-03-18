@@ -54,8 +54,8 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
           // console.log("login : ",change_data)
 
           const res = await login(change_data);
+          console.log("login page : ", res.data);
 
-          // console.log(res.data);
           toast.success("Login successfully");
           navigate(
             role === "STUDENT"
@@ -73,7 +73,6 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
       },
     },
   );
-
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
@@ -210,19 +209,13 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                 </Link>
               </p>
 
-              {/* <Link
-                to="/admin-login"
-                className="inline-flex items-center gap-2 text-xs mt-4 text-slate-400 hover:text-black"
-              >
-                <ShieldCheck className="w-4 h-4" />
-                Management Access
-              </Link> */}
+         
             </div>
           </form>
         </div>
 
         <p className="text-center text-xs text-slate-400 mt-8">
-          {/* © 2026 PlacementPro */}
+   
           &copy; 2026 Campus Placement Management System
         </p>
       </div>

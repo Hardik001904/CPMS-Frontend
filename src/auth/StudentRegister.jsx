@@ -84,7 +84,7 @@ const StudentRegister = () => {
       <div className="max-w-md w-full">
         <div className="text-center mb-10">
           <AppLogo />
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight italic">
+          <h1 className="text-3xl font-black text-slate-900 tracking-tight ">
             Student Enrollment
           </h1>
           <p className="text-slate-500 mt-2 font-medium">
@@ -224,7 +224,7 @@ const StudentRegister = () => {
           </form>
 
           <div className="mt-8 text-center pt-6 border-t border-slate-100">
-            <p className="text-slate-500 text-xs font-medium italic">
+            <p className="text-slate-500 text-xs font-medium ">
               Only authorized students can access this portal.
             </p>
             <p className="mt-2 text-sm">
