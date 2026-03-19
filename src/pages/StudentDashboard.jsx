@@ -44,6 +44,7 @@ import { SidebarNew } from "../components/SidebarNew";
 import { fetchAllJobs } from "../services/companyService";
 import { getStudentOverview } from "../services/studentService";
 import axios from "../services/axios";
+import SettingPage from "./SettingPage";
 
 const StudentDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -156,7 +157,7 @@ const StudentDashboard = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       const res = await axios.get("/auth/sessions");
-      console.log("fetchSessions : ",res.data);
+      console.log("fetchSessions : ", res.data);
       setSessions(res.data);
     };
 
@@ -196,7 +197,7 @@ const StudentDashboard = () => {
                         </div>
                         <h3 className="text-4xl font-black mb-4 tracking-tighter ">
                           {/* Welcome, {user?.name.split(" ")[0]}! */}
-                          Welcome, <span>{name}</span> 
+                          Welcome, <span>{name}</span>
                           {overview.welcome}
                         </h3>
                         <div className="flex items-center gap-2 text-indigo-100 font-bold mb-8">
@@ -264,6 +265,17 @@ const StudentDashboard = () => {
               element={<StudentProfileEdit profile={profile} />}
             />
             <Route path="*" element={<Navigate to="overview" replace />} />
+
+            <Route
+              path="settings"
+              element={
+                <SettingPage
+                  user={user}
+                  onLogout={logout}
+               
+                />
+              }
+            />
           </Routes>
         </div>
 
@@ -343,62 +355,5 @@ const StudentDashboard = () => {
     </div>
   );
 };
-
-// const JobListingView = ({ jobs, studentApps, onViewCompany, onApply }) => (
-//   <div className="space-y-6 animate-in slide-in-from-bottom-4">
-//     <div>
-//       <h3 className="text-3xl font-black text-slate-900 tracking-tight italic">
-//         Corporate Openings
-//       </h3>
-//       <p className="text-slate-500 font-medium">
-//         Opportunities curated for the Batch of 2026.
-//       </p>
-//     </div>
-//     <div className="grid gap-6">
-//       {jobs.map((job) => {
-//         const hasApplied = studentApps.some((a) => a.jobId === job.id);
-//         return (
-//           <div
-//             key={job.id}
-//             className="bg-white p-10 rounded-[3rem] border border-slate-200 flex flex-col md:flex-row justify-between items-center hover:border-blue-400 transition-all group shadow-sm"
-//           >
-//             <div className="mb-6 md:mb-0">
-//               <h4 className="font-black text-3xl text-slate-900 italic tracking-tighter group-hover:text-blue-600 transition-colors mb-2">
-//                 {job.title}
-//               </h4>
-//               <button
-//                 onClick={() => onViewCompany(job.companyId)}
-//                 className="flex items-center gap-2 text-slate-500 font-bold hover:text-blue-600 transition-colors mb-6 group-hover:translate-x-1 duration-300"
-//               >
-//                 <Building2 className="w-5 h-5" /> {job.companyName}{" "}
-//                 <Info className="w-4 h-4 opacity-50" />
-//               </button>
-//               <div className="flex gap-4">
-//                 <span className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100 text-xs font-black uppercase tracking-widest text-slate-500">
-//                   <MapPin className="w-4 h-4 text-blue-500" /> {job.location}
-//                 </span>
-//                 <span className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100 text-xs font-black uppercase tracking-widest text-slate-500">
-//                   <DollarSign className="w-4 h-4 text-emerald-500" />{" "}
-//                   {job.salary}
-//                 </span>
-//               </div>
-//             </div>
-//             <button
-//               disabled={hasApplied}
-//               onClick={() => onApply(job)}
-//               className={`px-12 py-5 rounded-[1.5rem] font-black text-sm transition-all active:scale-95 shadow-xl ${
-//                 hasApplied
-//                   ? "bg-emerald-50 text-emerald-600 border border-emerald-100 cursor-not-allowed"
-//                   : "bg-slate-900 text-white hover:bg-blue-600"
-//               }`}
-//             >
-//               {hasApplied ? "Submission Sent" : "Secure Opportunity"}
-//             </button>
-//           </div>
-//         );
-//       })}
-//     </div>
-//   </div>
-// );
 
 export default StudentDashboard;

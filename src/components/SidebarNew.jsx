@@ -62,12 +62,12 @@ export const SidebarNew = ({
         >
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-black text-xl italic shadow-lg"
+            className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-black text-xl  shadow-lg"
           >
             P
           </button>
           {!isCollapsed && (
-            <h1 className="text-xl font-black italic">{title}</h1>
+            <h1 className="text-xl font-black ">{title}</h1>
           )}
         </div>
 
@@ -167,7 +167,7 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
   return (
     <header className="h-20 bg-white/80 backdrop-blur-xl border-b flex items-center justify-between px-8 sticky top-0 z-40">
       <div>
-        <h2 className="text-xl font-black italic uppercase">{title}</h2>
+        <h2 className="text-xl font-black  uppercase">{title}</h2>
         {subtitle && (
           <p className="text-[10px] text-slate-500 uppercase">{subtitle}</p>
         )}
@@ -219,3 +219,5 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
     </header>
   );
 };
+
+

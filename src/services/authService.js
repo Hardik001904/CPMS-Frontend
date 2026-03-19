@@ -44,3 +44,54 @@ export const fetchUserById = async () => {
   }
 };
 
+// export const updateProfile = async (data) => {
+//   try {
+//     const response = await axios.patch("/company/profile", data);
+//     return response.data;
+
+//   } catch (error) {
+//     console.error(
+//       "Update Profile Error:",
+//       error.response?.data?.message || error.message
+//     );
+//     throw new Error(
+//       error.response?.data?.message || "Failed to update profile"
+//     );
+//   }
+// };
+
+export const changePassword = async (currentPassword, newPassword) => {
+  try {
+    const response = await axios.patch("/company/change-password", {
+      currentPassword,
+      newPassword,
+    });
+
+    return response.data;
+
+  } catch (error) {
+    console.error(
+      "Change Password Error:",
+      error.response?.data?.message || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "Failed to change password"
+    );
+  }
+};
+
+export const deleteAccount = async () => {
+  try {
+    const response = await axiosInstance.delete("/company/account");
+    return response.data;
+
+  } catch (error) {
+    console.error(
+      "Delete Account Error:",
+      error.response?.data?.message || error.message
+    );
+    throw new Error(
+      error.response?.data?.message || "Failed to delete account"
+    );
+  }
+};

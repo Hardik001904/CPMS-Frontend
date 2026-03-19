@@ -91,6 +91,8 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
   const notificationRef = useRef(null);
   const profileRef = useRef(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -105,7 +107,7 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // const getInitials = (name) => 
+  // const getInitials = (name) =>
   //   name
   //     .split(" ")
   //     .map((n) => n[0])
@@ -113,16 +115,16 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
   //     .toUpperCase()
   //     .substring(0, 2);
 
-const getInitials = (name) => {
-  if (!name) return "NA";
+  const getInitials = (name) => {
+    if (!name) return "NA";
 
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase()
-    .substring(0, 2);
-};
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+      .substring(0, 2);
+  };
 
   return (
     <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
@@ -198,7 +200,6 @@ const getInitials = (name) => {
             </div>
           </button>
 
-          
           {showProfileMenu && (
             <div className="absolute right-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50">
               <div className="p-4 bg-slate-50 border-b border-slate-100">
@@ -211,7 +212,10 @@ const getInitials = (name) => {
                 <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-all text-left">
                   <UserCircle className="w-4 h-4" /> Profile
                 </button>
-                <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-all text-left">
+                <button
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-all text-left"
+                  onClick={() => navigate('/dashboard/student/settings')}
+                >
                   <Settings className="w-4 h-4" /> Settings
                 </button>
                 <div className="h-px bg-slate-100 my-1" />
@@ -295,7 +299,7 @@ export const Footer = () => (
               "Browse Jobs",
               "Build Persona",
               "Placement Guides",
-              "Career Guidance"
+              "Career Guidance",
             ].map((item) => (
               <li key={item}>
                 <a
