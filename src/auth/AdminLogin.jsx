@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { User, UserRole } from '../types';
 import {
   ShieldAlert,
   Lock,
@@ -8,16 +7,11 @@ import {
   ArrowLeft,
   Info,
 } from "lucide-react";
-// Fix: Removed .tsx/.ts extensions
 import { INITIAL_ADMIN } from "../../utils/Constant";
 import { Link, useNavigate } from "react-router-dom";
 import { object, string } from "yup";
 import { useFormik } from "formik";
 import { login } from "../services/authService";
-
-// interface AdminLoginProps {
-//   onLogin: (user: User) => void;
-// }
 
 const userValidationSchema = object({
   email: string().email("Invalid email").required("Email is required"),
@@ -38,7 +32,6 @@ const AdminLogin = ({ onLogin }) => {
   const [error, setError] = useState("");
 
   const handleLogin = (e) => {
-    // e.preventDefault();
     console.log(values);
     // Default Credentials check
     if (email === "admin@placement.edu" && password === "Admin@123") {
@@ -54,13 +47,12 @@ const AdminLogin = ({ onLogin }) => {
       initialValues: myinitialValues,
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
-        // addUser(values);
         try {
           const change_data = {
             ...values,
             role: "ADMIN",
           };
-          console.log("admin login : ", change_data);
+          // console.log("admin login : ", change_data);
           await login(change_data);
           navigate("/dashboard/admin/overview");
         } catch (error) {
@@ -100,15 +92,6 @@ const AdminLogin = ({ onLogin }) => {
               </div>
             )}
 
-            {/* <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-2xl text-blue-400 text-xs font-medium flex items-start gap-3 mb-4">
-              <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-bold text-blue-300 uppercase tracking-wider mb-1">Demo Credentials</p>
-                <p>Email: <span className="text-white select-all">admin@placement.edu</span></p>
-                <p>Pass: <span className="text-white select-all">Admin@123</span></p>
-              </div>
-            </div> */}
-
             <div className="space-y-2">
               <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">
                 Admin Email
@@ -121,8 +104,6 @@ const AdminLogin = ({ onLogin }) => {
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-14 pr-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-blue-500/50 outline-none transition-all"
                   placeholder="admin@placement.edu"
                 />
@@ -142,8 +123,6 @@ const AdminLogin = ({ onLogin }) => {
                   name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={password}
-                  // onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-14 pr-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-blue-500/50 outline-none transition-all"
                   placeholder="••••••••"
                 />

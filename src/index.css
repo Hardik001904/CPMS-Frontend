@@ -18,35 +18,22 @@
 body {
   margin: 0;
   padding: 0;
-  /* display: flex; */
-  /* place-items: center; */
-  /* min-width: 320px;
-  min-height: 100vh; */
   color: #213547;
   background-color: #ffffff;
 }
 
-/* table,th,td{
-  border: 1px solid black;
-  padding: 5px;
-} */
 
 /* Hide vertical scrollbar but keep scrolling */
 
 html,
 body {
   -ms-overflow-style: none;
-
   /* IE & Edge */
-
   scrollbar-width: none;
-
   /* Firefox */
 }
-
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
-
   /* Chrome, Safari */
 }

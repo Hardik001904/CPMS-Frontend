@@ -203,12 +203,5 @@ export default function AdminStudentProfile() {
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
   );
 }

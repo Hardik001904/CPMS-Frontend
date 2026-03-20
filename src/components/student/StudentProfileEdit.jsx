@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import user from "../../../utils/JSON/cpms_user.json";
 import { Globe, Hash, Phone, Plus, Save, X } from "lucide-react";
 import { useFormik } from "formik";
 import {
@@ -38,7 +37,6 @@ export const StudentProfileEdit = ({ profile }) => {
   const getStudent = async () => {
     try {
       const res = await fetchStudentById();
-      // console.log("inside API Response:", res?.user);
       setUser(res?.user);
     } catch (error) {
       console.log(error);
@@ -78,13 +76,8 @@ export const StudentProfileEdit = ({ profile }) => {
     },
     validationSchema: userValidationSchema,
     onSubmit: async (values) => {
-      // console.log("FORM SUBMITTED");
-      // console.log(values);
       try {
-        console.log(values);
-
         const res = await updateStudentProfile(values);
-        // console.log("inside ", res.data);
         toast.success("Profile updated successfully");
       } catch (error) {
         console.log("Error message:", error.message);
@@ -116,7 +109,6 @@ export const StudentProfileEdit = ({ profile }) => {
             </p>
           </div>
           <button
-            // onClick={() => onSave(local)}
             type="submit"
             className="bg-blue-600 text-white px-12 py-5 rounded-2xl font-black shadow-2xl shadow-blue-600/30 hover:bg-blue-500 transition-all flex items-center gap-3 active:scale-95 uppercase tracking-widest text-sm"
           >
@@ -139,9 +131,6 @@ export const StudentProfileEdit = ({ profile }) => {
                 </label>
                 <input
                   value={values.department}
-                  // onChange={(e) =>
-                  //   setLocal({ ...local, department: e.target.value })
-                  // }
                   className="w-full  p-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none cursor-not-allowed appearance-none"
                 />
                 {touched.department && errors.department ? (
@@ -160,9 +149,6 @@ export const StudentProfileEdit = ({ profile }) => {
                       value={values.enrollmentNumber}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      // onChange={(e) =>
-                      //   setLocal({ ...local, enrollmentNumber: e.target.value })
-                      // }
                       className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 cursor-not-allowed outline-none"
                       placeholder="TIT/2026/001"
                     />
@@ -180,9 +166,6 @@ export const StudentProfileEdit = ({ profile }) => {
                     <input
                       name="phone"
                       value={values.phone}
-                      // onChange={(e) =>
-                      //   setLocal({ ...local, location: e.target.value })
-                      // }
                       onChange={handleChange}
                       onBlur={handleBlur}
                       className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none"
@@ -214,9 +197,6 @@ export const StudentProfileEdit = ({ profile }) => {
                     name="resumeUrl"
                     type="url"
                     value={values.resumeUrl}
-                    // onChange={(e) =>
-                    //   setLocal({ ...local, website: e.target.value })
-                    // }
                     onChange={handleChange}
                     onBlur={handleBlur}
                     className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none"
@@ -252,7 +232,6 @@ export const StudentProfileEdit = ({ profile }) => {
                 <input
                   name="cgpa"
                   value={values.cgpa}
-                  // onChange={(e) => setLocal({ ...local, cgpa: e.target.value })}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="w-full bg-transparent text-emerald-600 font-black text-4xl tracking-tighter outline-none"
@@ -267,9 +246,6 @@ export const StudentProfileEdit = ({ profile }) => {
                 <input
                   name="batch of"
                   value={values.gradYear}
-                  // onChange={(e) =>
-                  //   setLocal({ ...local, gradYear: e.target.value })
-                  // }
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="w-full bg-transparent text-slate-900 font-black text-4xl text-center outline-none"
@@ -332,8 +308,6 @@ export const StudentProfileEdit = ({ profile }) => {
           </div>
 
           {/* Skill Inventory */}
-          {/* Skill Inventory */}
-          {/* <div className="  bg-white p-8 rounded-[3.5rem]  border border-slate-200 space-y-6 shadow-sm"> */}
           <div className=" bg-white p-12 rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
             <h4 className="text-[10px] font-black text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-4">
               Skill Repository
@@ -398,40 +372,6 @@ export const StudentProfileEdit = ({ profile }) => {
               </div>
             </div>
           </div>
-          {/* <div className="bg-white p-12 rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
-            <h4 className="text-[10px] font-black text-slate-900 flex items-center gap-3 uppercase tracking-[0.3em]">
-              <div className="w-1.5 h-1.5 bg-purple-600 rounded-full" /> Skill
-              Inventory
-            </h4>
-            <div className="space-y-6">
-              <div>
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">
-                  Core Tech (Comma Separated)
-                </label>
-                <textarea
-                  name="skills"
-                  rows={3}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none resize-none"
-                  placeholder="React, AWS, Node.js..."
-                />
-                {touched.skills && errors.skills ? (
-                  <p>{errors.skills}</p>
-                ) : null}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {user.profile?.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 bg-[#0a0f1d] text-white text-[9px] font-black uppercase tracking-widest rounded-xl shadow-lg"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </form>

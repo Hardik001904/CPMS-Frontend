@@ -6,13 +6,13 @@ import MasterStudentList from "./MasterStudentList";
 
 export default function StudentDirectory() {
   const [students, setStudents] = useState([]);
-  const [activeTab, setActiveTab] = useState("directory"); // ✅ ADD HERE
+  const [activeTab, setActiveTab] = useState("directory"); 
   const navigate = useNavigate();
 
   const loadstudents = async () => {
     try {
       const data = await fetchStudents();
-      console.log("data", data);
+      // console.log("data", data);
       setStudents(data);
     } catch (error) {
       console.log("Failed to fetch students", error);
@@ -25,7 +25,7 @@ export default function StudentDirectory() {
 
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
-      {/* ✅ ADD HERE */}
+      {/* ADD HERE */}
       <div className="flex gap-3">
         <button
           onClick={() => setActiveTab("directory")}

@@ -6,9 +6,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-// import { Sidebar, DashboardHeader } from '../components/Layout';
 import { DashboardHeader, Sidebar } from "../components/Layout";
-// import { User, Job, Application, ApplicationStatus, CompanyProfile, UserRole, StudentProfile } from '../types';
 import {
   Building2,
   Briefcase,
@@ -37,24 +35,12 @@ import {
   Activity,
 } from "lucide-react";
 
-// interface CompanyDashboardProps {
-//   user: User;
-//   onLogout: () => void;
-//   jobs: Job[];
-//   onUpdateJobs: (jobs: Job[]) => void;
-//   applications: Application[];
-//   onUpdateApps: (apps: Application[]) => void;
-//   allUsers: User[];
-//   onUpdateUser: (users: User[]) => void;
-// }
 
 import PostJob from "../components/company/PostJob";
 import { SidebarNew } from "../components/SidebarNew";
 import MyJob from "../components/company/MyJob";
 import Applicants from "../components/company/Applicants";
 import Profile from "../components/company/Profile";
-// import { handlePost } from "../components/company/HandlePost";
-// import applications from "../../utils/JSON/cpms_apps.json";
 import { useFormik } from "formik";
 import { string } from "yup";
 import {
@@ -62,17 +48,9 @@ import {
   getCompanyApplication,
   getCompanyOverview,
 } from "../services/companyService";
+import SettingPage from "./SettingPage";
 
-// const userValidationSchema = object({
-//   // id: string().required(),
-//   title: string().required(),
-//   location: string().required(),
-//   salary: string().required(),
-//   description: string().required(),
-//   criteria: string().required(),
-//   status: string().required()
 
-// })
 
 const CompanyDashboard = ({
   onUpdateJobs,
@@ -97,14 +75,12 @@ const CompanyDashboard = ({
 
   const getOverview = async () => {
     const res = await getCompanyOverview();
-    // console.log("overview res",res)
     setOverview(res);
-    // console.log(res )
+    
   };
 
   const getApplications = async () => {
     const res = await getCompanyApplication();
-    // console.log("getApplications", res);
     console.log(res.data);
     setApplications(res);
   };
@@ -112,7 +88,6 @@ const CompanyDashboard = ({
   const getJobs = async () => {
     try {
       const res = await fetchAllJobs();
-      // console.log("API Response:" , res.data);
       setJobs(res.data);
     } catch (error) {
       console.log(error);
@@ -121,13 +96,10 @@ const CompanyDashboard = ({
 
   const currentPath = location.pathname.split("/").pop() || "overview";
 
-  // const companyJobs = jobs?.filter((j) => j.companyId === user?.id);
   const companyJobs = jobs.filter((j) => j.companyId === user._id);
 
-  // console.log("First Job CompanyId:", jobs[0]?.companyId);
 
   const companyApps = applications?.filter((a) => a.companyId === user?.id);
-  // console.log("applications:", applications);
 
   const profile = user?.profile || {
     description: "",
@@ -138,7 +110,6 @@ const CompanyDashboard = ({
     industry: "",
   };
 
-  //   const [viewingCandidate, setViewingCandidate] = useState<{app: Application, student: User} | null>(null);
   const [viewingCandidate, setViewingCandidate] = useState(null);
 
   const SidebarItems = [
@@ -246,13 +217,13 @@ const CompanyDashboard = ({
                         Corporate Identity Active
                       </div>
                       <h3 className="text-3xl md:text-4xl font-black mb-4 tracking-tighter  leading-tight">
-                        {/* Welcome, {profile?.hrName || user?.name.split(" ")[0]}! */}
+
                         Welcome, <span>{overview.name}</span>
                       </h3>
                       <p className="text-slate-400 max-w-md font-bold ">
                         Your organization,{" "}
                         <span className="text-white">{user?.name}</span>, has{" "}
-                        {/* {overview?.length} live hiring mandates. */}
+                        
                         {overview?.activeMandates || 0} live hiring mandates
                       </p>
                     </div>
@@ -266,30 +237,7 @@ const CompanyDashboard = ({
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {/* {[
-                      {
-                        label: "Active Mandates",
-                        value: companyJobs?.filter((j) => j.status === "Open")
-                          .length,
-                        color: "text-slate-900",
-                        bg: "bg-white",
-                        
-                      },
-                      {
-                        label: "Talent Pool",
-                        value: companyApps?.length,
-                        color: "text-blue-600",
-                        bg: "bg-blue-50",
-                      },
-                      {
-                        label: "Successful Hires",
-                        value: companyApps?.filter(
-                          (a) => a.status === ApplicationStatus.SELECTED,
-                        ).length,
-                        color: "text-emerald-600",
-                        bg: "bg-emerald-50",
-                      },
-                    ] */}
+
                     {[
                       {
                         label: "Active Mandates",
@@ -338,10 +286,7 @@ const CompanyDashboard = ({
               path="applicants"
               element={<Applicants refreshOverview={getOverview} />}
             />
-            {/* //   companyApps={companyApps}
-              //   applications={applications}
-              //   onUpdateApps={onUpdateApps}
-              // /> */}
+       
 
             <Route
               path="profile"
@@ -356,6 +301,7 @@ const CompanyDashboard = ({
             />
 
             <Route path="*" element={<Navigate to="overview" />} />
+            <Route path="settings" element={<SettingPage user={user} onLogout={logout} />} />
           </Routes>
         </div>
       </main>

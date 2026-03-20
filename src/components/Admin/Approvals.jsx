@@ -1,17 +1,11 @@
 import { CheckCircle2, XCircle } from "lucide-react";
 import React, { useEffect, useState } from "react";
-
-// import allUsers from "../../../utils/JSON/cpms_all_users.json";
 import {
   approveUser,
   getPendingApprovals,
   rejectUser,
 } from "../../services/adminService";
 import { UserRole } from "../../pages/AdminDashboard";
-
-// const pending = allUsers.filter(
-//   (u) => !u.isApproved && u.role !== UserRole.ADMIN,
-// );
 
 export default function Approvals() {
   const [pending, setPending] = useState([]);

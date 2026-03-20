@@ -1,11 +1,9 @@
 import { AlertCircle, RotateCcw, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { UserStatus } from "../../pages/AdminDashboard";
 import { fetchUser } from "../../services/studentService";
 import { deleteUserPermanently, getBinUsers, restoreUser } from "../../services/adminService";
 
 export default function Bin({ onUpdateUsers }) {
-  // const [rejectedUsers, setRejectedUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [allUsers, setallUsers] = useState([]);
   const [binUsers, setBinUsers] = useState([]);
@@ -22,29 +20,11 @@ export default function Bin({ onUpdateUsers }) {
   const getAllUsers = async () => {
     try {
       const res = await fetchUser();
-      // console.log("res profile", res.count);
       setallUsers(res.count);
-      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
-
-  // useEffect(() => {
-  //   // In a real app, we would fetch from /api/admin/bin
-  //   // For this demo, we'll filter from allUsers prop
-  //   const fetchRejected = async () => {
-  //     setIsLoading(true);
-  //     // Simulate API delay
-  //     await new Promise((resolve) => setTimeout(resolve, 500));
-  //     const rejected = allUsers.filter((u) => u.status === UserStatus.REJECTED);
-  //     setRejectedUsers(rejected);
-  //     setIsLoading(false);
-  //   };
-  //   getAllUsers();
-  //   fetchRejected();
-  //   fetchBin();
-  // }, [allUsers]);
 
   useEffect(() => {
     const loadBinUsers = async () => {
@@ -64,15 +44,6 @@ export default function Bin({ onUpdateUsers }) {
     getAllUsers();
   }, []);
 
-  // const handleRestore = async (id) => {
-  //   // In a real app: await fetch(`/api/admin/restore/${id}`, { method: 'PATCH' });
-  //   const updatedUsers = allUsers.map((u) =>
-  //     u.id === id ? { ...u, status: UserStatus.PENDING, isApproved: false } : u,
-  //   );
-  //   onUpdateUsers(updatedUsers);
-  //   alert("User restored to pending approvals.");
-  // };
-
 const handleRestore = async (id) => {
   try {
 
@@ -87,37 +58,17 @@ const handleRestore = async (id) => {
 };
 
 
-  // const handleDeletePermanently = async (id) => {
-  //   if (
-  //     !window.confirm(
-  //       "Are you sure you want to permanently delete this user? This action cannot be undone.",
-  //     )
-  //   ) {
-  //     return;
-  //   }
-  //   // In a real app: await fetch(`/api/admin/delete/${id}`, { method: 'DELETE' });
-  //   const updatedUsers = allUsers.filter((u) => u.id !== id);
-  //   onUpdateUsers(updatedUsers);
-  //   alert("User permanently deleted.");
-  // };
-
-
 const handleDeletePermanently = async (id) => {
 
   if (!window.confirm("Delete this user permanently?")) return;
-
   try {
-
     await deleteUserPermanently(id);
-
     // refresh bin list
     fetchBin();
-
   } catch (error) {
     console.log(error);
   }
 };
-
 
   if (isLoading) {
     return (
@@ -127,7 +78,6 @@ const handleDeletePermanently = async (id) => {
     );
   }
   
-
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
       <div className="flex justify-between items-end">

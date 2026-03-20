@@ -1,11 +1,8 @@
-// import axios from "axios";
-
 import { data } from "react-router-dom";
 import axios from "./axios";
 
 export const login = async (data) => {
   try {
-    // console.log("inside api ", data);
     const res = await axios.post("/auth/login", data);
     sessionStorage.setItem("token", res.data.token);
     sessionStorage.setItem("user", JSON.stringify(res.data.user));
@@ -43,22 +40,6 @@ export const fetchUserById = async () => {
     throw error;
   }
 };
-
-// export const updateProfile = async (data) => {
-//   try {
-//     const response = await axios.patch("/company/profile", data);
-//     return response.data;
-
-//   } catch (error) {
-//     console.error(
-//       "Update Profile Error:",
-//       error.response?.data?.message || error.message
-//     );
-//     throw new Error(
-//       error.response?.data?.message || "Failed to update profile"
-//     );
-//   }
-// };
 
 export const changePassword = async (currentPassword, newPassword) => {
   try {

@@ -6,7 +6,6 @@ import {
 
 export default function MyJob() {
   const [jobs, setJobs] = useState([]);
-  // const user = JSON.parse(sessionStorage.getItem("user")) || {};
   useEffect(() => {
     getJobs();
   }, []);
@@ -14,14 +13,12 @@ export default function MyJob() {
   const getJobs = async () => {
     try {
       const res = await fetchMyJobs();
-      // console.log("API Response:", res.data);
       setJobs(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // const companyJobs = jobs?.filter((j) => j.companyId === user._id);
   const companyJobs = jobs;
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-4">
@@ -70,18 +67,6 @@ export default function MyJob() {
                 </td>
                 <td className="px-6 py-4 text-right">
                   <button
-                    // onClick={() => {
-                    //   const updated = companyJobs.map((j) =>
-                    //     j._id === job._id
-                    //       ? {
-                    //           ...j,
-                    //           status: j.status === "Open" ? "Closed" : "Open",
-                    //         }
-                    //       : j,
-                    //   );
-                    //   // onUpdateJobs(updated);
-                    //     setJobs(updated);
-                    // }}
                     onClick={async () => {
                       try {
                         await updateJobRequirements(job._id);

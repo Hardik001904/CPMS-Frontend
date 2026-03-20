@@ -1,4 +1,3 @@
-// src/pages/SessionExpired.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, LogIn, ArrowLeft } from 'lucide-react';

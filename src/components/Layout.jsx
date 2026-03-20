@@ -16,17 +16,8 @@ import {
   Twitter,
   Github,
 } from "lucide-react";
-// import { User, UserRole } from '../types';
-// Fix: Ensured standard react-router-dom import
 import { Link, useNavigate } from "react-router-dom";
 
-// interface  {
-//   title: string;
-//   items: Array<{ icon: React.ReactNode; label: string; active: boolean; onClick: () => void }>;
-//   onLogout: () => void;
-//   userName: string;
-//   role: string;
-// }
 
 export const Sidebar = ({ title, items, onLogout, userName, role }) => (
   <aside className="w-64 bg-slate-900 text-white min-h-screen fixed left-0 top-0 flex flex-col z-20 shadow-xl">
@@ -107,14 +98,6 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // const getInitials = (name) =>
-  //   name
-  //     .split(" ")
-  //     .map((n) => n[0])
-  //     .join("")
-  //     .toUpperCase()
-  //     .substring(0, 2);
-
   const getInitials = (name) => {
     if (!name) return "NA";
 
@@ -183,13 +166,6 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
 
         <div className="h-8 w-px bg-slate-200 mx-1"></div>
 
-        {/* <div className="relative" ref={profileRef}>
-          <button
-            onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="w-10 h-10 rounded-full bg-blue-100 border-2 border-transparent hover:border-blue-200 flex items-center justify-center text-blue-600 text-xs font-bold transition-all shadow-sm"
-          >
-            {user ? getInitials(user.name) : "ID"}
-          </button> */}
         <div className="relative" ref={profileRef}>
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
@@ -214,7 +190,9 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
                 </button>
                 <button
                   className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-all text-left"
-                  onClick={() => navigate('/dashboard/student/settings')}
+                  onClick={() =>
+                    navigate(`/dashboard/${user?.role?.toLowerCase()}/settings`)
+                  }
                 >
                   <Settings className="w-4 h-4" /> Settings
                 </button>
@@ -228,21 +206,6 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
               </div>
             </div>
           )}
-
-          {/* {showProfileMenu && (
-            <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in slide-in-from-top-2 duration-200">
-              <div className="p-4 bg-slate-50 border-b border-slate-100"><p className="text-sm font-bold text-slate-900 truncate">{user?.name}</p></div>
-              <div className="p-2">
-                <button className="w-full flex items-center gap-3 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-xl font-medium text-left"><UserCircle className="w-4 h-4"/> Profile</button>
-                <button onClick={() => {
-                  sessionStorage.removeItem("token");
-                  sessionStorage.removeItem("user");
-                  onClose();
-                  navigate("/");
-                }} className="w-full flex items-center gap-3 px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-xl font-bold text-left"><LogOut className="w-4 h-4"/>     Sign Out</button>
-              </div>
-            </div>
-          )} */}
         </div>
       </div>
     </header>
@@ -366,7 +329,6 @@ export const Footer = () => (
       {/* Bottom Copyright Section */}
       <div className="pt-10 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-[11px] font-black uppercase tracking-widest text-slate-600">
-          {/* © 2026 PLACEMENTPRO ECOSYSTEM • UNIVERSITY PLACEMENT MANAGEMENT */}
           &copy; 2026 Campus Placement Management System
         </p>
         <div className="flex items-center gap-6">
@@ -383,9 +345,6 @@ export const Footer = () => (
             <a href="#" className="hover:text-blue-500 transition-colors">
               Terms
             </a>
-            {/* <a href="#" className="hover:text-blue-500 transition-colors">
-              Audit
-            </a> */}
           </div>
         </div>
       </div>

@@ -11,7 +11,6 @@ import {
   XCircle,
 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-// import app from "../../../utils/JSON/cpms_apps.json";
 import {
   fetchCompanyApplication,
   updateApplicationStatus,
@@ -38,9 +37,8 @@ export default function Applicants({ refreshOverview }) {
   const getApplicationBycompany = async () => {
     try {
       const res = await fetchCompanyApplication();
-      // console.log("res application", res.application);
       setApplications(res.application);
-      toast.success(res.message);
+      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -49,9 +47,8 @@ export default function Applicants({ refreshOverview }) {
   const getStudentProfile = async () => {
     try {
       const res = await fetchUser();
-      // console.log("res profile", res.users);
       setUser(res.users);
-      toast.success(res.message);
+      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -68,7 +65,6 @@ export default function Applicants({ refreshOverview }) {
       const res = await updateApplicationStatus(appId, { status });
       console.log("onUpdateApps", res);
       await getApplicationBycompany();
-      // window.location.reload();
       refreshOverview();
 
       toast.success(res.message);
@@ -126,7 +122,6 @@ export default function Applicants({ refreshOverview }) {
                   {applications?.map((app) => {
                     const student = user.find((u) => u._id === app.studentId);
                     const studentProfile = student?.profile;
-                    // console.log("studentProfile----- : ", studentProfile);
                     return (
                       <tr
                         key={app._id}
@@ -417,57 +412,3 @@ export default function Applicants({ refreshOverview }) {
     </div>
   );
 }
-
-// <div
-//   key={app._id}
-//   className="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row justify-between items-center hover:border-blue-400 transition-all shadow-sm group"
-// >
-//   <div className="flex items-center gap-4">
-//     <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center font-black text-blue-600 text-xl  group-hover:bg-blue-600 group-hover:text-white transition-all">
-//       {app.studentName.charAt(0)}
-//     </div>
-//     <div>
-//       <h4 className="font-black text-slate-900 tracking-tight ">
-//         {app.studentName}
-//       </h4>
-//       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-//         Applying for {app.jobTitle}
-//       </p>
-//     </div>
-//   </div>
-//   <div className="flex items-center gap-3 mt-4 md:mt-0">
-//     <div
-//       className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${app.status === ApplicationStatus.SELECTED ? "bg-emerald-50 text-emerald-600 border-emerald-100" : "bg-slate-50 text-slate-500"}`}
-//     >
-//       {app.status}
-//     </div>
-//     <div className="h-6 w-px bg-slate-100 mx-2"></div>
-//     <button
-//       onClick={() =>
-//         onUpdateApps(app._id, ApplicationStatus.SHORTLISTED)
-//       }
-//       className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
-//       title="Shortlist"
-//     >
-//       <CheckCircle2 className="w-5 h-5" />
-//     </button>
-//     <button
-//       onClick={() =>
-//         onUpdateApps(app._id, ApplicationStatus.SELECTED)
-//       }
-//       className="p-2 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all"
-//       title="Final Select"
-//     >
-//       <Award className="w-5 h-5" />
-//     </button>
-//     <button
-//       onClick={() =>
-//         onUpdateApps(app._id, ApplicationStatus.REJECTED)
-//       }
-//       className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"
-//       title="Reject"
-//     >
-//       <XCircle className="w-5 h-5" />
-//     </button>
-//   </div>
-// </div>

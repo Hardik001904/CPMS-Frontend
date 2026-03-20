@@ -1,5 +1,4 @@
 import React, { useEffect, useEffectEvent, useState } from "react";
-// Fix: Ensured standard react-router-dom imports
 import { Link, useNavigate } from "react-router-dom";
 import {
   User as UserIcon,
@@ -52,7 +51,6 @@ const StudentRegister = () => {
       },
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
-        // console.log(values);
         try {
           // Frontend validation for email domain
           if (!values.email.endsWith("@university.edu")) {
@@ -65,7 +63,6 @@ const StudentRegister = () => {
           const res = await register(values);
           console.log(res.data);
           toast.success("Register successfully");
-          // navigate('/dashboard/student')
           navigate("/login");
         } catch (err) {
           console.log("Error message:", err);

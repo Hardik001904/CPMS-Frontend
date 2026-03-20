@@ -1,6 +1,3 @@
-// Fix: Removed .ts extension from import
-// import { Job, Application, ApplicationStatus, User, UserRole } from './types';
-
 export const INITIAL_ADMIN = {
   id: "admin_1",
   name: "Placement Director",

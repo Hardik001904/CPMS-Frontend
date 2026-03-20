@@ -7,8 +7,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { DashboardHeader } from "../components/Layout";
-
-// import { User, UserRole, Job, Application } from '../types';
 import {
   LayoutDashboard,
   Users,
@@ -22,32 +20,19 @@ import {
   Database,
   Trash2,
 } from "lucide-react";
-
-// interface AdminDashboardProps {
-//   user: User;
-//   onLogout: () => void;
-//   allUsers: User[];
-//   onUpdateUsers: (users: User[]) => void;
-//   jobs: Job[];
-//   applications: Application[];
-// }
-
-// import user from "../../utils/JSON/cpms_user.json";
 import { SidebarNew } from "../components/SidebarNew";
 import Approvals from "../components/Admin/Approvals";
 import StudentDirectory from "../components/Admin/StudentDirectory";
 import HiringPartners from "../components/Admin/HiringPartners";
-import LiveActivities from "../components/Admin/LiveActivities";
 import Reports from "../components/Admin/Reports";
 import { fetchUser } from "../services/studentService";
 import toast from "react-hot-toast";
 import { fetchAllJobs } from "../services/companyService";
-import allUsers from "../../utils/JSON/cpms_all_users.json";
 import Bin from "../components/Admin/Bin";
 import { fetchUserById } from "../services/authService";
 import AdminStudentProfile from "../components/Admin/AdminStudentProfile";
 import { getAdminDashboard } from "../services/adminService";
-// import applications from "../../utils/JSON/cpms_apps.json"
+import SettingPage from "./SettingPage";
 
 export const UserRole = {
   STUDENT: "STUDENT",
@@ -61,12 +46,7 @@ export const UserStatus = {
   REJECTED: "REJECTED",
 };
 
-const AdminDashboard = ({
-  
-  onUpdateUsers,
-
-  applications,
-}) => {
+const AdminDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -75,14 +55,11 @@ const AdminDashboard = ({
   const [users, setUsers] = useState([]);
   const [overview, setOverview] = useState([]);
   const [jobs, setJobs] = useState([]);
-  // const user = JSON.parse(sessionStorage.getItem("user")) || {};
 
   const getUser = async () => {
     try {
       const res = await fetchUser();
-      // console.log("res profile", res.count);
       setUsers(res.count);
-      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -90,10 +67,7 @@ const AdminDashboard = ({
   const getUserProfile = async () => {
     try {
       const res = await fetchUserById();
-      // console.log("res profile", res.count);
-      // console.log("profile :", res.user);
       setUser(res.user);
-      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -102,10 +76,7 @@ const AdminDashboard = ({
   const getAdminDashboardOverview = async () => {
     try {
       const res = await getAdminDashboard();
-      // console.log("res profile", res.count);
-      // console.log("getAdminDashboardOverview :", res);
       setOverview(res);
-      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -115,7 +86,6 @@ const AdminDashboard = ({
     try {
       const res = await fetchAllJobs();
       setJobs(res.data);
-      // console.log("getJobs", res.data);
     } catch (error) {
       console.log(error);
     }
@@ -127,38 +97,6 @@ const AdminDashboard = ({
     getJobs();
     getAdminDashboardOverview();
   }, []);
-
-  const pending = allUsers?.filter(
-    (u) => !u.isApproved && u.role !== UserRole.ADMIN,
-  );
-  const students = allUsers?.filter(
-    (u) => u.role === UserRole.STUDENT && u.isApproved,
-  );
-  const companies = allUsers?.filter(
-    (u) => u.role === UserRole.COMPANY && u.isApproved,
-  );
-  // console.log("companies : ", companies);
-  const handleAction = (id) => {
-    if (approve) {
-      onUpdateUsers(
-        allUsers?.map((u) => (u.id === id ? { ...u, isApproved: true } : u)),
-      );
-    } else {
-      onUpdateUsers(allUsers?.filter((u) => u.id !== id));
-    }
-  };
-
-  // const handleAction = async (id) => {
-  //   try {
-  //     await approveUser(id);
-
-  //     // Remove user from list after approval
-  //     setPending((prev) => prev.filter((u) => u._id !== id));
-
-  //   } catch (error) {
-  //     console.error("Approval failed", error);
-  //   }
-  // };
 
   const sidebarItems = [
     {
@@ -185,12 +123,6 @@ const AdminDashboard = ({
       active: currentPath === "companies",
       onClick: () => navigate("/dashboard/admin/companies"),
     },
-    // {
-    //   icon: <Activity className="w-5 h-5" />,
-    //   label: "Live Activities",
-    //   active: currentPath === "activities",
-    //   onClick: () => navigate("/dashboard/admin/activities"),
-    // },
     {
       icon: <PieChart className="w-5 h-5" />,
       label: "Reports",
@@ -206,7 +138,6 @@ const AdminDashboard = ({
   ];
 
   const logout = () => {
-    // console.log("Logout User");
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
     navigate("/");
@@ -326,10 +257,9 @@ const AdminDashboard = ({
 
             <Route path="companies" element={<HiringPartners />} />
 
-            {/* <Route path="activities" element={<LiveActivities />} /> */}
-
             <Route path="reports" element={<Reports />} />
             <Route path="bin" element={<Bin />} />
+            <Route path="settings" element={<SettingPage user={user} onLogout={logout} />} />
           </Routes>
         </div>
       </main>

@@ -31,7 +31,6 @@ const myinitialValues = {
 const LoginPage = ({ onLogin, allUsers = [] }) => {
   const navigate = useNavigate();
 
-  // FIX 1: use simple string roles
   const [role, setRole] = useState("STUDENT");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,15 +42,11 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
       initialValues: myinitialValues,
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
-        // addUser(values);
-        // console.log(values);
         try {
           const change_data = {
             ...values,
             role,
           };
-
-          // console.log("login : ",change_data)
 
           const res = await login(change_data);
           console.log("login page : ", res.data);
@@ -134,7 +129,6 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                 Email Address
               </label>
               <div className="relative">
-                {/* <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
                 <Mail className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -142,8 +136,6 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={email}
-                  // onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 font-black text-sm"
                   placeholder="name@email.com"
                 />
@@ -155,7 +147,6 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
             <div>
               <label className="block text-sm font-bold mb-2">Password</label>
               <div className="relative">
-                {/* <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" /> */}
                 <Lock className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -163,8 +154,6 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                   name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  // value={password}
-                  // onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-12 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 font-black text-sm"
                   placeholder="••••••••"
                 />

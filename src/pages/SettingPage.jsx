@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { DashboardHeader } from "../components/Layout";
 import { useNavigate } from "react-router-dom";
-// import { userService } from "../services/userService";
 import {
   Settings as SettingsIcon,
   ShieldCheck,
@@ -18,7 +17,6 @@ import {
   Briefcase,
   Building2,
 } from "lucide-react";
-import { SidebarNew } from "../components/SidebarNew";
 import { changePassword, deleteAccount } from "../services/authService";
 
 export const UserRole = {
@@ -91,22 +89,6 @@ export default function SettingPage({ user, onLogout }) {
       ];
     }
   };
-
-  //   const handleProfileUpdate = async (e) => {
-  //     e.preventDefault();
-  //     setIsSaving(true);
-  //     setMessage(null);
-  //     try {
-  //       const updatedUser = await updateProfile({ name: profileData.name, email: profileData.email });
-  //       onUpdateUser(updatedUser);
-  //       setMessage({ type: 'success', text: 'Profile details updated successfully!' });
-  //     } catch (error) {
-  //       setMessage({ type: 'error', text: error.message || 'Failed to update profile' });
-  //     } finally {
-  //       setIsSaving(false);
-  //       setTimeout(() => setMessage(null), 3000);
-  //     }
-  //   };
 
   const handlePasswordUpdate = async (e) => {
     e.preventDefault();
@@ -185,63 +167,6 @@ export default function SettingPage({ user, onLogout }) {
               Personal Information
             </h4>
           </div>
-
-          {/* <form  className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2 ml-1">
-                      Full Name
-                    </label>
-                    <div className="relative">
-                      <UserIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                      <input
-                        value={profileData.name}
-                        onChange={(e) =>
-                          setProfileData({
-                            ...profileData,
-                            name: e.target.value,
-                          })
-                        }
-                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm italic"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2 ml-1">
-                      Email Address
-                    </label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                      <input
-                        type="email"
-                        value={profileData.email}
-                        onChange={(e) =>
-                          setProfileData({
-                            ...profileData,
-                            email: e.target.value,
-                          })
-                        }
-                        className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm italic"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-end">
-                  <button
-                    type="submit"
-                    disabled={isSaving}
-                    className="bg-slate-900 text-white px-8 py-3.5 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center gap-2 active:scale-95 shadow-lg shadow-slate-900/10"
-                  >
-                    {isSaving ? (
-                      "Processing..."
-                    ) : (
-                      <>
-                        <Save className="w-4 h-4" /> Save Changes
-                      </>
-                    )}
-                  </button>
-                </div>
-              </form> */}
         </div>
 
         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
@@ -355,215 +280,3 @@ export default function SettingPage({ user, onLogout }) {
     </div>
   );
 }
-
-// import React, { useState } from "react";
-// import { DashboardHeader } from "../components/Layout";
-// import { useNavigate } from "react-router-dom";
-// import {
-//   Settings as SettingsIcon,
-//   ShieldCheck,
-//   Lock,
-//   User as UserIcon,
-//   Eye,
-//   EyeOff,
-//   Trash2,
-//   AlertCircle,
-//   CheckCircle2,
-//   Briefcase,
-//   Building2,
-// } from "lucide-react";
-// import { SidebarNew } from "../components/SidebarNew";
-// import { changePassword, deleteAccount } from "../services/authService";
-
-// export default function SettingPage({ user, onLogout }) {
-//   const navigate = useNavigate();
-
-//   // 🛡️ Safety check
-//   if (!user) return null;
-
-//   const [showPassword, setShowPassword] = useState(false);
-//   const [passwords, setPasswords] = useState({
-//     current: "",
-//     new: "",
-//     confirm: "",
-//   });
-//   const [isSaving, setIsSaving] = useState(false);
-//   const [message, setMessage] = useState(null);
-
-//   const getSidebarItems = () => {
-//     const base = "/dashboard/" + user.role.toLowerCase();
-
-//     if (user.role === "ADMIN") {
-//       return [
-//         {
-//           icon: <ShieldCheck className="w-5 h-5" />,
-//           label: "Overview",
-//           onClick: () => navigate(base + "/overview"),
-//         },
-//         {
-//           icon: <SettingsIcon className="w-5 h-5" />,
-//           label: "Settings",
-//           active: true,
-//         },
-//       ];
-//     }
-
-//     if (user.role === "STUDENT") {
-//       return [
-//         {
-//           icon: <Briefcase className="w-5 h-5" />,
-//           label: "Overview",
-//           onClick: () => navigate(base + "/overview"),
-//         },
-//         {
-//           icon: <SettingsIcon className="w-5 h-5" />,
-//           label: "Settings",
-//           active: true,
-//         },
-//       ];
-//     }
-
-//     return [
-//       {
-//         icon: <Building2 className="w-5 h-5" />,
-//         label: "Overview",
-//         onClick: () => navigate(base + "/overview"),
-//       },
-//       {
-//         icon: <SettingsIcon className="w-5 h-5" />,
-//         label: "Settings",
-//         active: true,
-//       },
-//     ];
-//   };
-
-//   // 🔐 Change Password
-//   const handlePasswordUpdate = async (e) => {
-//     e.preventDefault();
-
-//     if (passwords.new !== passwords.confirm) {
-//       setMessage({ type: "error", text: "Passwords do not match!" });
-//       return;
-//     }
-
-//     try {
-//       setIsSaving(true);
-//       await changePassword(passwords.current, passwords.new);
-
-//       setMessage({ type: "success", text: "Password updated successfully!" });
-//       setPasswords({ current: "", new: "", confirm: "" });
-
-//     } catch (error) {
-//       setMessage({
-//         type: "error",
-//         text: error.message || "Failed to update password",
-//       });
-//     } finally {
-//       setIsSaving(false);
-//       setTimeout(() => setMessage(null), 3000);
-//     }
-//   };
-
-//   // 🗑️ Delete Account
-//   const handleDeleteAccount = async () => {
-//     const confirmDelete = window.confirm(
-//       "Are you sure you want to delete your account?"
-//     );
-//     if (!confirmDelete) return;
-
-//     try {
-//       setIsSaving(true);
-//       await deleteAccount();
-//       onLogout();
-//     } catch (error) {
-//       setMessage({
-//         type: "error",
-//         text: error.message || "Failed to delete account",
-//       });
-//       setIsSaving(false);
-//     }
-//   };
-
-//   return (
-
-//         <div className="p-6 max-w-3xl mx-auto space-y-6">
-
-//           {/* Message */}
-//           {message && (
-//             <div
-//               className={`p-4 rounded-xl flex items-center gap-2 ${
-//                 message.type === "success"
-//                   ? "bg-green-100 text-green-600"
-//                   : "bg-red-100 text-red-600"
-//               }`}
-//             >
-//               {message.type === "success" ? (
-//                 <CheckCircle2 />
-//               ) : (
-//                 <AlertCircle />
-//               )}
-//               {message.text}
-//             </div>
-//           )}
-
-//           {/* 🔐 Change Password */}
-//           <div className="bg-white p-6 rounded-xl shadow">
-//             <h3 className="font-bold mb-4">Change Password</h3>
-
-//             <form onSubmit={handlePasswordUpdate} className="space-y-4">
-//               <input
-//                 type={showPassword ? "text" : "password"}
-//                 placeholder="Current Password"
-//                 value={passwords.current}
-//                 onChange={(e) =>
-//                   setPasswords({ ...passwords, current: e.target.value })
-//                 }
-//                 className="w-full p-3 border rounded"
-//               />
-
-//               <input
-//                 type="password"
-//                 placeholder="New Password"
-//                 value={passwords.new}
-//                 onChange={(e) =>
-//                   setPasswords({ ...passwords, new: e.target.value })
-//                 }
-//                 className="w-full p-3 border rounded"
-//               />
-
-//               <input
-//                 type="password"
-//                 placeholder="Confirm Password"
-//                 value={passwords.confirm}
-//                 onChange={(e) =>
-//                   setPasswords({ ...passwords, confirm: e.target.value })
-//                 }
-//                 className="w-full p-3 border rounded"
-//               />
-
-//               <button
-//                 type="submit"
-//                 disabled={isSaving}
-//                 className="bg-blue-600 text-white px-4 py-2 rounded"
-//               >
-//                 {isSaving ? "Updating..." : "Update Password"}
-//               </button>
-//             </form>
-//           </div>
-
-//           {/* 🗑️ Delete Account */}
-//           <div className="bg-red-50 p-6 rounded-xl">
-//             <h3 className="font-bold text-red-600 mb-2">Danger Zone</h3>
-
-//             <button
-//               onClick={handleDeleteAccount}
-//               disabled={isSaving}
-//               className="bg-red-600 text-white px-4 py-2 rounded"
-//             >
-//               {isSaving ? "Deleting..." : "Delete Account"}
-//             </button>
-//           </div>
-
-//         </div>
-//   );
-// }

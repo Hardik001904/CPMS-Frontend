@@ -30,7 +30,7 @@ export const JobListingView = () => {
       const res = await getStudentApplication();
       setStudentApps(res.application);
       console.log("res getApplicationByStudent", res);
-      toast.success(res.message);
+      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -210,51 +210,5 @@ export const JobListingView = () => {
         </div>
       )}
     </div>
-
-    // <div className="space-y-6 animate-in slide-in-from-bottom-8 duration-700">
-    //   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-    //     <h3 className="text-2xl font-black text-slate-900 tracking-tight ">
-    //       Active Opportunities
-    //     </h3>
-    //   </div>
-    //   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    //     {jobs.map((job) => {
-    //       const hasApplied = studentApps.some((a) => a.jobId === job.id);
-    //       return (
-    //         <div
-    //           key={job.id}
-    //           className="bg-white p-8 rounded-3xl border border-slate-200 flex flex-col justify-between hover:border-blue-300 transition-all shadow-lg"
-    //         >
-    //           <div>
-    //             <div className="flex justify-between items-start mb-4">
-    //               <div className="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center font-black text-xl text-blue-600 border border-slate-200 uppercase">
-    //                 {job.companyName?.charAt(0)}
-    //               </div>
-    //               <span className="text-emerald-600 font-black bg-emerald-50 px-3 py-1 rounded-lg text-[10px] uppercase tracking-widest ">
-    //                 {job.salary}
-    //               </span>
-    //             </div>
-    //             <h4 className="font-black text-xl text-slate-900 mb-1  tracking-tight">
-    //               {job.title}
-    //             </h4>
-    //             <p className="text-slate-500 font-bold text-xs mb-4 uppercase tracking-wider">
-    //               {job.companyName} • {job.location}
-    //             </p>
-    //             <p className="text-sm text-slate-600 line-clamp-2 mb-6 font-medium ">
-    //               {job.description}
-    //             </p>
-    //           </div>
-    //           <button
-    //             disabled={hasApplied}
-    //             onClick={() => onApply(job)}
-    //             className={`w-full py-3.5 rounded-xl font-black uppercase tracking-[0.2em] text-xs transition-all ${hasApplied ? "bg-emerald-50 text-emerald-600 cursor-not-allowed border border-emerald-100" : "bg-slate-900 text-white hover:bg-blue-600 shadow-lg shadow-slate-900/10 active:scale-95"}`}
-    //           >
-    //             {hasApplied ? "Verified Application" : "Apply Now"}
-    //           </button>
-    //         </div>
-    //       );
-    //     })}
-    //   </div>
-    // </div>
   );
 };

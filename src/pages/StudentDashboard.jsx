@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect } from "react";
-// // Fix: Ensured standard react-router-dom imports
 import {
   Routes,
   Route,
@@ -7,9 +6,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-// // Fix: Removed file extensions from imports
-import { Sidebar, DashboardHeader } from "../components/Layout";
-// import { User, Job, Application, ApplicationStatus, StudentProfile, CompanyProfile } from '../types';
+import { DashboardHeader } from "../components/Layout";
 import {
   LayoutDashboard,
   Briefcase,
@@ -36,7 +33,6 @@ import {
   Plus,
 } from "lucide-react";
 
-// import applications from "../../utils/JSON/cpms_apps.json";
 import { JobListingView } from "../components/student/JobListingView";
 import { ApplicationsView } from "../components/student/ApplicationsView";
 import { StudentProfileEdit } from "../components/student/StudentProfileEdit";
@@ -58,7 +54,6 @@ const StudentDashboard = () => {
   const getJobs = async () => {
     try {
       const res = await fetchAllJobs();
-      // console.log("inside student dashbord API Response:", res.data);
       setJobs(res.data);
     } catch (error) {
       console.log(error);
@@ -68,25 +63,15 @@ const StudentDashboard = () => {
     getJobs();
     getOverview();
   }, []);
-  // const studentApps = applications?.filter((a) => a.studentId === user.id);
-
-  // const studentApps = (applications || []).filter(
-  //   (a) => a.studentId === user.id,
-  // );
 
   const getOverview = async () => {
     const res = await getStudentOverview();
-    // console.log("res", res);
     setOverview(res);
   };
 
   const currentPath = location.pathname.split("/").pop() || "overview";
-  // const currentPath = location.pathname.split("/").pop() ;
-  // console.log(currentPath);
 
   const openJobs = jobs?.filter((j) => j.status === "Open");
-  // console.log("jobs ", openJobs);
-  // const openJobs = (jobs || []).filter((j) => j.status === "Open");
 
   const profile = user?.profile || {
     university: "",
@@ -103,7 +88,6 @@ const StudentDashboard = () => {
     location: "",
   };
 
-  //   //   const [viewingCompany, setViewingCompany] = useState<User | null>(null);
   const [viewingCompany, setViewingCompany] = useState(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -196,7 +180,6 @@ const StudentDashboard = () => {
                           Authenticated
                         </div>
                         <h3 className="text-4xl font-black mb-4 tracking-tighter ">
-                          {/* Welcome, {user?.name.split(" ")[0]}! */}
                           Welcome, <span>{name}</span>
                           {overview.welcome}
                         </h3>
@@ -255,11 +238,7 @@ const StudentDashboard = () => {
               }
             />
             <Route path="jobs" element={<JobListingView />} />
-            <Route
-              path="applications"
-              element={<ApplicationsView />}
-              // element={<ApplicationsView studentApps={studentApps} />}
-            />
+            <Route path="applications" element={<ApplicationsView />} />
             <Route
               path="profile"
               element={<StudentProfileEdit profile={profile} />}
@@ -268,13 +247,7 @@ const StudentDashboard = () => {
 
             <Route
               path="settings"
-              element={
-                <SettingPage
-                  user={user}
-                  onLogout={logout}
-               
-                />
-              }
+              element={<SettingPage user={user} onLogout={logout} />}
             />
           </Routes>
         </div>

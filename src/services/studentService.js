@@ -1,5 +1,3 @@
-// import axios from "./axios";
-
 import axios from "./axios";
 
 export const fetchUser = async () => {
@@ -12,6 +10,7 @@ export const fetchUser = async () => {
   }
 };
 
+//Student Can Update There Profile
 export const updateStudentProfile = async (data) => {
   try {
     const res = await axios.put("/student/profile", data);
@@ -21,6 +20,7 @@ export const updateStudentProfile = async (data) => {
   }
 };
 
+//Get Students By There Id's
 export const fetchStudentById = async () => {
   try {
     const res = await axios.get(`/auth/getUser`);
@@ -30,6 +30,7 @@ export const fetchStudentById = async () => {
   }
 };
 
+//Show The Overview Of Student Dashboard
 export const getStudentOverview = async () => {
   try {
     const res = await axios.get(`/student/overview`);
@@ -37,4 +38,4 @@ export const getStudentOverview = async () => {
   } catch (error) {
     throw error;
   }
-}
+};

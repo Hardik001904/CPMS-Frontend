@@ -14,13 +14,11 @@ const jobValidationSchema = object({
   allowedBranches: string().required("Branches are required"),
   requiredSkills: string().required("Skills are required"),
 
-  // criteria: string().required("Criteria is required"),
 });
 
 export default function PostJob() {
   const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("user"));
-  // console.log("user : ", user);
 
   const { handleSubmit, handleChange, errors, touched, values, handleBlur } =
     useFormik({
@@ -34,7 +32,6 @@ export default function PostJob() {
         description: "",
         status: "Open",
       },
-      // validationSchema: jobValidationSchema,
       onSubmit: async (values) => {
         try {
           console.log("user : ", user);
@@ -57,36 +54,11 @@ export default function PostJob() {
     });
 
   return (
-    // <div className="max-w-3xl mx-auto space-y-6 animate-in slide-in-from-bottom-4 ">
     <div className="max-w-3xl  space-y-6 animate-in slide-in-from-bottom-4 ">
       <h3 className="text-2xl font-black text-slate-900  tracking-tight">
         Post New Requirement
       </h3>
       <div className="bg-white p-10 rounded-[2.5rem]  border border-slate-200 shadow-sm">
-        {/* <div >
-          <h3 className="text-3xl font-black text-slate-900  mb-10 tracking-tight">
-        Post New Requirement
-      </h3>
-      </div> */}
-        {/* onSubmit={(e) => {
-            e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            const newJob = {
-              id: "j" + Date.now(),
-              title: formData.get("title"),
-              companyId: user.id,
-              companyName: user.name,
-              location: formData.get("location"),
-              salary: formData.get("salary"),
-              description: formData.get("description"),
-              criteria: formData.get("criteria"),
-              postedDate: new Date().toISOString().split("T")[0],
-              status: "Open",
-            };
-            onUpdateJobs([...jobs, newJob]);
-            alert("Job Posted Successfully!");
-            navigate("/dashboard/company/my-jobs");
-          }} */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -217,25 +189,6 @@ export default function PostJob() {
               <p>{errors.description}</p>
             ) : null}
           </div>
-          {/* <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">
-              Eligibility Criteria
-            </label>
-            <textarea
-              name="criteria"
-              required
-              value={values.criteria}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              rows={2}
-              className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-medium "
-              placeholder="CGPA > 8.0, CS/IT only..."
-            />
-
-            {touched.criteria && errors.criteria ? (
-              <p>{errors.criteria}</p>
-            ) : null}
-          </div> */}
           <button
             type="submit"
             className="w-full bg-slate-900 hover:bg-blue-600 text-white py-4 rounded-2xl font-black uppercase tracking-[0.2em] transition-all shadow-xl active:scale-95"
@@ -247,115 +200,3 @@ export default function PostJob() {
     </div>
   );
 }
-
-// import React, { useState } from "react";
-
-// export default function PostJob() {
-//   const [newJob, setNewJob] = useState({
-//     title: "",
-//     salary: "",
-//     location: "",
-//     criteria: "",
-//     description: "",
-//   });
-
-//   const handlePost = (e) => {
-//     e.preventDefault();
-//     const job = {
-//       id: `job_${Date.now()}`,
-//       ...newJob,
-//       companyId: user.id,
-//       companyName: user.name,
-//       postedDate: new Date().toISOString().split("T")[0],
-//       status: "Open",
-//     };
-//     onUpdateJobs([...jobs, job]);
-//     setNewJob({
-//       title: "",
-//       salary: "",
-//       location: "",
-//       criteria: "",
-//       description: "",
-//     });
-//     navigate("/dashboard/company/my-jobs");
-//     alert("Hiring Requirement Published Successfully!");
-//   };
-//   return (
-//     <div className="max-w-3xl bg-white p-10 md:p-14 rounded-[3rem] border border-slate-200 shadow-sm animate-in slide-in-from-bottom-8 duration-700">
-//       <div className="mb-10">
-//         <h3 className="text-3xl font-black text-slate-900 italic tracking-tight">
-//           Broadcast Mandate
-//         </h3>
-//         <p className="text-slate-500 font-medium mt-2">
-//           Formalizing corporate outreach for technical talent acquisition.
-//         </p>
-//       </div>
-//       <form onSubmit={handlePost} className="space-y-8">
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-//           <div className="md:col-span-2">
-//             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 block">
-//               Mandate Designation
-//             </label>
-//             <input
-//               required
-//               value={newJob.title}
-//               onChange={(e) => setNewJob({ ...newJob, title: e.target.value })}
-//               className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none"
-//               placeholder="e.g. Platform Engineer"
-//             />
-//           </div>
-//           <div>
-//             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 block">
-//               Compensation Range
-//             </label>
-//             <input
-//               required
-//               value={newJob.salary}
-//               onChange={(e) => setNewJob({ ...newJob, salary: e.target.value })}
-//               className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none"
-//               placeholder="$140k - $180k"
-//             />
-//           </div>
-//           <div>
-//             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 block">
-//               Deployment HQ
-//             </label>
-//             <input
-//               required
-//               value={newJob.location}
-//               onChange={(e) =>
-//                 setNewJob({ ...newJob, location: e.target.value })
-//               }
-//               className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none"
-//               placeholder="Hybrid / Remote"
-//             />
-//           </div>
-//           <div className="md:col-span-2">
-//             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 block">
-//               Scope of Responsibility
-//             </label>
-//             <textarea
-//               required
-//               rows={6}
-//               value={newJob.description}
-//               onChange={(e) =>
-//                 setNewJob({
-//                   ...newJob,
-//                   description: e.target.value,
-//                 })
-//               }
-//               className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl font-bold focus:ring-4 focus:ring-blue-500/5 outline-none resize-none"
-//               placeholder="Describe the impact of this role..."
-//             ></textarea>
-//           </div>
-//         </div>
-//         <button
-//           type="submit"
-//           className="w-full py-5 bg-[#0a0f1d] text-white rounded-2xl font-black text-lg shadow-2xl hover:bg-blue-600 active:scale-95 transition-all uppercase tracking-widest"
-//         >
-//           Broadcast Mandate
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }

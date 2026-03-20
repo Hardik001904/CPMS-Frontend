@@ -45,7 +45,7 @@ function App() {
     };
 
     const resetTimer = () => {
-      console.log("resetTimer");
+      // console.log("resetTimer");
       clearTimeout(timer);
       timer = setTimeout(logout, 15 * 60 * 1000); // 15 min
     };
@@ -65,7 +65,7 @@ function App() {
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
-console.log("/api/ping")
+// console.log("/api/ping")
     if (!token) return;
 
     const interval = setInterval(
@@ -77,7 +77,7 @@ console.log("/api/ping")
         });
       },
       15 * 60 * 1000,
-    ); // every 5 min
+    ); // every 15 min
 
     return () => clearInterval(interval);
   }, []);

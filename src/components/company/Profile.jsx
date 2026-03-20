@@ -6,17 +6,7 @@ import { object, string } from "yup";
 import toast from "react-hot-toast";
 import { fetchUserById } from "../../services/authService";
 
-export default function Profile({
-  user,
-  // profile = {},
-  allUsers = [],
-  onUpdateUser,
-}) {
-  // const  profile = {
-  //   description:"we are looking for dedicated developer who can real world problem",
-  //   location:"Ahmedabad",
-  //   size:"1000+ Employees"
-  // }
+export default function Profile() {
 
   const userValidationSchema = object({
     description: string().required("Description is required"),
@@ -24,10 +14,6 @@ export default function Profile({
     size: string().required("Size is required"),
   });
 
-  // const [profile, setProfile] = useState();
-  // useEffect(() => {
-
-  // },[]);
 
   const [profile, setProfile] = useState({});
   useEffect(() => {
@@ -37,13 +23,11 @@ export default function Profile({
   const getCompany = async () => {
     try {
       const res = await fetchUserById();
-      // console.log("inside API Response:", res?.user?.profile);
       setProfile(res?.user?.profile);
     } catch (error) {
       console.log(error);
     }
   };
-  // console.log("outside", profile.description);
 
   const { handleSubmit, handleChange, errors, touched, values, handleBlur } =
     useFormik({
@@ -82,12 +66,6 @@ export default function Profile({
           </div>
           <button
             type="submit"
-            // onClick={() => handleSubmit()}
-            // onUpdateUser(
-            //   allUsers.map((u) => (u.id === user.id ? { ...u, profile } : u)),
-            // );
-            // alert("Company Profile Updated!");
-            // }}
             className="bg-slate-900 text-white px-8 py-3 rounded-xl font-black shadow-lg hover:bg-blue-600 transition-all flex items-center gap-2 active:scale-95 uppercase tracking-[0.2em] text-[10px]"
           >
             <Save className="w-4 h-4" /> Update Identity
@@ -102,7 +80,6 @@ export default function Profile({
             <textarea
               name="description"
               value={values.description}
-              // defaultValue={profile.description}
               onChange={handleChange}
               onBlur={handleBlur}
               className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-medium  h-32"
@@ -113,14 +90,12 @@ export default function Profile({
             ) : null}
           </div>
           <div className="bg-white p-8 rounded-[2rem] border border-slate-200 space-y-4">
-            {/* <div className="bg-white p-8 rounded-[2rem] border border-slate-200 space-y-4"> */}
             <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">
               Headquarters
             </label>
             <input
               name="location"
               value={values.location}
-              // defaultValue={profile.location}
               onChange={handleChange}
               onBlur={handleBlur}
               className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-bold "
@@ -129,9 +104,6 @@ export default function Profile({
             {touched.location && errors.location ? (
               <p>{errors.location}</p>
             ) : null}
-            {/* <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mt-2 block">
-              Organization Size
-            </label> */}
 
             <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mt-2 block">
               Organization Size

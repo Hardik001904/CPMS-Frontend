@@ -1,18 +1,6 @@
-// export const login = async (data) => {
-
 import axios from "./axios";
 
-//     try {
-//         const res = await axios.post("http://localhost:3000/",data);
-//         return res;
-
-//     } catch (error) {
-//         console.log(" Login Failed", error)
-//         throw error;
-//     }
-
-// };
-
+//For job posting
 export const postJobs = async (data) => {
   try {
     const res = await axios.post("/jobs/create", data);
@@ -22,6 +10,7 @@ export const postJobs = async (data) => {
   }
 };
 
+//Get All Posted Jobs
 export const fetchAllJobs = async () => {
   try {
     const res = await axios.get("/jobs");
@@ -30,6 +19,7 @@ export const fetchAllJobs = async () => {
     throw error;
   }
 };
+
 
 export const fetchMyJobs = async () => {
   try {
@@ -40,6 +30,7 @@ export const fetchMyJobs = async () => {
   }
 };
 
+//Company Proflie Update
 export const updateMyprofile = async (data) => {
   try {
     const res = await axios.put("/company/update-profile", data);
@@ -49,9 +40,9 @@ export const updateMyprofile = async (data) => {
   }
 };
 
+//Get Companies By There Id
 export const fetchCompanyById = async (companyId) => {
   try {
-    // console.log("fetchCompanyById", companyId);
     const res = await axios.get(`/company/companies/${companyId}`);
     return res.data;
   } catch (error) {
@@ -59,6 +50,7 @@ export const fetchCompanyById = async (companyId) => {
   }
 };
 
+//Show the Overview Of The Company Dashboard
 export const getCompanyOverview = async () => {
   try {
     const res = await axios.get(`/company/overview`);
@@ -68,17 +60,17 @@ export const getCompanyOverview = async () => {
   }
 };
 
+
 export const getCompanyApplication = async () => {
   try {
     const res = await axios.get(`/applications/company`);
-    // console.log("res", res);
-    // return res.data.data;
     return res.data.application;
   } catch (error) {
     throw error;
   }
 };
 
+//Companies Can Upadte The Jobs According To There Requirements
 export const updateJobRequirements = async (jobId) => {
   try {
     const res = await axios.patch(`/jobs/${jobId}/status`);

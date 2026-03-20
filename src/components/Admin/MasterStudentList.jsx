@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { adminService } from "../../services/adminService";
 import {
   Plus,
   Search,
@@ -18,13 +17,6 @@ import {
   getMasterStudents,
 } from "../../services/adminService";
 import { AnimatePresence, motion } from "framer-motion";
-
-// interface MasterStudent {
-//   _id: string;
-//   name: string;
-//   enrollmentNumber: string;
-//   department: string;
-// }
 
 export default function MasterStudentList() {
   const [students, setStudents] = useState([]);
@@ -47,7 +39,7 @@ export default function MasterStudentList() {
     try {
       setLoading(true);
       const data = await getMasterStudents();
-      console.log("getMasterStudents",data);
+      // console.log("getMasterStudents",data);
       setStudents(data.students);
     } catch (error) {
       console.error("Error loading master students:", error);
@@ -127,7 +119,7 @@ export default function MasterStudentList() {
         <div className="lg:col-span-3 relative">
           <Search className="absolute left-6 top-4.5  w-5 h-5 text-slate-400" />
           <input
-            type="text"
+            type="search"
             placeholder="Search by name, enrollment, or department..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}

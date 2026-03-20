@@ -31,8 +31,6 @@ export const fetchCompanyApplication = async () => {
 export const updateApplicationStatus = async (id,status) => {
   try {
     console.log("status",status)
-    // const s = JSON.parse({"status":status})
-    // console.log(s)
     const res = await axios.patch(`/applications/${id}/status`,status);
     return res.data;
   } catch (error) {
