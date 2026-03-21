@@ -17,11 +17,15 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SessionExpired from "./pages/SessionExpired";
 import Bin from "./components/Admin/Bin";
+import Loader from "./components/Loader";
 
 export const appName = "Placement Pro";
 export const appLogo = "P";
 
 export const AppLogo = () => {
+
+
+  
   return (
     <Link to="/" className="inline-flex items-center gap-2 mb-6">
       <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-xl">
@@ -33,7 +37,17 @@ export const AppLogo = () => {
 };
 
 function App() {
+
   const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  // Loader before landing page
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
+  }, []);
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -81,6 +95,10 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
+    // Show loader first
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <>
       <Toaster position="top-center" />

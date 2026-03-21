@@ -10,7 +10,7 @@ export const ApplicationsView = () => {
       const res = await getStudentApplication();
       setStudentApps(res.application);
       console.log("res", res)
-      toast.success(res.message);
+      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
