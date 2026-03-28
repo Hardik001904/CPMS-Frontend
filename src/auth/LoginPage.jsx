@@ -145,8 +145,11 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
 
             {/* PASSWORD */}
             <div>
+              
               <label className="block text-sm font-bold mb-2">Password</label>
+              
               <div className="relative">
+                
                 <Lock className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -160,6 +163,7 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                 {touched.password && errors.password ? (
                   <p>{errors.password}</p>
                 ) : null}
+                
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -171,6 +175,20 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                     <Eye className="w-5 h-5" />
                   )}
                 </button>
+                <div className="text-right block text-sm font-bold my-4">
+                   <p >
+                <Link
+                  to={
+                    role === "STUDENT"||
+                    "COMPANY"
+                      ? "/forgot-password"
+                      : "/reset-password/:token"
+                  }
+                >
+                  Forgot Password?
+                </Link>
+              </p>
+                </div>
               </div>
             </div>
 
@@ -184,6 +202,7 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
 
             {/* LINKS */}
             <div className="text-center text-sm">
+             
               <p>
                 Need an account?{" "}
                 <Link
@@ -197,14 +216,11 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                   Register Now
                 </Link>
               </p>
-
-         
             </div>
           </form>
         </div>
 
         <p className="text-center text-xs text-slate-400 mt-8">
-   
           &copy; 2026 Campus Placement Management System
         </p>
       </div>

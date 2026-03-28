@@ -18,14 +18,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import SessionExpired from "./pages/SessionExpired";
 import Bin from "./components/Admin/Bin";
 import Loader from "./components/Loader";
+import ForgotPassword from "./auth/Forgotpassword";
+import ResetPassword from "./auth/Resetpassword";
 
 export const appName = "Placement Pro";
 export const appLogo = "P";
 
 export const AppLogo = () => {
-
-
-  
   return (
     <Link to="/" className="inline-flex items-center gap-2 mb-6">
       <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-xl">
@@ -37,7 +36,6 @@ export const AppLogo = () => {
 };
 
 function App() {
-
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
@@ -47,7 +45,6 @@ function App() {
       setLoading(false);
     }, 2500);
   }, []);
-
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -79,7 +76,7 @@ function App() {
 
   useEffect(() => {
     const token = sessionStorage.getItem("token");
-// console.log("/api/ping")
+    // console.log("/api/ping")
     if (!token) return;
 
     const interval = setInterval(
@@ -95,7 +92,7 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
-    // Show loader first
+  // Show loader first
   if (loading) {
     return <Loader />;
   }
@@ -138,6 +135,9 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         <Route path="/dummy" element={<DummyPage />} />
       </Routes>
