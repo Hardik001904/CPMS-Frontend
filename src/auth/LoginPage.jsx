@@ -36,6 +36,7 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { handleSubmit, handleChange, errors, touched, handleBlur } = useFormik(
     {
@@ -49,7 +50,7 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
           };
 
           const res = await login(change_data);
-          console.log("login page : ", res.data);
+          // console.log("login page : ", res.data);
 
           toast.success("Login successfully");
           navigate(
@@ -64,6 +65,8 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
             err.response?.data?.message || "Something went wrong";
 
           toast.error(errorMessage);
+        } finally {
+          setLoading(false); // stop loading
         }
       },
     },
@@ -115,7 +118,8 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
           </div>
 
           {/* FORM */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* <form onSubmit={handleSubmit} className="space-y-6"> */}
+          <form onSubmit={loading ? null : handleSubmit} className="space-y-6">
             {error && (
               <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex gap-3 text-red-600 text-sm font-bold">
                 <AlertCircle className="w-5 h-5" />
@@ -145,11 +149,9 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
 
             {/* PASSWORD */}
             <div>
-              
               <label className="block text-sm font-bold mb-2">Password</label>
-              
+
               <div className="relative">
-                
                 <Lock className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -163,7 +165,7 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                 {touched.password && errors.password ? (
                   <p>{errors.password}</p>
                 ) : null}
-                
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -176,33 +178,39 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                   )}
                 </button>
                 <div className="text-right block text-sm font-bold my-4">
-                   <p >
-                <Link
-                  to={
-                    role === "STUDENT"||
-                    "COMPANY"
-                      ? "/forgot-password"
-                      : "/reset-password/:token"
-                  }
-                >
-                  Forgot Password?
-                </Link>
-              </p>
+                  <p>
+                    <Link
+                      to={
+                        role === "STUDENT" || "COMPANY"
+                          ? "/forgot-password"
+                          : "/reset-password/:token"
+                      }
+                    >
+                      Forgot Password?
+                    </Link>
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* SUBMIT */}
+
             <button
               type="submit"
-              className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700"
+              disabled={loading}
+              // className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700"
+              className={`w-full py-4 rounded-xl font-bold text-white ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
             >
-              Sign In
+              {/* Sign In */}
+              {loading ? "Signing..." : "Sign In"}
             </button>
 
             {/* LINKS */}
             <div className="text-center text-sm">
-             
               <p>
                 Need an account?{" "}
                 <Link
