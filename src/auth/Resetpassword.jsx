@@ -30,7 +30,7 @@ export default function ResetPassword() {
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const res = await axios.post(`${API_URL}/auth/reset-password/${token}`, {
+        const res = await axios.post(`/auth/reset-password/${token}`, {
           password: values.password,
         });
         toast.success(res.data.message || "Password reset successful!");
