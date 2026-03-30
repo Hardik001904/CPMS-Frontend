@@ -18,7 +18,7 @@ export default function ForgotPassword() {
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        const res = await axios.post(`/auth/forgot-password`, {
+        const res = await axios.post(`${API_URL}/auth/forgot-password`, {
           email: values.email,
         });
         toast.success(res.data.message || "Reset link sent!");

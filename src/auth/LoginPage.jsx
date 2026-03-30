@@ -37,37 +37,44 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  const { handleSubmit, handleChange, errors, touched, handleBlur } = useFormik(
-    {
-      initialValues: myinitialValues,
-      validationSchema: userValidationSchema,
-      onSubmit: async (values) => {
-        try {
-          const change_data = {
-            ...values,
-            role,
-          };
+  const {
+    handleSubmit,
+    handleChange,
+    errors,
+    touched,
+    handleBlur,
+    isSubmitting,
+  } = useFormik({
+    initialValues: myinitialValues,
+    validationSchema: userValidationSchema,
+    onSubmit: async (values) => {
+      try {
+        const change_data = {
+          ...values,
+          role,
+        };
 
-          const res = await login(change_data);
-          console.log("login page : ", res.data);
+        const res = await login(change_data);
+        // console.log("login page : ", res.data);
 
-          toast.success("Login successfully");
-          navigate(
-            role === "STUDENT"
-              ? "/dashboard/student/overview"
-              : "/dashboard/company/overview",
-          );
-        } catch (err) {
-          console.log("Error message:", err);
+        toast.success("Login successfully");
+        navigate(
+          role === "STUDENT"
+            ? "/dashboard/student/overview"
+            : "/dashboard/company/overview",
+        );
+      } catch (err) {
+        console.log("Error message:", err);
 
-          const errorMessage =
-            err.response?.data?.message || "Something went wrong";
+        const errorMessage =
+          err.response?.data?.message || "Something went wrong";
 
-          toast.error(errorMessage);
-        }
-      },
+        toast.error(errorMessage);
+      } finally {
+        setSubmitting(false);
+      }
     },
-  );
+  });
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
@@ -145,11 +152,8 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
 
             {/* PASSWORD */}
             <div>
-              
               <label className="block text-sm font-bold mb-2">Password</label>
-              
               <div className="relative">
-                
                 <Lock className="absolute left-4 top-3.5 w-5 h-5 text-slate-400" />
                 <input
                   type={showPassword ? "text" : "password"}
@@ -163,7 +167,7 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                 {touched.password && errors.password ? (
                   <p>{errors.password}</p>
                 ) : null}
-                
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -176,34 +180,41 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
                   )}
                 </button>
                 <div className="text-right block text-sm font-bold my-4">
-                   <p >
-                <Link
-                  to={
-                    role === "STUDENT"||
-                    "COMPANY"
-                      ? "/forgot-password"
-                      : "/reset-password/:token"
-                  }
-                >
-                  Forgot Password?
-                </Link>
-              </p>
+                  <p>
+                    <Link
+                      to={
+                        role === "STUDENT" || "COMPANY"
+                          ? "/forgot-password"
+                          : "/reset-password/:token"
+                      }
+                    >
+                      Forgot Password?
+                    </Link>
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* SUBMIT */}
-              
-            <button
+
+            {/* <button
               type="submit"
               className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700"
             >
               Sign In
+            </button> */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold flex justify-center items-center gap-2"
+            >
+              {isSubmitting && (
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              )}
+              {isSubmitting ? "Signing..." : "Sign In"}
             </button>
-
             {/* LINKS */}
             <div className="text-center text-sm">
-             
               <p>
                 Need an account?{" "}
                 <Link

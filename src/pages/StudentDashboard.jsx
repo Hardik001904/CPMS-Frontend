@@ -141,7 +141,7 @@ const StudentDashboard = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       const res = await axios.get("/auth/sessions");
-      console.log("fetchSessions : ", res.data);
+      // console.log("fetchSessions : ", res.data);
       setSessions(res.data);
     };
 
