@@ -177,7 +177,7 @@ export const JobListingView = () => {
                 </h4>
                 <p className="text-[#1C1E21] pl-2 font-medium leading-relaxed ">
                   "
-                  {viewingCompany.profile.description ||
+                  {viewingCompany.profile?.description ||
                     "No corporate description provided."}
                   "
                 </p>
@@ -188,7 +188,7 @@ export const JobListingView = () => {
                     Lead Recruiter
                   </h4>
                   <p className="pl-14 font-black text-slate-900">
-                    {viewingCompany.profile.hrName}
+                    {viewingCompany.profile?.hrName}
                   </p>
                 </div>
                 <div>

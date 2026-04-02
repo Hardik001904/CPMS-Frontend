@@ -293,7 +293,7 @@ const StudentDashboard = () => {
                   </h4>
                   <p className="text-slate-600 font-medium leading-relaxed italic">
                     "
-                    {viewingCompany.profile.description ||
+                    {viewingCompany.profile?.description ||
                       "No corporate description provided."}
                     "
                   </p>
@@ -304,7 +304,7 @@ const StudentDashboard = () => {
                       Lead Recruiter
                     </h4>
                     <p className="font-black text-slate-900">
-                      {viewingCompany.profile.hrName}
+                      {viewingCompany.profile?.hrName}
                     </p>
                   </div>
                   <div>
