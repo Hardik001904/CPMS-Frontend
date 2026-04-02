@@ -138,10 +138,20 @@ const AdminDashboard = () => {
   ];
 
   const logout = () => {
+    // sessionStorage.removeItem("token");
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("user");
-    navigate("/");
+    useNotificationStore.getState().reset(); // clear notification state
+    navigate("/login");
+    // navigate("/");
+
   };
+
+  function handleLogout() {
+    useNotificationStore.getState().reset(); // clear notification state
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  }
 
   return (
     <div className="flex bg-slate-50 min-h-screen font-sans">
@@ -259,7 +269,10 @@ const AdminDashboard = () => {
 
             <Route path="reports" element={<Reports />} />
             <Route path="bin" element={<Bin />} />
-            <Route path="settings" element={<SettingPage user={user} onLogout={logout} />} />
+            <Route
+              path="settings"
+              element={<SettingPage user={user} onLogout={logout} />}
+            />
           </Routes>
         </div>
       </main>

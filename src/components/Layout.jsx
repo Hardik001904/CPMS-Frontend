@@ -17,7 +17,7 @@ import {
   Github,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-
+import NotificationBell from "./Notifications/NotificationBell";
 
 export const Sidebar = ({ title, items, onLogout, userName, role }) => (
   <aside className="w-64 bg-slate-900 text-white min-h-screen fixed left-0 top-0 flex flex-col z-20 shadow-xl">
@@ -84,15 +84,25 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
 
   const navigate = useNavigate();
 
+  const UserRole = {
+    STUDENT: "STUDENT",
+    COMPANY: "COMPANY",
+    ADMIN: "ADMIN",
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // console.log("handleClickOutside : ",notificationRef.current)
       if (
         notificationRef.current &&
         !notificationRef.current.contains(event.target)
-      )
+      ) {
         setShowNotifications(false);
-      if (profileRef.current && !profileRef.current.contains(event.target))
+      }
+
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
         setShowProfileMenu(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -121,14 +131,15 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
       </div>
       <div className="flex items-center gap-4">
         <div className="relative" ref={notificationRef}>
-          <button
+          {/* <button
             onClick={() => setShowNotifications(!showNotifications)}
             className={`p-2 rounded-full transition-all relative ${showNotifications ? "bg-blue-50 text-blue-600" : "text-slate-400 hover:bg-slate-50"}`}
           >
             <Bell className="w-5 h-5" />
             <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
-          </button>
-
+          </button> */}
+          <NotificationBell /> 
+          {/* <CheckCircle className="w-3.5 h-3.5 text-emerald-600" /> */}
           {showNotifications && (
             <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in duration-200">
               <div className="p-4 bg-slate-50/50 border-b border-slate-50 flex justify-between items-center">
@@ -141,7 +152,6 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
                 {user?.role === UserRole.COMPANY && user?.isApproved && (
                   <div className="p-4 bg-emerald-50 hover:bg-emerald-100/50 transition-colors border-b border-emerald-100 cursor-pointer">
                     <div className="flex items-center gap-2 mb-1">
-                      <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
                       <p className="text-sm font-bold text-emerald-900">
                         Verification Successful
                       </p>
@@ -167,6 +177,10 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
         <div className="h-8 w-px bg-slate-200 mx-1"></div>
 
         <div className="relative" ref={profileRef}>
+          {/* <div className="flex items-center gap-2">
+            <NotificationBell />
+            <UserMenu />
+          </div> */}
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
             className="flex items-center gap-3 p-1 rounded-full hover:bg-slate-100 transition-all"

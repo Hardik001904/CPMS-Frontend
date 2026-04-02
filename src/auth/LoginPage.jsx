@@ -206,7 +206,10 @@ const LoginPage = ({ onLogin, allUsers = [] }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold flex justify-center items-center gap-2"
+              className={`w-full py-4 text-white rounded-xl font-bold flex justify-center items-center gap-2 transition-colors 
+    ${isSubmitting ? "bg-gray-400 hover:bg-gray-600 cursor-not-allowed" : "bg-blue-600"}`}
+
+              // className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold flex justify-center items-center gap-2"
             >
               {isSubmitting && (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

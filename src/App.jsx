@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
 // import "./App.css";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import StudentRegister from "./auth/StudentRegister";
@@ -10,20 +10,44 @@ import AdminLogin from "./auth/AdminLogin";
 import LandingPage from "./pages/LandingPage";
 import DummyPage from "./components/DummyPage";
 import StudentDashboard from "./pages/StudentDashboard";
-import { JobListingView } from "./components/student/JobListingView";
+// import { JobListingView } from "./components/student/JobListingView";
 import CompanyDashboard from "./pages/CompanyDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoute";
 import SessionExpired from "./pages/SessionExpired";
-import Bin from "./components/Admin/Bin";
+// import Bin from "./components/Admin/Bin";
 import Loader from "./components/Loader";
 import ForgotPassword from "./auth/Forgotpassword";
 import ResetPassword from "./auth/Resetpassword";
+// import { NotificationToastProvider } from "./components/Notifications/NotificationToast";
+// import { useNotificationSocket } from "./hooks/useNotificationSocket";
+// import NotificationsPage from "./pages/NotificationsPage";
 
 export const appName = "Placement Pro";
 export const appLogo = "P";
 
+
+ // ── NEW: Notification imports ──────────────────────────────────────────────
+import { NotificationToastProvider } from "./components/Notifications/NotificationToast";
+import { useNotificationSocket } from "./hooks/useNotificationSocket";
+import { useNotificationStore } from "./store/notificationStore";
+import NotificationsPage from "./pages/NotificationsPage";
+// ───────────────────────────────────────────────────────────────────────────
+ 
+
+function AuthenticatedLayout() {
+  // ── NEW: Connect to notification socket ──────────────────────────────────
+  useNotificationSocket();
+  // ────────────────────────────────────────────────────────────────────────
+
+  return (
+    <>
+      <Navbar /> {/* Your Navbar already has NotificationBell inside */}
+      <Outlet />
+    </>
+  );
+}
 export const AppLogo = () => {
   return (
     <Link to="/" className="inline-flex items-center gap-2 mb-6">
@@ -51,7 +75,7 @@ function App() {
     let timer;
 
     const logout = () => {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
       navigate("/login");
     };
 
@@ -98,6 +122,7 @@ function App() {
   }
   return (
     <>
+      {/* <NotificationToastProvider /> */}
       <Toaster position="top-center" />
 
       <Routes>
@@ -135,6 +160,10 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route element={<AuthenticatedLayout />}>
+          <Route path="/notifications" element={<NotificationsPage />} />
+        </Route>
 
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
