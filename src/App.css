@@ -40,3 +40,85 @@
 .read-the-docs {
   color: #888;
 } */
+
+
+/* 🌐 Main App Background */
+/* .app-bg {
+  background: linear-gradient(
+    180deg,
+    #f8fafc 0%,
+    #f1f5f9 40%,
+    #eef2ff 100%
+  );
+} */
+
+/* Section subtle variation */
+/* .section-soft {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.9),
+    rgba(241,245,249,0.9)
+  );
+} */
+
+/* Premium blur blobs */
+/* .bg-blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: red; 
+  opacity: 0.6;   
+  filter: blur(80px); 
+  border-radius: 50%;
+  z-index: 5;
+} */
+/* 🔥 Smooth scroll */
+/* html {
+  scroll-behavior: smooth;
+} */
+
+/* 🎯 Scroll Animation Base */
+/* .reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+} */
+
+/* When visible */
+/* .reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+} */
+
+/* 🧠 Auto trigger without JS (modern browsers) */
+/* @supports (animation-timeline: view()) {
+  .reveal {
+    animation: fadeUp linear;
+    animation-timeline: view();
+    animation-range: entry 10% cover 30%;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+} */
+
+/* ✨ Glass effect */
+/* .glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+} */
+
+/* 🌈 Soft gradient background */
+/* .hero-gradient {
+  background: radial-gradient(circle at top right, #dbeafe, transparent 60%),
+              radial-gradient(circle at bottom left, #e0f2fe, transparent 60%);
+} */

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import NotificationBell from "./Notifications/NotificationBell";
+import SessionTimer from "./SessionTimer";
 
 export const Sidebar = ({ title, items, onLogout, userName, role }) => (
   <aside className="w-64 bg-slate-900 text-white min-h-screen fixed left-0 top-0 flex flex-col z-20 shadow-xl">
@@ -129,7 +130,10 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
           <p className="text-xs text-slate-500 font-medium">{subtitle}</p>
         )}
       </div>
+
       <div className="flex items-center gap-4">
+        {/* <SessionTimer /> */}
+        <SessionTimer onExpire={() => navigate("/session-expired")} />
         <div className="relative" ref={notificationRef}>
           {/* <button
             onClick={() => setShowNotifications(!showNotifications)}
@@ -138,7 +142,7 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
             <Bell className="w-5 h-5" />
             <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
           </button> */}
-          <NotificationBell /> 
+          <NotificationBell />
           {/* <CheckCircle className="w-3.5 h-3.5 text-emerald-600" /> */}
           {showNotifications && (
             <div className="absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50 animate-in fade-in duration-200">

@@ -10,7 +10,7 @@ export default function Profile() {
 
   const userValidationSchema = object({
     description: string().required("Description is required"),
-    location: string().required("Location is required"),
+    headquarters: string().required("Location is required"),
     size: string().required("Size is required"),
   });
 
@@ -34,7 +34,7 @@ export default function Profile() {
       enableReinitialize: true,
       initialValues: {
         description: profile?.description || "",
-        location: profile?.location || "",
+        headquarters: profile?.headquarters || "",
         size: profile?.size || "",
       },
       validationSchema: userValidationSchema,
@@ -94,15 +94,15 @@ export default function Profile() {
               Headquarters
             </label>
             <input
-              name="location"
-              value={values.location}
+              name="headquarters"
+              value={values.headquarters}
               onChange={handleChange}
               onBlur={handleBlur}
               className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-bold "
               placeholder="e.g. San Francisco, CA"
             />
-            {touched.location && errors.location ? (
-              <p>{errors.location}</p>
+            {touched.headquarters && errors.headquarters ? (
+              <p>{errors.headquarters}</p>
             ) : null}
 
             <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1 mt-2 block">

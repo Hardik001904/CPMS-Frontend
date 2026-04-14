@@ -72,7 +72,8 @@ export const SidebarNew = ({
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 p-4 mt-4 space-y-8 overflow-y-auto">
+        {/* <nav className="flex-1 p-4 mt-4 space-y-8 overflow-y-auto"> */}
+        <nav className="flex-1 p-4 mt-4 space-y-6 overflow-hidden">
           <ul className="space-y-2">
             {items.map((item, idx) => (
               <li key={idx}>
@@ -99,7 +100,7 @@ export const SidebarNew = ({
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-white/5">
+        <div className="p-3 border-t border-white/5">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
               <UserIcon className="w-5 h-5 text-slate-400" />

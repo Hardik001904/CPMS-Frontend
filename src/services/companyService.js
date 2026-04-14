@@ -50,6 +50,8 @@ export const fetchCompanyById = async (companyId) => {
   }
 };
 
+
+
 //Show the Overview Of The Company Dashboard
 export const getCompanyOverview = async () => {
   try {
@@ -73,9 +75,38 @@ export const getCompanyApplication = async () => {
 //Companies Can Upadte The Jobs According To There Requirements
 export const updateJobRequirements = async (jobId) => {
   try {
-    const res = await axios.patch(`/jobs/${jobId}/status`);
+    const res = await axios.patch(`/jobs/:id/requirements`);
     return res.data;
   } catch (error) {
+    throw error;
+  }
+};
+
+
+// export const updateJobStatus = async (jobId) => {
+//   try {
+//     const res = await axios.patch(`/jobs/${jobId}/status`);
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+export const updateJobStatus = async (jobId) => {
+  try {
+    const token = sessionStorage.getItem("token");
+
+    const res = await axios.patch(
+      `/jobs/${jobId}/status`,
+      {}, //  IMPORTANT: send empty body
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return res.data;
+  } catch (error) {
+    console.error("API ERROR:", error.response?.data);
     throw error;
   }
 };

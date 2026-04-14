@@ -19,7 +19,7 @@ const SessionExpired = () => {
         </div>
 
         <div className="space-y-4">
-          <h1 className="text-4xl font-black tracking-tighter italic">Session Expired</h1>
+          <h1 className="text-4xl font-black tracking-tighter ">Session Expired</h1>
           <p className="text-slate-400 text-lg leading-relaxed">
             Your security token has expired or you've been logged out. Please sign in again to continue accessing your dashboard.
           </p>

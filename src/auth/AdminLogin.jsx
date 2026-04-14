@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { object, string } from "yup";
 import { useFormik } from "formik";
 import { login } from "../services/authService";
+import toast from "react-hot-toast";
 
 const userValidationSchema = object({
   email: string().email("Invalid email").required("Email is required"),
@@ -27,20 +28,21 @@ const myinitialValues = {
 
 const AdminLogin = ({ onLogin }) => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleLogin = (e) => {
-    console.log(values);
-    // Default Credentials check
-    if (email === "admin@placement.edu" && password === "Admin@123") {
-      onLogin(INITIAL_ADMIN);
-      navigate("/dashboard/admin/overview");
-    } else {
-      setError("Invalid administrative credentials. Access Denied.");
-    }
-  };
+  const [pendingTakeover, setPendingTakeover] = useState(false);
+  const [conflictInfo, setConflictInfo] = useState(null);
+  // const handleLogin = (e) => {
+  //   console.log(values);
+  //   // Default Credentials check
+  //   if (email === "admin@placement.edu" && password === "Admin@123") {
+  //     onLogin(INITIAL_ADMIN);
+  //     navigate("/dashboard/admin/overview");
+  //   } else {
+  //     setError("Invalid administrative credentials. Access Denied.");
+  //   }
+  // };
 
   const { handleSubmit, handleChange, errors, touched, handleBlur } = useFormik(
     {
@@ -48,19 +50,63 @@ const AdminLogin = ({ onLogin }) => {
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
         try {
-          const change_data = {
-            ...values,
+          // const change_data = {
+          //   ...values,
+          //   role: "ADMIN",
+          // };
+          const payload = {
+            email: values.email,
+            password: values.password,
             role: "ADMIN",
+            confirmTakeover: pendingTakeover,
           };
-          // console.log("admin login : ", change_data);
-          await login(change_data);
+          console.log("admin login : ", payload);
+          const res = await login(payload);
+          console.log("res payload", res);
+          const { token, user } = res.data;
+
+          sessionStorage.setItem("token", token);
+          sessionStorage.setItem("user", JSON.stringify(user));
+
+          // ── FIX 5: notify the app that the user is now logged in ─────────────
+          // if (onLogin) onLogin(user);
+
+          setPendingTakeover(false);
+          toast.success("Login successful");
+          // navigate(
+          //   role === "STUDENT"
+          //     ? "/dashboard/student/overview"
+          //     : "/dashboard/company/overview",
+          // );
           navigate("/dashboard/admin/overview");
         } catch (error) {
+          console.log("error ::::::::::", error);
+          const errorMessage = error?.response?.data?.message;
+
+          if (errorMessage === "SESSION_CONFLICT") {
+            setConflictInfo(error.response.data.existingSession);
+            return; // no toast for this case — the dialog handles it
+          }
+
+          toast.error(errorMessage || "Login failed. Please try again.");
           setError("Invalid administrative credentials. Access Denied.");
         }
+        //    finally {
+        //   // ── FIX 6: setSubmitting comes from formikHelpers (destructured above) ─
+        //   setSubmitting(false);
+        // }
       },
     },
   );
+  // Called when the user clicks "Yes, log them out" in the conflict dialog.
+  // We set the flag in state first, then re-submit.
+  const handleTakeover = () => {
+    setConflictInfo(null);
+    setPendingTakeover(true);
+    // setTimeout(0) ensures React flushes the state update before Formik
+    // reads `pendingTakeover` inside onSubmit.
+    setTimeout(() => handleSubmit(), 0);
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 font-sans">
@@ -132,7 +178,10 @@ const AdminLogin = ({ onLogin }) => {
               </div>
             </div>
 
-            <button className="w-full bg-blue-600 hover:bg-blue-500 text-white py-5 rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 shadow-2xl shadow-blue-600/20 group active:scale-[0.98]">
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-500 text-white py-5 rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 shadow-2xl shadow-blue-600/20 group active:scale-[0.98]"
+            >
               Unlock Dashboard
               <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -142,6 +191,62 @@ const AdminLogin = ({ onLogin }) => {
             Institutional Access Audit Protocol Active
           </p>
         </div>
+        {/* ── SESSION CONFLICT DIALOG ──────────────────────────────────────── */}
+        {conflictInfo && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm">
+              <h3 className="text-lg font-bold text-slate-900 mb-1">
+                Account Already Active
+              </h3>
+              <p className="text-slate-500 text-sm mb-4">
+                This account is currently logged in on another device:
+              </p>
+              <div className="bg-slate-50 rounded-xl p-4 text-sm space-y-2 mb-5">
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Browser</span>
+                  <span className="font-semibold text-slate-800 text-right max-w-[60%] truncate">
+                    {conflictInfo.browser}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Device</span>
+                  <span className="font-semibold text-slate-800">
+                    {conflictInfo.device}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">IP Address</span>
+                  <span className="font-semibold text-slate-800">
+                    {conflictInfo.ip}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-500">Last Active</span>
+                  <span className="font-semibold text-slate-800">
+                    {new Date(conflictInfo.lastActive).toLocaleString()}
+                  </span>
+                </div>
+              </div>
+              <p className="text-sm text-slate-600 mb-5">
+                Do you want to log that session out and continue here?
+              </p>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleTakeover}
+                  className="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl font-bold text-sm transition-colors"
+                >
+                  Yes, log them out
+                </button>
+                <button
+                  onClick={() => setConflictInfo(null)}
+                  className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-sm transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

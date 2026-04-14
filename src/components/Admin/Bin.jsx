@@ -1,7 +1,11 @@
 import { AlertCircle, RotateCcw, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { fetchUser } from "../../services/studentService";
-import { deleteUserPermanently, getBinUsers, restoreUser } from "../../services/adminService";
+import {
+  deleteUserPermanently,
+  getBinUsers,
+  restoreUser,
+} from "../../services/adminService";
 
 export default function Bin({ onUpdateUsers }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,31 +48,27 @@ export default function Bin({ onUpdateUsers }) {
     getAllUsers();
   }, []);
 
-const handleRestore = async (id) => {
-  try {
+  const handleRestore = async (id) => {
+    try {
+      await restoreUser(id);
 
-    await restoreUser(id);
+      // refresh bin list
+      fetchBin();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    // refresh bin list
-    fetchBin();
-
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-
-const handleDeletePermanently = async (id) => {
-
-  if (!window.confirm("Delete this user permanently?")) return;
-  try {
-    await deleteUserPermanently(id);
-    // refresh bin list
-    fetchBin();
-  } catch (error) {
-    console.log(error);
-  }
-};
+  const handleDeletePermanently = async (id) => {
+    if (!window.confirm("Delete this user permanently?")) return;
+    try {
+      await deleteUserPermanently(id);
+      // refresh bin list
+      fetchBin();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -77,7 +77,7 @@ const handleDeletePermanently = async (id) => {
       </div>
     );
   }
-  
+
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
       <div className="flex justify-between items-end">

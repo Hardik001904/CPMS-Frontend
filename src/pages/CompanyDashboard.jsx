@@ -286,7 +286,6 @@ const CompanyDashboard = ({
               path="applicants"
               element={<Applicants refreshOverview={getOverview} />}
             />
-       
 
             <Route
               path="profile"

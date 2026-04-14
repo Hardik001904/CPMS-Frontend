@@ -96,7 +96,7 @@ export const fetchCompanies = async ( search = "") => {
 };
 
 //Reports stats
-export const fetchSystemStats = async () => {
+export const fetchSystemStats = async () =>{
   try {
     const res = await axios.get("/admin/stats");
     return res.data;
@@ -104,6 +104,15 @@ export const fetchSystemStats = async () => {
     throw error;
   }
 }
+// export const fetchSystemStats = async () => {
+//   try {
+//     const res = await axios.get("/admin/stats");
+//     return res.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// }
+
 
 //Admin dashboard overview
 export const getAdminDashboard = async () => {
@@ -148,3 +157,5 @@ export const deleteMasterStudent = async (id) => {
     throw error;
   }
 };
+
+

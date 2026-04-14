@@ -25,7 +25,7 @@ const userValidationSchema = object({
     .min(6, "Minimum 6 characters")
     .required("Password is required"),
   website: string().url().required("Website url is required"),
-  hrname: string().required("HR Name is required"),
+  hrName: string().required("HR Name is required"),
   industry: string().required("Indusrty Type is required"),
 });
 
@@ -41,7 +41,7 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
         password: "",
         website: "",
         industry: "",
-        hrname: "",
+        hrName: "",
       },
 
       validationSchema: userValidationSchema,
@@ -114,15 +114,15 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   <input
                     required
                     type="text"
-                    name="hrname"
+                    name="hrName"
                     onChange={handleChange}
                     onBlur={handleBlur}
                  
                     className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                     placeholder="John Smith"
                   />
-                  {touched.hrname && errors.hrname ? (
-                    <p>{errors.hrname}</p>
+                  {touched.hrName && errors.hrName ? (
+                    <p>{errors.hrName}</p>
                   ) : null}
                 </div>
               </div>

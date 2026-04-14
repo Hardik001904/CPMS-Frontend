@@ -19,6 +19,7 @@ import {
   Activity,
   Database,
   Trash2,
+  Mail,
 } from "lucide-react";
 import { SidebarNew } from "../components/SidebarNew";
 import Approvals from "../components/Admin/Approvals";
@@ -33,6 +34,8 @@ import { fetchUserById } from "../services/authService";
 import AdminStudentProfile from "../components/Admin/AdminStudentProfile";
 import { getAdminDashboard } from "../services/adminService";
 import SettingPage from "./SettingPage";
+import { useNotificationStore } from "../store/notificationStore";
+import ContactMessages from "../components/Admin/ContactMessages";
 
 export const UserRole = {
   STUDENT: "STUDENT",
@@ -135,6 +138,12 @@ const AdminDashboard = () => {
       active: currentPath === "bin",
       onClick: () => navigate("/dashboard/admin/bin"),
     },
+    {
+  icon: <Mail className="w-5 h-5" />,
+  label: "Contact Messages",
+  active: currentPath === "contact-messages",
+  onClick: () => navigate("/dashboard/admin/contact-messages"),
+},
   ];
 
   const logout = () => {
@@ -269,6 +278,7 @@ const AdminDashboard = () => {
 
             <Route path="reports" element={<Reports />} />
             <Route path="bin" element={<Bin />} />
+            <Route path="contact-messages" element={<ContactMessages />} />
             <Route
               path="settings"
               element={<SettingPage user={user} onLogout={logout} />}

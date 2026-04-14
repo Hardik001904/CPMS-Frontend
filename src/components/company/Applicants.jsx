@@ -332,12 +332,12 @@ export default function Applicants({ refreshOverview }) {
                         {selectedStudent.profile.phone || "Not provided"}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                       <MapPin className="w-4 h-4 text-slate-400" />
                       <span className="text-xs font-bold text-slate-600 ">
                         {selectedStudent.profile.location || "Not provided"}
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -358,7 +358,7 @@ export default function Applicants({ refreshOverview }) {
                 </div>
               </div>
 
-              <div className="p-6 bg-slate-50 rounded-3xl border border-slate-200 flex items-center justify-between">
+              {/* <div className="p-6 bg-slate-50 rounded-3xl border border-slate-200 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <FileText className="w-6 h-6 text-slate-400" />
                   <div>
@@ -373,7 +373,7 @@ export default function Applicants({ refreshOverview }) {
                 <button className="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95">
                   Download CV
                 </button>
-              </div>
+              </div> */}
             </div>
 
             <div className="p-8 bg-slate-50 border-t border-slate-100 flex gap-4">

@@ -41,6 +41,8 @@ import { fetchAllJobs } from "../services/companyService";
 import { getStudentOverview } from "../services/studentService";
 import axios from "../services/axios";
 import SettingPage from "./SettingPage";
+import { logoutUser } from "../services/authService";
+// import { logoutUser } from "../../utils/sessionManager";
 
 const StudentDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -131,10 +133,12 @@ const StudentDashboard = () => {
     },
   ];
 
-  const logout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
+  const logout = async () => {
+    // sessionStorage.removeItem("token");
+    // sessionStorage.removeItem("user");
     // onClose();
+    console.log("clear student data")
+    await logoutUser()
     navigate("/");
   };
   const name = user.name.split(" ")[0];

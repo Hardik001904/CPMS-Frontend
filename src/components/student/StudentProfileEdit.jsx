@@ -248,7 +248,7 @@ export const StudentProfileEdit = ({ profile }) => {
                   value={values.gradYear}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className="w-full bg-transparent text-slate-900 font-black text-4xl text-center outline-none"
+                  className="w-full bg-transparent cursor-not-allowed text-slate-900 font-black text-4xl text-center outline-none"
                   placeholder="2026"
                 />
                 {touched.batch && errors.batch ? <p>{errors.batch}</p> : null}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   fetchMyJobs,
   updateJobRequirements,
+  updateJobStatus,
 } from "../../services/companyService";
 
 export default function MyJob() {
@@ -10,9 +11,17 @@ export default function MyJob() {
     getJobs();
   }, []);
 
+  const formatDate = (date) => {
+  if (!date) return "-";
+  const d = new Date(date);
+  if (isNaN(d)) return "-";
+  return d.toISOString().slice(0, 10);
+};
+
   const getJobs = async () => {
     try {
       const res = await fetchMyJobs();
+      console.log("data : ",res.data);
       setJobs(res.data);
     } catch (error) {
       console.log(error);
@@ -36,6 +45,9 @@ export default function MyJob() {
                 Date Posted
               </th>
               <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                Deadline
+              </th>
+              <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                 Status
               </th>
               <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">
@@ -56,7 +68,12 @@ export default function MyJob() {
                   </p>
                 </td>
                 <td className="px-6 py-4 text-xs font-bold text-slate-600">
-                  {new Date(job.postedDate).toISOString().slice(0, 10)}
+                  {/* {new Date(job.postedDate).toISOString().slice(0, 10)} */}
+                  {formatDate(job.postedDate)}
+                </td>
+                 <td className="px-6 py-4 text-xs font-bold text-slate-600">
+                  {/* {new Date(job?.deadline).toISOString().slice(0, 10)} */}
+                  {formatDate(job.deadline)}
                 </td>
                 <td className="px-6 py-4">
                   <span
@@ -69,7 +86,9 @@ export default function MyJob() {
                   <button
                     onClick={async () => {
                       try {
-                        await updateJobRequirements(job._id);
+                        // await updateJobRequirements(job._id);
+                        await updateJobStatus(job._id);
+                        console.log("API CALLED");
 
                         setJobs((prev) =>
                           prev.map((j) =>
