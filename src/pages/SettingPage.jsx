@@ -136,10 +136,10 @@ export default function SettingPage({ user, onLogout }) {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-3xl font-black text-slate-900 italic tracking-tight">
+        <h2 className="text-3xl font-black text-slate-900  tracking-tight">
           Account Configuration
         </h2>
-        <p className="text-slate-500 font-medium italic">
+        <p className="text-slate-500 font-medium ">
           Manage your security and personal information.
         </p>
       </div>
@@ -153,28 +153,28 @@ export default function SettingPage({ user, onLogout }) {
           ) : (
             <AlertCircle className="w-5 h-5" />
           )}
-          <p className="text-sm font-bold italic">{message.text}</p>
+          <p className="text-sm font-bold ">{message.text}</p>
         </div>
       )}
 
       <div className="space-y-8">
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
+        {/* <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-10 h-10 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600">
               <UserIcon className="w-5 h-5" />
             </div>
-            <h4 className="text-lg font-black text-slate-900 italic tracking-tight">
+            <h4 className="text-lg font-black text-slate-900  tracking-tight">
               Personal Information
             </h4>
           </div>
-        </div>
+        </div> */}
 
         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-10 h-10 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600">
               <Lock className="w-5 h-5" />
             </div>
-            <h4 className="text-lg font-black text-slate-900 italic tracking-tight">
+            <h4 className="text-lg font-black text-slate-900  tracking-tight">
               Security & Password
             </h4>
           </div>
@@ -193,7 +193,7 @@ export default function SettingPage({ user, onLogout }) {
                     setPasswords({ ...passwords, current: e.target.value })
                   }
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-12 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm italic"
+                  className="w-full pl-12 pr-12 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm "
                 />
                 <button
                   type="button"
@@ -221,7 +221,7 @@ export default function SettingPage({ user, onLogout }) {
                     setPasswords({ ...passwords, new: e.target.value })
                   }
                   placeholder="••••••••"
-                  className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm italic"
+                  className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm "
                 />
               </div>
               <div>
@@ -235,7 +235,7 @@ export default function SettingPage({ user, onLogout }) {
                     setPasswords({ ...passwords, confirm: e.target.value })
                   }
                   placeholder="••••••••"
-                  className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm italic"
+                  className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500/10 font-bold text-sm "
                 />
               </div>
             </div>
@@ -260,10 +260,10 @@ export default function SettingPage({ user, onLogout }) {
 
         <div className="bg-rose-50 p-8 rounded-[2.5rem] border border-rose-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h4 className="text-lg font-black text-rose-900 italic tracking-tight mb-1">
+            <h4 className="text-lg font-black text-rose-900  tracking-tight mb-1">
               Danger Zone
             </h4>
-            <p className="text-xs text-rose-600 font-medium italic">
+            <p className="text-xs text-rose-600 font-medium ">
               Permanently delete your institutional account and records.
             </p>
           </div>

@@ -57,7 +57,7 @@ const LoginPage = ({ onLogin }) => {
           confirmTakeover: pendingTakeover,
         };
 
-        console.log("userdata : ",payload);
+        // console.log("userdata : ",payload);
         const res = await login(payload);
 
         // ── FIX 4: variable is `res`, not `data` — was crashing here ─────────
@@ -269,7 +269,7 @@ const LoginPage = ({ onLogin }) => {
                     {conflictInfo.browser}
                   </span>
                 </div>
-                <div className="flex justify-between">
+                {/* <div className="flex justify-between">
                   <span className="text-slate-500">Device</span>
                   <span className="font-semibold text-slate-800">
                     {conflictInfo.device}
@@ -280,7 +280,7 @@ const LoginPage = ({ onLogin }) => {
                   <span className="font-semibold text-slate-800">
                     {conflictInfo.ip}
                   </span>
-                </div>
+                </div> */}
                 <div className="flex justify-between">
                   <span className="text-slate-500">Last Active</span>
                   <span className="font-semibold text-slate-800">

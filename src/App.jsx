@@ -150,8 +150,8 @@ function App() {
   return (
     <>
       {/* <NotificationToastProvider /> */}
-      <Toaster position="top-center" />
       <AuthProvider>
+      <Toaster position="top-center" />
         <Routes>
           <Route path="/*" element={<LandingPage />} />
           <Route path="/admin-login" element={<AdminLogin />} />

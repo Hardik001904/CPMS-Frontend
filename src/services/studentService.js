@@ -43,9 +43,7 @@ export const getStudentOverview = async () => {
 //Get JobById
 export const fetchJobById = async (id) => {
   try {
-    console.log("fetchJobById");
     const res = await axios.get(`/jobs/${id}/me`);
-    console.log("fetchJobById : ", res);
     return res.data;
   } catch (error) {
     throw error;

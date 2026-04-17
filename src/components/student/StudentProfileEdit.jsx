@@ -162,7 +162,7 @@ export const StudentProfileEdit = ({ profile }) => {
                     Phone
                   </label>
                   <div className="relative">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Phone className="absolute left-4 top-5.5 w-4 h-4 text-slate-400" />
                     <input
                       name="phone"
                       value={values.phone}
