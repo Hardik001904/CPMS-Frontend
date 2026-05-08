@@ -11,46 +11,6 @@ import {
 import { motion } from "framer-motion";
 import { fetchSystemStats } from '../../services/adminService';
 
-// Mock Data
-// const summaryStats = [
-//   { title: 'Total Students', value: '1,240', icon: <Users className="w-5 h-5" />, change: '+12%', positive: true },
-//   { title: 'Total Companies', value: '84', icon: <Building2 className="w-5 h-5" />, change: '+5%', positive: true },
-//   { title: 'Active Job Postings', value: '156', icon: <Briefcase className="w-5 h-5" />, change: '-2%', positive: false },
-//   { title: 'Total Placed Students', value: '942', icon: <CheckCircle2 className="w-5 h-5" />, change: '+18%', positive: true },
-// ];
-
-// const companyPlacementsData = [
-//   { name: 'Google', placements: 12 },
-//   { name: 'Amazon', placements: 8 },
-//   { name: 'Microsoft', placements: 5 },
-//   { name: 'Meta', placements: 7 },
-//   { name: 'Apple', placements: 4 },
-//   { name: 'Netflix', placements: 3 },
-//   { name: 'Adobe', placements: 6 },
-// ];
-
-// const yearlyTrendsData = [
-//   { year: '2021', placements: 450 },
-//   { year: '2022', placements: 580 },
-//   { year: '2023', placements: 720 },
-//   { year: '2024', placements: 890 },
-//   { year: '2025', placements: 942 },
-// ];
-
-// const distributionData = [
-//   { name: 'Placed', value: 95 },
-//   { name: 'Unplaced', value: 298 },
-// ];
-
-// const jobsVsPlacementsData = [
-//   { month: 'Jan', jobs: 45, placements: 32 },
-//   { month: 'Feb', jobs: 52, placements: 38 },
-//   { month: 'Mar', jobs: 48, placements: 42 },
-//   { month: 'Apr', jobs: 61, placements: 45 },
-//   { month: 'May', jobs: 55, placements: 48 },
-//   { month: 'Jun', jobs: 67, placements: 52 },
-// ];
-
 
 
 const COLORS = ['#2563eb', '#e2e8f0'];
@@ -106,47 +66,21 @@ const monthlyData = stats.monthlyPlacements?.map(m => ({
           <h3 className="text-2xl font-black text-slate-900  tracking-tight">Placement Intelligence</h3>
           <p className="text-slate-500 font-medium">Comprehensive analytics and institutional performance metrics.</p>
         </div>
-        <div className="flex items-center gap-3">
+        {/* <div className="flex flex-wrap items-center gap-3">
           <button className="px-4 py-2 bg-white border border-slate-200 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-50 transition-colors shadow-sm">
             Export PDF
           </button>
           <button className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/20">
             Generate Report
           </button>
-        </div>
+        </div> */}
       </div>
 
-      {/* Summary Stats */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {summaryStats.map((stat, index) => (
-          <motion.div 
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all group"
-          >
-            <div className="flex justify-between items-start mb-4">
-              <div className="p-3 bg-slate-50 rounded-xl text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                {stat.icon}
-              </div>
-              <div className={`flex items-center gap-1 text-[10px] font-black px-2 py-1 rounded-full ${stat.positive ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'}`}>
-                {stat.positive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                {stat.change}
-              </div>
-            </div>
-            <div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.title}</p>
-              <p className="text-3xl font-black text-slate-900 tracking-tighter ">{stat.value}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div> */}
 
       {/* Main Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Company-wise Placement Chart */}
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
+        <div className="bg-white p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] border border-slate-200 shadow-sm">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest ">Company Placements</h4>
@@ -182,7 +116,7 @@ const monthlyData = stats.monthlyPlacements?.map(m => ({
         </div>
 
         {/* Year-wise Placement Trends */}
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
+        <div className="bg-white p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] border border-slate-200 shadow-sm">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest ">Placement Trends</h4>
@@ -224,7 +158,7 @@ const monthlyData = stats.monthlyPlacements?.map(m => ({
         </div>
 
         {/* Placement Distribution */}
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
+        <div className="bg-white p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] border border-slate-200 shadow-sm">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest ">Placement Distribution</h4>
@@ -265,7 +199,7 @@ const monthlyData = stats.monthlyPlacements?.map(m => ({
         </div>
 
         {/* Jobs vs Placements Chart */}
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
+        <div className="bg-white p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] border border-slate-200 shadow-sm">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest ">Jobs vs Placements</h4>

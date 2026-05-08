@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   //   try {
   //     // const token = sessionStorage.getItem("token");
 
-  //     // 🚫 STOP if no token
+  //     //  STOP if no token
   //     if (!token) {
   //       setUser(null);
   //       setLoadingUser(false);
@@ -54,16 +54,16 @@ export const AuthProvider = ({ children }) => {
   //   }
   // };
 
-  // ✅ ADD THIS 🔥
+  //  ADD THIS 
   const logout = () => {
     logoutUser(); // clear user
   };
 
-  // ✅ THIS MUST BE OUTSIDE FUNCTION
+  //  THIS MUST BE OUTSIDE FUNCTION
   useEffect(() => {
     const retry = setTimeout(() => {
       if (!user) {
-        console.log("Retrying fetchUser...");
+        // console.log("Retrying fetchUser...");
         fetchUser();
       }
     }, 3000);
@@ -78,5 +78,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// ✅ ALSO OUTSIDE
+//  ALSO OUTSIDE
 export const useAuth = () => useContext(AuthContext);

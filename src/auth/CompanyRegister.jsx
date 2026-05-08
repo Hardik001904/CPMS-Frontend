@@ -17,7 +17,6 @@ import { useFormik } from "formik";
 import { registercompany } from "../services/authService";
 import toast from "react-hot-toast";
 
-
 const userValidationSchema = object({
   name: string().required("Name is required"),
   email: string().email("Invalid email").required("Email is required"),
@@ -46,11 +45,8 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
 
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
-   
-        console.log(values);
         try {
           const res = await registercompany(values);
-          console.log(res.data);
           toast.success("Register successfully");
           navigate("/login");
         } catch (error) {
@@ -95,7 +91,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                 
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="Google Inc."
                 />
@@ -109,7 +104,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   HR Name
                 </label>
                 <div className="relative">
-                 
                   <UserIcon className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                   <input
                     required
@@ -117,7 +111,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                     name="hrName"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                 
                     className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                     placeholder="John Smith"
                   />
@@ -131,7 +124,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   Industry
                 </label>
                 <div className="relative">
-              
                   <Briefcase className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                   <input
                     required
@@ -139,7 +131,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                     name="industry"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                
                     className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                     placeholder="Tech / Finance"
                   />
@@ -155,7 +146,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                 Website URL
               </label>
               <div className="relative">
-                
                 <Globe className="absolute left-4 top-4  w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -163,7 +153,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="website"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                 
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="https://company.com"
                 />
@@ -178,7 +167,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                 HR Contact Email
               </label>
               <div className="relative">
-              
                 <Mail className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -186,7 +174,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="email"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                 
                   className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="hiring@company.com"
                 />
@@ -199,7 +186,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                 Set Password
               </label>
               <div className="relative">
-                
                 <Lock className="absolute left-4 top-4 w-5 h-5 text-slate-400" />
                 <input
                   required
@@ -207,7 +193,6 @@ const CompanyRegister = ({ allUsers, onUpdateUsers }) => {
                   name="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-             
                   className="w-full pl-12 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20"
                   placeholder="••••••••"
                 />

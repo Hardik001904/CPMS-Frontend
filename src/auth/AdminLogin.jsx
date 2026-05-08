@@ -60,39 +60,32 @@ const AdminLogin = ({ onLogin }) => {
             role: "ADMIN",
             confirmTakeover: pendingTakeover,
           };
-          console.log("admin login : ", payload);
           const res = await login(payload);
-          console.log("res payload", res);
           const { token, user } = res.data;
 
           sessionStorage.setItem("token", token);
           sessionStorage.setItem("user", JSON.stringify(user));
 
-          // ── FIX 5: notify the app that the user is now logged in ─────────────
+          // ──  notify the app that the user is now logged in ─────────────
           // if (onLogin) onLogin(user);
 
           setPendingTakeover(false);
           toast.success("Login successful");
-          // navigate(
-          //   role === "STUDENT"
-          //     ? "/dashboard/student/overview"
-          //     : "/dashboard/company/overview",
-          // );
           navigate("/dashboard/admin/overview");
         } catch (error) {
-          console.log("error ::::::::::", error);
+          console.log("error:", error);
           const errorMessage = error?.response?.data?.message;
 
           if (errorMessage === "SESSION_CONFLICT") {
             setConflictInfo(error.response.data.existingSession);
-            return; // no toast for this case — the dialog handles it
+            return;
           }
 
           toast.error(errorMessage || "Login failed. Please try again.");
           setError("Invalid administrative credentials. Access Denied.");
         }
         //    finally {
-        //   // ── FIX 6: setSubmitting comes from formikHelpers (destructured above) ─
+        //   // ──  setSubmitting comes from formikHelpers (destructured above) ─
         //   setSubmitting(false);
         // }
       },
@@ -151,7 +144,6 @@ const AdminLogin = ({ onLogin }) => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className="w-full bg-slate-800 border border-slate-700 rounded-2xl py-4 pl-14 pr-4 text-white placeholder-slate-600 focus:ring-2 focus:ring-blue-500/50 outline-none transition-all"
-                  placeholder="admin@placement.edu"
                 />
                 {touched.email && errors.email ? <p>{errors.email}</p> : null}
               </div>

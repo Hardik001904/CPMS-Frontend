@@ -12,16 +12,15 @@ export default function MyJob() {
   }, []);
 
   const formatDate = (date) => {
-  if (!date) return "-";
-  const d = new Date(date);
-  if (isNaN(d)) return "-";
-  return d.toISOString().slice(0, 10);
-};
+    if (!date) return "-";
+    const d = new Date(date);
+    if (isNaN(d)) return "-";
+    return d.toLocaleDateString();
+  };
 
   const getJobs = async () => {
     try {
       const res = await fetchMyJobs();
-      console.log("data : ",res.data);
       setJobs(res.data);
     } catch (error) {
       console.log(error);
@@ -30,12 +29,12 @@ export default function MyJob() {
 
   const companyJobs = jobs;
   return (
-    <div className="space-y-6 animate-in slide-in-from-bottom-4">
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-8 space-y-6 animate-in slide-in-from-bottom-4">
       <h3 className="text-2xl font-black text-slate-900  tracking-tight">
         Manage Requirements
       </h3>
-      <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
-        <table className="w-full text-left">
+      <div className="hidden md:block bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+        <table className="w-full text-left min-w-[600px]">
           <thead className="bg-slate-50 border-b border-slate-100">
             <tr>
               <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
@@ -68,11 +67,9 @@ export default function MyJob() {
                   </p>
                 </td>
                 <td className="px-6 py-4 text-xs font-bold text-slate-600">
-                  {/* {new Date(job.postedDate).toISOString().slice(0, 10)} */}
                   {formatDate(job.postedDate)}
                 </td>
-                 <td className="px-6 py-4 text-xs font-bold text-slate-600">
-                  {/* {new Date(job?.deadline).toISOString().slice(0, 10)} */}
+                <td className="px-6 py-4 text-xs font-bold text-slate-600">
                   {formatDate(job.deadline)}
                 </td>
                 <td className="px-6 py-4">
@@ -86,7 +83,6 @@ export default function MyJob() {
                   <button
                     onClick={async () => {
                       try {
-                        // await updateJobRequirements(job._id);
                         await updateJobStatus(job._id);
                         console.log("API CALLED");
 
@@ -114,6 +110,70 @@ export default function MyJob() {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="md:hidden space-y-4">
+        {companyJobs?.map((job) => (
+          <div
+            key={job._id}
+            className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3"
+          >
+            {/* Job Title */}
+            <div>
+              <h4 className="font-black text-slate-900 text-base">
+                {job.title}
+              </h4>
+              <p className="text-xs text-slate-500 font-bold">{job.location}</p>
+            </div>
+
+            {/* Dates */}
+            <div className="flex justify-between text-xs font-bold text-slate-600">
+              <span>Posted:</span>
+              <span>{formatDate(job.postedDate)}</span>
+            </div>
+
+            <div className="flex justify-between text-xs font-bold text-slate-600">
+              <span>Deadline:</span>
+              <span>{formatDate(job.deadline)}</span>
+            </div>
+
+            {/* Status + Action */}
+            <div className="flex justify-between items-center">
+              <span
+                className={`px-2 py-1 rounded text-[10px] font-black uppercase tracking-widest ${
+                  job.status === "Open"
+                    ? "bg-emerald-50 text-emerald-600"
+                    : "bg-slate-100 text-slate-500"
+                }`}
+              >
+                {job.status}
+              </span>
+
+              <button
+                onClick={async () => {
+                  try {
+                    await updateJobStatus(job._id);
+
+                    setJobs((prev) =>
+                      prev.map((j) =>
+                        j._id === job._id
+                          ? {
+                              ...j,
+                              status: j.status === "Open" ? "Closed" : "Open",
+                            }
+                          : j,
+                      ),
+                    );
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
+                className="text-[10px] font-black uppercase text-blue-600 tracking-widest"
+              >
+                {job.status === "Open" ? "Close" : "Re-open"}
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

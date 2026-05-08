@@ -53,7 +53,6 @@ export default function PostJob() {
       backlogAllowed: false,
     },
     onSubmit: async (values) => {
-      console.log("post job : ",values)
       try {
         const jobData = {
           ...values,
@@ -95,9 +94,9 @@ export default function PostJob() {
       <h3 className="text-2xl font-black text-slate-900  tracking-tight">
         Post New Requirement
       </h3>
-      <div className="bg-white p-10 rounded-[2.5rem]  border border-slate-200 shadow-sm">
+      <div className="bg-white p-5 md:p-10 rounded-2xl md:rounded-[2.5rem]  border border-slate-200 shadow-sm">
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">
                 Role Title
@@ -163,7 +162,7 @@ export default function PostJob() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid=cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">
                 Deadline
@@ -199,7 +198,7 @@ export default function PostJob() {
             <h4 className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">
               Eligibility Requirements
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols01 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">
                   Min CGPA
@@ -322,9 +321,9 @@ export default function PostJob() {
                 name="requiredSkills"
                 className="w-full px-5 py-3.5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-bold "
                 placeholder="React, Node.js, Python"
-                 value={values.requiredSkills}
-              onChange={handleChange}
-              onBlur={handleBlur}
+                value={values.requiredSkills}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </div>
           </div>

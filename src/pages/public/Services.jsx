@@ -228,7 +228,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Footer } from "../../components/Layout";
+import { Footer, PublicNavbar } from "../../components/Layout";
 import { Link } from "react-router-dom";
 import {
   GraduationCap,
@@ -242,12 +242,14 @@ import {
   Users,
 } from "lucide-react";
 import { appLogo, appName } from "../../App";
+// import { Footer } from "../../components/Layout";
 
 const Services = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* NAVBAR */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
+      <PublicNavbar />
+      {/* <nav className="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <Link to="/" className="flex items-center gap-2.5 group">
@@ -294,7 +296,7 @@ const Services = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </nav> */}
 
       <main className="flex-1">
         {/* HERO */}

@@ -6,7 +6,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-import { DashboardHeader, Sidebar } from "../components/Layout";
+import { DashboardHeader } from "../components/Layout";
 import {
   Building2,
   Briefcase,
@@ -35,7 +35,6 @@ import {
   Activity,
 } from "lucide-react";
 
-
 import PostJob from "../components/company/PostJob";
 import { SidebarNew } from "../components/SidebarNew";
 import MyJob from "../components/company/MyJob";
@@ -49,8 +48,7 @@ import {
   getCompanyOverview,
 } from "../services/companyService";
 import SettingPage from "./SettingPage";
-
-
+import { logoutUser } from "../services/authService";
 
 const CompanyDashboard = ({
   onUpdateJobs,
@@ -76,12 +74,10 @@ const CompanyDashboard = ({
   const getOverview = async () => {
     const res = await getCompanyOverview();
     setOverview(res);
-    
   };
 
   const getApplications = async () => {
     const res = await getCompanyApplication();
-    console.log(res.data);
     setApplications(res);
   };
 
@@ -97,7 +93,6 @@ const CompanyDashboard = ({
   const currentPath = location.pathname.split("/").pop() || "overview";
 
   const companyJobs = jobs.filter((j) => j.companyId === user._id);
-
 
   const companyApps = applications?.filter((a) => a.companyId === user?.id);
 
@@ -179,9 +174,11 @@ const CompanyDashboard = ({
 
   const name = user.name.split(" ")[0];
 
-  const logout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
+  const logout = async () => {
+    // sessionStorage.removeItem("token");
+    // sessionStorage.removeItem("user");
+    await logoutUser();
+    // navigate("/");
     navigate("/");
   };
 
@@ -197,7 +194,7 @@ const CompanyDashboard = ({
         setIsCollapsed={setIsCollapsed}
       />
       <main
-        className={`flex-1 transition-all duration-500 ease-in-out ${isCollapsed ? "md:ml-20" : "md:ml-72"}`}
+        className={`flex-1 transition-all duration-500 ease-in-out min-w-0 ${isCollapsed ? "md:ml-20" : "md:ml-72"}`}
       >
         <DashboardHeader
           title={`Recruiter Portal - ${currentPath.toUpperCase()}`}
@@ -209,35 +206,34 @@ const CompanyDashboard = ({
             <Route
               path="overview"
               element={
-                <div className="space-y-8 animate-in fade-in duration-700">
-                  <div className="bg-[#0a0f1d] rounded-[2.5rem] p-10 md:p-10 text-white flex flex-col lg:flex-row justify-between lg:items-center gap-8 shadow-2xl relative overflow-hidden">
+                <div className="space-y-6 md:space-y-8 animate-in fade-in duration-700">
+                  {/* Hero Banner */}
+                  <div className="bg-[#0a0f1d] rounded-2xl md:rounded-[2.5rem] p-6  md:p-10 text-white flex flex-col lg:flex-row justify-between lg:items-center gap-6 shadow-2xl relative overflow-hidden">
                     <div className="relative z-10">
-                      <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] border border-blue-500/20 mb-6">
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] border border-blue-500/20 mb-4 md:mb-6">
                         <Activity className="w-3.5 h-3.5 animate-pulse" />{" "}
                         Corporate Identity Active
                       </div>
-                      <h3 className="text-3xl md:text-4xl font-black mb-4 tracking-tighter  leading-tight">
-
+                      <h3 className="text-2xl md:text-4xl font-black mb-3 tracking-tighter  leading-tight">
                         Welcome, <span>{overview.name}</span>
                       </h3>
-                      <p className="text-slate-400 max-w-md font-bold ">
+                      <p className="text-slate-400 max-w-md font-bold text-sm md:text-base">
                         Your organization,{" "}
                         <span className="text-white">{user?.name}</span>, has{" "}
-                        
                         {overview?.activeMandates || 0} live hiring mandates
                       </p>
                     </div>
                     <button
                       onClick={() => navigate("/dashboard/company/post-job")}
-                      className="relative z-5 bg-blue-600 hover:bg-blue-500 px-12 py-5 rounded-2xl font-black shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all active:scale-95 text-sm uppercase tracking-widest "
+                      className=" bg-blue-600 hover:bg-blue-500 px-8 md:px-12 py-4 md:py-5 rounded-2xl font-black shadow-[0_20px_40px_rgba(37,99,235,0.3)] transition-all active:scale-95 text-sm uppercase tracking-widest w-full lg:w-auto text center "
                     >
                       Initiate Drive
                     </button>
                     <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
+                  {/* Stats Grid — 1 col mobile, 3 col desktop */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4  md:gap-6">
                     {[
                       {
                         label: "Active Mandates",
@@ -260,13 +256,13 @@ const CompanyDashboard = ({
                     ].map((stat, i) => (
                       <div
                         key={i}
-                        className={`p-10 rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-2xl transition-all group ${stat.bg}`}
+                        className={`p-6 md:p-10 rounded-2xl md:rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-2xl transition-all group ${stat.bg}`}
                       >
                         <p className="text-[10px] font-black text-slate-400  uppercase tracking-[0.3em] mb-2">
                           {stat.label}
                         </p>
                         <p
-                          className={`text-5xl font-black  tracking-tighter  ${stat.color}`}
+                          className={`text-4xl md:text-5xl font-black  tracking-tighter  ${stat.color}`}
                         >
                           {stat.value}
                         </p>
@@ -300,7 +296,10 @@ const CompanyDashboard = ({
             />
 
             <Route path="*" element={<Navigate to="overview" />} />
-            <Route path="settings" element={<SettingPage user={user} onLogout={logout} />} />
+            <Route
+              path="settings"
+              element={<SettingPage user={user} onLogout={logout} />}
+            />
           </Routes>
         </div>
       </main>

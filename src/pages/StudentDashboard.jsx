@@ -42,7 +42,6 @@ import { getStudentOverview } from "../services/studentService";
 import axios from "../services/axios";
 import SettingPage from "./SettingPage";
 import { logoutUser } from "../services/authService";
-// import { logoutUser } from "../../utils/sessionManager";
 
 const StudentDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -134,25 +133,20 @@ const StudentDashboard = () => {
   ];
 
   const logout = async () => {
-    // sessionStorage.removeItem("token");
-    // sessionStorage.removeItem("user");
-    // onClose();
-    console.log("clear student data")
-    await logoutUser()
+    await logoutUser();
     navigate("/");
   };
   const name = user.name.split(" ")[0];
   useEffect(() => {
     const fetchSessions = async () => {
       const res = await axios.get("/auth/sessions");
-      // console.log("fetchSessions : ", res.data);
       setSessions(res.data);
     };
 
     fetchSessions();
   }, []);
   return (
-    <div className="flex bg-slate-50 min-h-screen font-sans">
+    <div className="flex flex-col md:flex-row bg-slate-50 min-h-screen font-sans">
       <SidebarNew
         title="Student Portal"
         userName={user?.name || "Student"}
@@ -163,27 +157,29 @@ const StudentDashboard = () => {
         setIsCollapsed={setIsCollapsed}
       />
       <main
-        className={`flex-1 transition-all duration-500 ease-in-out ${isCollapsed ? "md:ml-20" : "md:ml-72"}`}
+        className={`flex-1 transition-all duration-500 ease-in-out ${
+          isCollapsed ? "md:ml-20" : "md:ml-72"
+        } ml-0`}
       >
         <DashboardHeader
           title={`Student Hub / ${currentPath.toUpperCase()}`}
           user={user}
           onLogout={logout}
         />
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           <Routes>
             <Route
               path="overview"
               element={
                 <div className="space-y-8 animate-in fade-in duration-500">
                   <div className="bg-indigo-600 rounded-[2.5rem] z-5 p-10 text-white shadow-2xl relative overflow-hidden">
-                    <div className="relative z-10 flex justify-between items-start">
+                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-6">
                       <div>
                         <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/10 text-white text-[10px] font-black uppercase tracking-widest border border-white/20 mb-6">
                           <CheckCircle2 className="w-4 h-3" /> Profile
                           Authenticated
                         </div>
-                        <h3 className="text-4xl font-black mb-4 tracking-tighter ">
+                        <h3 className="text-2xl md:text-4xl font-black mb-4 tracking-tighter ">
                           Welcome, <span>{name}</span>
                           {overview.welcome}
                         </h3>
@@ -195,7 +191,7 @@ const StudentDashboard = () => {
                         </div>
                         <button
                           onClick={() => navigate("/dashboard/student/jobs")}
-                          className="bg-white text-indigo-600 px-10 py-4 rounded-2xl font-black shadow-xl hover:bg-indigo-50 transition-all active:scale-95 flex items-center gap-2"
+                          className="bg-white text-indigo-600 px-6 md:px-10 py-3 md:py-4 w-full md:w-auto rounded-2xl font-black shadow-xl hover:bg-indigo-50 transition-all active:scale-95 flex items-center gap-2"
                         >
                           Explore Openings <ChevronRight className="w-5 h-5" />
                         </button>
@@ -204,14 +200,14 @@ const StudentDashboard = () => {
                         <p className="text-sm z-2 font-black uppercase tracking-[0.3em] text-indigo-200 mb-2">
                           Placement Readiness
                         </p>
-                        <p className="text-6xl  font-black tracking-tighter">
+                        <p className="text-3xl md:text-6xl font-black tracking-tighter">
                           {overview.placementReadiness}%
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-lg transition-all group">
                       <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
                         Applications In Review
@@ -263,7 +259,7 @@ const StudentDashboard = () => {
               className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
               onClick={() => setViewingCompany(null)}
             ></div>
-            <div className="relative bg-white w-full max-w-2xl rounded-[3rem] shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+            <div className="relative bg-white w-full max-w-2xl mx-2 md:mx-0 rounded-2xl md:rounded-[3rem] shadow-2xl overflow-hidden animate-in zoom-in duration-300">
               <div className="bg-slate-900 p-12 text-white relative">
                 <button
                   onClick={() => setViewingCompany(null)}
@@ -290,7 +286,7 @@ const StudentDashboard = () => {
                   </div>
                 </div>
               </div>
-              <div className="p-12 space-y-8">
+              <div className="p-6 md:p-12 space-y-6 md:space-y-8">
                 <div>
                   <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">
                     Corporate Mission
@@ -302,7 +298,7 @@ const StudentDashboard = () => {
                     "
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-slate-100">
                   <div>
                     <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">
                       Lead Recruiter

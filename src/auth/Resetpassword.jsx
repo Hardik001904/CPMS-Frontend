@@ -38,7 +38,9 @@ export default function ResetPassword() {
         // Auto-redirect to login after 2.5s
         setTimeout(() => navigate("/login"), 2500);
       } catch (err) {
-        toast.error(err.response?.data?.message || "Invalid or expired reset link.");
+        toast.error(
+          err.response?.data?.message || "Invalid or expired reset link.",
+        );
       } finally {
         setSubmitting(false);
       }
@@ -53,7 +55,9 @@ export default function ResetPassword() {
           <div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 mx-auto mb-5">
             <CheckCircle className="w-8 h-8 text-green-400" />
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">Password Updated!</h2>
+          <h2 className="text-2xl font-bold text-white mb-2">
+            Password Updated!
+          </h2>
           <p className="text-gray-400 text-sm mb-6">
             Your password has been reset successfully. Redirecting you to login…
           </p>
@@ -117,11 +121,17 @@ export default function ResetPassword() {
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
                   tabIndex={-1}
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
                 </button>
               </div>
               {formik.touched.password && formik.errors.password && (
-                <p className="text-red-400 text-xs mt-1.5">{formik.errors.password}</p>
+                <p className="text-red-400 text-xs mt-1.5">
+                  {formik.errors.password}
+                </p>
               )}
             </div>
 
@@ -145,7 +155,8 @@ export default function ResetPassword() {
                   onBlur={formik.handleBlur}
                   className={`w-full bg-gray-800 text-white placeholder-gray-500 pl-10 pr-11 py-3 rounded-xl border text-sm outline-none transition-colors
                     ${
-                      formik.touched.confirmPassword && formik.errors.confirmPassword
+                      formik.touched.confirmPassword &&
+                      formik.errors.confirmPassword
                         ? "border-red-500 focus:border-red-400"
                         : "border-gray-700 focus:border-indigo-500"
                     }`}
@@ -156,12 +167,19 @@ export default function ResetPassword() {
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
                   tabIndex={-1}
                 >
-                  {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showConfirm ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
                 </button>
               </div>
-              {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                <p className="text-red-400 text-xs mt-1.5">{formik.errors.confirmPassword}</p>
-              )}
+              {formik.touched.confirmPassword &&
+                formik.errors.confirmPassword && (
+                  <p className="text-red-400 text-xs mt-1.5">
+                    {formik.errors.confirmPassword}
+                  </p>
+                )}
             </div>
 
             {/* Submit */}

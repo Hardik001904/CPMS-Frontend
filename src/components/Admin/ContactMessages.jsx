@@ -1,109 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { deleteContactMessage, fetchContactMessages, toggleContactReadStatus } from "../../services/contactService";
-// // import {
-// //   fetchContactMessages,
-// //   toggleContactReadStatus,
-// //   deleteContactMessage,
-// // } from "../../services/contactAdminService";
-
-// const ContactMessages = () => {
-//   const [messages, setMessages] = useState([]);
-
-//   const loadMessages = async () => {
-//     const data = await fetchContactMessages();
-//     setMessages(data);
-//   };
-
-//   useEffect(() => {
-//     loadMessages();
-//   }, []);
-
-//   const handleToggleRead = async (id) => {
-//     await toggleContactReadStatus(id);
-//     loadMessages();
-//   };
-
-//   const handleDelete = async (id) => {
-//     if (!window.confirm("Delete this message?")) return;
-
-//     await deleteContactMessage(id);
-//     loadMessages();
-//   };
-
-//   return (
-//     <div className="p-8">
-//       <h1 className="text-3xl font-bold mb-8">
-//         Contact Messages
-//       </h1>
-
-//       <div className="bg-white rounded-3xl shadow border overflow-hidden">
-//         <table className="w-full">
-//           <thead className="bg-slate-50 border-b">
-//             <tr>
-//               <th className="p-4 text-left">Name</th>
-//               <th className="p-4 text-left">Email</th>
-//               <th className="p-4 text-left">Subject</th>
-//               <th className="p-4 text-left">Message</th>
-//               <th className="p-4 text-left">Date</th>
-//               <th className="p-4 text-left">Status</th>
-//               <th className="p-4 text-left">Actions</th>
-//             </tr>
-//           </thead>
-
-//           <tbody>
-//             {messages.map((msg) => (
-//               <tr
-//                 key={msg._id}
-//                 className="border-b hover:bg-slate-50"
-//               >
-//                 <td className="p-4">{msg.name}</td>
-//                 <td className="p-4">{msg.email}</td>
-//                 <td className="p-4">{msg.subject}</td>
-//                 <td className="p-4 max-w-xs truncate">
-//                   {msg.message}
-//                 </td>
-//                 <td className="p-4">
-//                   {new Date(msg.createdAt).toLocaleDateString()}
-//                 </td>
-
-//                 <td className="p-4">
-//                   <span
-//                     className={`px-3 py-1 rounded-full text-sm font-medium ${
-//                       msg.isRead
-//                         ? "bg-green-100 text-green-700"
-//                         : "bg-yellow-100 text-yellow-700"
-//                     }`}
-//                   >
-//                     {msg.isRead ? "Read" : "Unread"}
-//                   </span>
-//                 </td>
-
-//                 <td className="p-4 flex gap-2">
-//                   <button
-//                     onClick={() => handleToggleRead(msg._id)}
-//                     className="px-3 py-2 bg-blue-600 text-white rounded-xl text-sm"
-//                   >
-//                     Toggle Read
-//                   </button>
-
-//                   <button
-//                     onClick={() => handleDelete(msg._id)}
-//                     className="px-3 py-2 bg-red-600 text-white rounded-xl text-sm"
-//                   >
-//                     Delete
-//                   </button>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ContactMessages;
-
 import React, { useEffect, useState } from "react";
 import {
   deleteContactMessage,
@@ -149,11 +43,11 @@ const ContactMessages = () => {
   };
 
   return (
-    <div className="space-y-8 w-full max-w-full overflow-hidden">
+    <div className="w-full px-4 sm:px-6 lg:px-8 py-6 space-y-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 w-full">
+      <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-5">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
             Contact Messages
           </h1>
           <p className="text-slate-500 font-medium mt-2">
@@ -161,7 +55,7 @@ const ContactMessages = () => {
           </p>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-2xl px-5 py-3 shadow-sm flex items-center gap-3 w-fit self-start lg:self-auto">
+        <div className="bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm flex items-center gap-3 w-full sm:w-fit">
           <Mail className="w-5 h-5 text-blue-600" />
           <div>
             <p className="text-xs text-slate-500 font-semibold uppercase">
@@ -174,10 +68,72 @@ const ContactMessages = () => {
         </div>
       </div>
 
+      {/* Mobile Card Layout */}
+      <div className="grid grid-cols-1 gap-4 lg:hidden">
+        {messages.map((msg) => (
+          <div
+            key={msg._id}
+            className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm space-y-4"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="font-bold text-slate-900">{msg.name}</h3>
+
+                <p className="text-sm text-slate-500 break-all">{msg.email}</p>
+              </div>
+
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-bold ${
+                  msg.isRead
+                    ? "bg-emerald-100 text-emerald-700"
+                    : "bg-amber-100 text-amber-700"
+                }`}
+              >
+                {msg.isRead ? "Read" : "Unread"}
+              </span>
+            </div>
+
+            <div>
+              <p className="font-semibold text-slate-800">{msg.subject}</p>
+
+              <p className="text-sm text-slate-500 mt-1 line-clamp-3">
+                {msg.message}
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-slate-400">
+                {new Date(msg.createdAt).toLocaleDateString()}
+              </p>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleToggleRead(msg._id)}
+                  className="p-3 rounded-xl bg-blue-50 text-blue-600"
+                >
+                  {msg.isRead ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
+
+                <button
+                  onClick={() => handleDelete(msg._id)}
+                  className="p-3 rounded-xl bg-red-50 text-red-600"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Table Card */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden w-full">
-        <div className="overflow-x-auto">
-          <table className="w-full table-fixed">
+      <div className="hidden lg:block bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden w-full">
+        <div className="w-full overflow-x-auto scrollbar-thin">
+          <table className="w-full min-w-[900px]">
             <thead className="bg-slate-50 border-b border-slate-100">
               <tr>
                 {[
@@ -191,7 +147,7 @@ const ContactMessages = () => {
                 ].map((head) => (
                   <th
                     key={head}
-                    className="px-6 py-5 text-left text-xs font-black uppercase tracking-wider text-slate-500"
+                    className="px-3 md:px-6 py-4 md:py-5 text-left text-xs font-black uppercase tracking-wider text-slate-500"
                   >
                     {head}
                   </th>
@@ -215,29 +171,29 @@ const ContactMessages = () => {
                     key={msg._id}
                     className="border-b border-slate-100 hover:bg-slate-50/80 transition"
                   >
-                    <td className="px-6 py-5 font-bold text-slate-900 whitespace-nowrap">
+                    <td className="px-3 md:px-6 py-4 md:py-5 font-bold text-slate-900 whitespace-nowrap">
                       {msg.name}
                     </td>
 
-                    <td className="px-6 py-5 text-slate-600 whitespace-nowrap">
+                    <td className="px-3 md:px-6 py-4 md:py-5 text-slate-600 whitespace-nowrap">
                       {msg.email}
                     </td>
 
-                    <td className="px-6 py-5 font-semibold text-slate-700 break-words">
+                    <td className="px-3 md:px-6 py-4 md:py-5 font-semibold text-slate-700 break-words">
                       {msg.subject}
                     </td>
 
-                    <td className="px-6 py-5 w-[260px]">
+                    <td className="px-3 md:px-6 py-4 md:py-5 min-w-[250px] max-w-[350px]">
                       <p className="text-slate-500 text-sm leading-relaxed break-words line-clamp-2">
                         {msg.message}
                       </p>
                     </td>
 
-                    <td className="px-6 py-5 text-slate-500 whitespace-nowrap">
+                    <td className="px-3 md:px-6 py-4 md:py-5 text-slate-500 whitespace-nowrap">
                       {new Date(msg.createdAt).toLocaleDateString()}
                     </td>
 
-                    <td className="px-6 py-5">
+                    <td className="px-3 md:px-6 py-4 md:py-5">
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${
                           msg.isRead
@@ -249,11 +205,11 @@ const ContactMessages = () => {
                       </span>
                     </td>
 
-                    <td className="px-6 py-5">
-                      <div className="flex items-center gap-2">
+                    {/* <td className="px-3 md:px-6 py-4 md:py-5">
+                      <div className="flex items-center gap-2 whitespace-nowrap">
                         <button
                           onClick={() => handleToggleRead(msg._id)}
-                          className="p-2.5 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition"
+                          className="p-3 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition"
                           title="Toggle Read Status"
                         >
                           {msg.isRead ? (
@@ -265,7 +221,30 @@ const ContactMessages = () => {
 
                         <button
                           onClick={() => handleDelete(msg._id)}
-                          className="p-2.5 rounded-xl bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition"
+                          className="p-3 rounded-xl bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition"
+                          title="Delete Message"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td> */}
+                    <td className="px-3 md:px-6 py-4 md:py-5">
+                      <div className="flex items-center justify-center gap-2 min-w-[110px]">
+                        <button
+                          onClick={() => handleToggleRead(msg._id)}
+                          className="p-3 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition"
+                          title="Toggle Read Status"
+                        >
+                          {msg.isRead ? (
+                            <EyeOff className="w-4 h-4" />
+                          ) : (
+                            <Eye className="w-4 h-4" />
+                          )}
+                        </button>
+
+                        <button
+                          onClick={() => handleDelete(msg._id)}
+                          className="p-3 rounded-xl bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition"
                           title="Delete Message"
                         >
                           <Trash2 className="w-4 h-4" />

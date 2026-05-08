@@ -98,10 +98,10 @@ export const StudentProfileEdit = ({ profile }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="max-w-6xl space-y-12 animate-in fade-in duration-700 pb-20">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-10 rounded-[3rem] border border-slate-200 shadow-sm gap-6">
+      <div className="max-w-6xl mx-auto px-4 md:px-0 space-y-8 md:space-y-12 animate-in fade-in duration-700 pb-20">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white p-6 md:p-10 rounded-2xl md:rounded-[3rem] border border-slate-200 shadow-sm gap-6">
           <div>
-            <h3 className="text-4xl font-black text-slate-900 tracking-tighter  underline decoration-blue-600 decoration-[6px] underline-offset-8">
+            <h3 className="text-2xl md:text-4xl font-black text-slate-900 tracking-tighter  underline decoration-blue-600 decoration-[6px] underline-offset-8">
               Academic Persona
             </h3>
             <p className="text-slate-400 font-black mt-3 uppercase tracking-[0.2em] text-[10px]">
@@ -110,16 +110,16 @@ export const StudentProfileEdit = ({ profile }) => {
           </div>
           <button
             type="submit"
-            className="bg-blue-600 text-white px-12 py-5 rounded-2xl font-black shadow-2xl shadow-blue-600/30 hover:bg-blue-500 transition-all flex items-center gap-3 active:scale-95 uppercase tracking-widest text-sm"
+            className="bg-blue-600 text-white w-full md:w-auto px-6 md:px-12 py-3 md:py-5 rounded-2xl font-black shadow-2xl shadow-blue-600/30 hover:bg-blue-500 transition-all flex items-center gap-3 active:scale-95 uppercase tracking-widest text-sm"
           >
             <Save className="w-5 h-5" />
             {/* Finalize Record */} Update Profile
           </button>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Identity Matrix */}
-          <div className="bg-white p-12 rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
+          <div className="bg-white p-6 md:p-12 rounded-2xl md:rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
             <h4 className="text-[10px] font-black text-slate-900 flex items-center gap-3 uppercase tracking-[0.3em]">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full" /> Identity
               Matrix
@@ -137,7 +137,7 @@ export const StudentProfileEdit = ({ profile }) => {
                   <p>{errors.department}</p>
                 ) : null}
               </div>
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                 <div>
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">
                     Campus ID
@@ -162,7 +162,7 @@ export const StudentProfileEdit = ({ profile }) => {
                     Phone
                   </label>
                   <div className="relative">
-                    <Phone className="absolute left-4 top-5.5 w-4 h-4 text-slate-400" />
+                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                     <input
                       name="phone"
                       value={values.phone}
@@ -181,7 +181,7 @@ export const StudentProfileEdit = ({ profile }) => {
           </div>
 
           {/* Digital Presence */}
-          <div className="bg-white p-12 rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
+          <div className="bg-white p-6 md:p-12 rounded-2xl md:rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
             <h4 className="text-[10px] font-black text-slate-900 flex items-center gap-3 uppercase tracking-[0.3em]">
               <div className="w-1.5 h-1.5 bg-indigo-600 rounded-full" /> Digital
               Portfolio
@@ -219,7 +219,7 @@ export const StudentProfileEdit = ({ profile }) => {
           </div>
 
           {/* Academic Status */}
-          <div className="bg-white p-12 rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
+          <div className="bg-white p-6 md:p-12 rounded-2xl md:rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
             <h4 className="text-[10px] font-black text-slate-900 flex items-center gap-3 uppercase tracking-[0.3em]">
               <div className="w-1.5 h-1.5 bg-emerald-600 rounded-full" />{" "}
               Performance Stats
@@ -234,7 +234,7 @@ export const StudentProfileEdit = ({ profile }) => {
                   value={values.cgpa}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className="w-full bg-transparent text-emerald-600 font-black text-4xl tracking-tighter outline-none"
+                  className="w-full bg-transparent text-emerald-600 font-black text-2xl md:text-4xl tracking-tighter outline-none"
                   placeholder="0.0"
                 />
                 {touched.cgpa && errors.cgpa ? <p>{errors.cgpa}</p> : null}
@@ -248,13 +248,13 @@ export const StudentProfileEdit = ({ profile }) => {
                   value={values.gradYear}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className="w-full bg-transparent cursor-not-allowed text-slate-900 font-black text-4xl text-center outline-none"
+                  className="w-full bg-transparent text-slate-900 font-black text-4xl text-center outline-none"
                   placeholder="2026"
                 />
                 {touched.batch && errors.batch ? <p>{errors.batch}</p> : null}
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1.5 ml-1">
                   Backlog Count
@@ -308,14 +308,14 @@ export const StudentProfileEdit = ({ profile }) => {
           </div>
 
           {/* Skill Inventory */}
-          <div className=" bg-white p-12 rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
+          <div className=" bg-white p-6 md:p-12 rounded-2xl md:rounded-[3.5rem] border border-slate-200 space-y-8 shadow-sm hover:shadow-xl transition-all">
             <h4 className="text-[10px] font-black text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-4">
               Skill Repository
             </h4>
 
             <div className="space-y-6">
               {/* Add Skill Input */}
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   value={newSkill}
                   onChange={(e) => setNewSkill(e.target.value)}
@@ -332,14 +332,14 @@ export const StudentProfileEdit = ({ profile }) => {
                 <button
                   type="button"
                   onClick={handleAddSkill}
-                  className="bg-slate-900 text-white px-6 py-3 rounded-xl font-black shadow-lg hover:bg-slate-800 transition-all flex items-center gap-2 active:scale-95 uppercase tracking-widest text-[10px]"
+                  className="bg-slate-900 text-white w-full sm:w-auto px-6 py-3 rounded-xl font-black shadow-lg hover:bg-slate-800 transition-all flex items-center gap-2 active:scale-95 uppercase tracking-widest text-[10px]"
                 >
                   <Plus className="w-4 h-4" /> Add Skill
                 </button>
               </div>
 
               {/* Skill List */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 max-w-full">
                 {values.skills.length === 0 ? (
                   <p className="text-xs text-slate-400 font-medium ">
                     No skills added yet. Showcase your technical strengths.

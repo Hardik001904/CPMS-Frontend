@@ -38,7 +38,7 @@ export const SidebarNew = ({
       {/* Mobile Toggle */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="md:hidden fixed top-4 left-4 z-[60] p-3 bg-blue-600 text-white rounded-xl shadow-lg"
+        className="md:hidden fixed top-4 left-4 z-[60] p-2 sm:p-3 bg-blue-600 text-white rounded-xl shadow-lg"
       >
         {isMobileOpen ? (
           <X className="w-5 h-5" />
@@ -49,14 +49,14 @@ export const SidebarNew = ({
 
       {/* Sidebar */}
       <aside
-        className={`bg-[#0a0f1d] text-white h-screen fixed left-0 top-0 flex flex-col z-50 transition-all duration-500 border-r border-white/5
-          ${isCollapsed ? "w-20" : "w-72"}
-          ${isMobileOpen ? "translate-x-0 w-72" : "-translate-x-full md:translate-x-0"}
+        className={`bg-[#0a0f1d] text-white h-screen md:h-screen overflow-y-auto hide-scrollbar fixed left-0 top-0 flex flex-col z-50 transition-all duration-500 border-r border-white/5
+          ${isCollapsed ? "md:w-20 w-0" : "md:w-72 w-72"}
+${isMobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
         `}
       >
         {/* Header */}
         <div
-          className={`p-6 border-b border-white/5 flex items-center ${
+          className={`p-4 md:p-6 border-b border-white/5 flex items-center ${
             isCollapsed ? "justify-center" : "gap-4"
           }`}
         >
@@ -66,14 +66,12 @@ export const SidebarNew = ({
           >
             P
           </button>
-          {!isCollapsed && (
-            <h1 className="text-xl font-black ">{title}</h1>
-          )}
+          {!isCollapsed && <h1 className="text-xl font-black ">{title}</h1>}
         </div>
 
         {/* Nav */}
-        {/* <nav className="flex-1 p-4 mt-4 space-y-8 overflow-y-auto"> */}
-        <nav className="flex-1 p-4 mt-4 space-y-6 overflow-hidden">
+        {/* <nav className="flex-1 p-3 md:p-4 mt-4 space-y-4 md:space-y-6 overflow-y-auto"> */}
+        <nav className="flex-1 p-3 md:p-4 mt-4 space-y-4 md:space-y-6 overflow-y-scroll sidebar-scroll">
           <ul className="space-y-2">
             {items.map((item, idx) => (
               <li key={idx}>
@@ -91,7 +89,7 @@ export const SidebarNew = ({
                 >
                   {item.icon}
                   {!isCollapsed && (
-                    <span className="font-bold text-sm">{item.label}</span>
+                    <span className="ffont-bold text-sm truncate">{item.label}</span>
                   )}
                 </button>
               </li>
@@ -100,7 +98,7 @@ export const SidebarNew = ({
         </nav>
 
         {/* Footer */}
-        <div className="p-3 border-t border-white/5">
+        <div className="p-3 md:p-4 border-t border-white/5">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center">
               <UserIcon className="w-5 h-5 text-slate-400" />
@@ -166,20 +164,20 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
       .toUpperCase();
 
   return (
-    <header className="h-20 bg-white/80 backdrop-blur-xl border-b flex items-center justify-between px-8 sticky top-0 z-40">
+    <header className="h-16 md:h-20 bg-white/80 backdrop-blur-xl border-b flex items-center justify-between px-4 md:px-8 sticky top-0 z-40">
       <div>
-        <h2 className="text-xl font-black  uppercase">{title}</h2>
+        <h2 className="text-sm sm:text-base md:text-xl font-black uppercase">{title}</h2>
         {subtitle && (
           <p className="text-[10px] text-slate-500 uppercase">{subtitle}</p>
         )}
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="fflex items-center gap-3 md:gap-6">
         {/* Notifications */}
         <div className="relative" ref={notificationRef}>
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className="p-3 rounded-2xl bg-slate-50 border hover:bg-slate-100"
+            className="p-2 md:p-3 rounded-xl md:rounded-2xl bg-slate-50 border hover:bg-slate-100"
           >
             <Bell className="w-5 h-5" />
           </button>
@@ -189,7 +187,7 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
         <div className="relative" ref={profileRef}>
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="flex items-center gap-3 p-2 bg-slate-900 text-white rounded-2xl"
+            className="flex items-center gap-2 md:gap-3 p-1.5 md:p-2 bg-slate-900 text-white rounded-xl md:rounded-2xl"
           >
             <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-black">
               {getInitials(user?.name)}
@@ -220,5 +218,3 @@ export const DashboardHeader = ({ title, subtitle, user, onLogout }) => {
     </header>
   );
 };
-
-

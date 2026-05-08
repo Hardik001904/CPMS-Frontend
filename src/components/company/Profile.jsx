@@ -7,13 +7,11 @@ import toast from "react-hot-toast";
 import { fetchUserById } from "../../services/authService";
 
 export default function Profile() {
-
   const userValidationSchema = object({
     description: string().required("Description is required"),
     headquarters: string().required("Location is required"),
     size: string().required("Size is required"),
   });
-
 
   const [profile, setProfile] = useState({});
   useEffect(() => {
@@ -39,12 +37,8 @@ export default function Profile() {
       },
       validationSchema: userValidationSchema,
       onSubmit: async (values) => {
-        console.log(values);
         try {
-          console.log(values);
-
           const res = await updateMyprofile(values);
-          console.log("inside ", res.data);
           toast.success("Profile updated successfully");
         } catch (error) {
           console.log("Error message:", error.message);
@@ -54,10 +48,10 @@ export default function Profile() {
     });
   return (
     <form onSubmit={handleSubmit}>
-      <div className="max-w-4xl space-y-8 animate-in fade-in duration-700">
-        <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 flex justify-between items-center shadow-sm">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 space-y-6 sm:space-y-8 animate-in fade-in duration-700">
+        <div className="bg-white p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border border-slate-200 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 shadow-sm">
           <div>
-            <h3 className="text-2xl font-black text-slate-900  tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900  tracking-tight">
               Corporate Profile
             </h3>
             <p className="text-xs text-slate-500 font-medium ">
@@ -66,14 +60,14 @@ export default function Profile() {
           </div>
           <button
             type="submit"
-            className="bg-slate-900 text-white px-8 py-3 rounded-xl font-black shadow-lg hover:bg-blue-600 transition-all flex items-center gap-2 active:scale-95 uppercase tracking-[0.2em] text-[10px]"
+            className="w-full sm:w-auto justify-center bg-slate-900 text-white px-6 py-3 rounded-xl font-black shadow-lg hover:bg-blue-600 transition-all flex items-center gap-2 active:scale-95 uppercase tracking-[0.2em] text-[10px]"
           >
             <Save className="w-4 h-4" /> Update Identity
           </button>
         </div>
         {/* Visual Placeholder for more profile fields if needed */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white p-8 rounded-[2rem] border border-slate-200 space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+          <div className="bg-white p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-slate-200 space-y-4">
             <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">
               Org Description
             </label>
@@ -82,7 +76,7 @@ export default function Profile() {
               value={values.description}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-medium  h-32"
+              className="w-full px-4 py-3 sm:px-5 sm:py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-medium  h-32"
               placeholder="Tell us about your company..."
             />
             {touched.description && errors.description ? (
@@ -98,7 +92,7 @@ export default function Profile() {
               value={values.headquarters}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-bold "
+              className="w-full px-4 py-3 sm:px-5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-bold "
               placeholder="e.g. San Francisco, CA"
             />
             {touched.headquarters && errors.headquarters ? (
@@ -114,7 +108,7 @@ export default function Profile() {
               value={values.size}
               onChange={handleChange}
               onBlur={handleBlur}
-              className="w-full px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-bold italic appearance-none"
+              className="w-full px-4 py-3 sm:px-5 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/10 font-bold italic appearance-none"
             >
               <option value="">Select size</option>
               <option value="1-50 Employees">1-50 Employees</option>

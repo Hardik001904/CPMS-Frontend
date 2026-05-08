@@ -38,7 +38,6 @@ export default function Applicants({ refreshOverview }) {
     try {
       const res = await fetchCompanyApplication();
       setApplications(res.application);
-      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -48,7 +47,6 @@ export default function Applicants({ refreshOverview }) {
     try {
       const res = await fetchUser();
       setUser(res.users);
-      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
@@ -61,9 +59,7 @@ export default function Applicants({ refreshOverview }) {
 
   const onUpdateApps = async (appId, status) => {
     try {
-      console.log("onUpdateApps", { appId, status });
       const res = await updateApplicationStatus(appId, { status });
-      console.log("onUpdateApps", res);
       await getApplicationBycompany();
       refreshOverview();
 
@@ -332,12 +328,6 @@ export default function Applicants({ refreshOverview }) {
                         {selectedStudent.profile.phone || "Not provided"}
                       </span>
                     </div>
-                    {/* <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-slate-400" />
-                      <span className="text-xs font-bold text-slate-600 ">
-                        {selectedStudent.profile.location || "Not provided"}
-                      </span>
-                    </div> */}
                   </div>
                 </div>
               </div>
@@ -357,23 +347,6 @@ export default function Applicants({ refreshOverview }) {
                   ))}
                 </div>
               </div>
-
-              {/* <div className="p-6 bg-slate-50 rounded-3xl border border-slate-200 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <FileText className="w-6 h-6 text-slate-400" />
-                  <div>
-                    <p className="text-sm font-black text-slate-900 ">
-                      Professional Resume
-                    </p>
-                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest ">
-                      PDF Document • 2.4 MB
-                    </p>
-                  </div>
-                </div>
-                <button className="bg-slate-900 text-white px-6 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-blue-600 transition-all active:scale-95">
-                  Download CV
-                </button>
-              </div> */}
             </div>
 
             <div className="p-8 bg-slate-50 border-t border-slate-100 flex gap-4">
@@ -382,9 +355,7 @@ export default function Applicants({ refreshOverview }) {
                   const app = applications.find(
                     (a) => a.studentId === selectedStudent._id,
                   );
-                  if (app)
-                    
-                    onUpdateApps(app._id, ApplicationStatus.SHORTLISTED);
+                  if (app) onUpdateApps(app._id, ApplicationStatus.SHORTLISTED);
                   setSelectedStudent(null);
                 }}
                 className="flex-1 bg-blue-600 text-white py-3.5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition-all active:scale-95"
@@ -396,9 +367,7 @@ export default function Applicants({ refreshOverview }) {
                   const app = applications.find(
                     (a) => a.studentId === selectedStudent._id,
                   );
-                  if (app)
-                  
-                    onUpdateApps(app._id, ApplicationStatus.REJECTED);
+                  if (app) onUpdateApps(app._id, ApplicationStatus.REJECTED);
                   setSelectedStudent(null);
                 }}
                 className="flex-1 bg-white border border-slate-200 text-slate-400 py-3.5 rounded-2xl font-black uppercase tracking-widest text-xs hover:text-rose-600 hover:border-rose-200 transition-all active:scale-95"

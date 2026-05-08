@@ -25,13 +25,12 @@ export const JobListingView = () => {
 
   const navigate = useNavigate();
   // const { user } = useAuth();
-  const userData = sessionStorage.getItem("user")
-  const user = JSON.parse(userData)
-  
+  const userData = sessionStorage.getItem("user");
+  const user = JSON.parse(userData);
+
   const handleApply = async (jobId) => {
     try {
       const res = await applyToJob(jobId);
-      console.log("handleApply", res);
       toast.success(res.message);
       navigate("/dashboard/student/applications");
     } catch (error) {
@@ -43,15 +42,12 @@ export const JobListingView = () => {
     try {
       const res = await getStudentApplication();
       setStudentApps(res.application);
-      console.log("res getApplicationByStudent", res);
-      // toast.success(res.message);
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
 
   const onViewCompany = async (jId) => {
-    console.log("in side job", jId);
     try {
       const company = await fetchJobById(jId);
       console.log("my company data", company);
@@ -66,7 +62,6 @@ export const JobListingView = () => {
     try {
       const res = await fetchAllJobs();
       setJobs(res.data);
-      console.log("getJobs", res.data);
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +85,6 @@ export const JobListingView = () => {
 
   const checkStudentEligibility = (job) => {
     const studentProfile = user?.profile;
-    console.log("clgpa ::",Number(studentProfile?.cgpa))
 
     const isEligibleCGPA =
       Number(studentProfile?.cgpa || 0) >=
@@ -107,8 +101,6 @@ export const JobListingView = () => {
     const hasBacklog = Boolean(studentProfile?.currentBacklog);
 
     const isEligibleBacklog = job.backlogAllowed || !hasBacklog;
-    // console.log("Student currentBacklog:", studentProfile?.currentBacklog);
-    // console.log("Type:", typeof studentProfile?.currentBacklog);
     // const isEligibleBacklog =
     //   job.backlogAllowed || !studentProfile?.currentBacklog;
     console.log("Data Check : ", {
@@ -118,8 +110,6 @@ export const JobListingView = () => {
     });
     return isEligibleCGPA && isEligibleBranch && isEligibleBacklog;
   };
-
-  console.log("viewingCompany ::::::", viewingCompany);
 
   return (
     <div className="space-y-6 animate-in slide-in-from-bottom-8 duration-700">
@@ -228,7 +218,7 @@ export const JobListingView = () => {
       {viewingCompany && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
           <div className="bg-white w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-            <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+            <div className="pd-4 md:p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50">
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-black text-3xl ">
                   {viewingCompany.companyName?.charAt(0)}
@@ -250,9 +240,9 @@ export const JobListingView = () => {
               </button>
             </div>
 
-            <div className="p-8 space-y-6 max-h-[70vh] overflow-y-auto">
+            <div className="p-4 md:p-8 space-y-6 max-h-[80vh] overflow-y-auto">
               <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid gird-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
                       Backlog Policy
@@ -408,7 +398,7 @@ export const JobListingView = () => {
                   </div> */}
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid gird-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
                       Lead Recruiter

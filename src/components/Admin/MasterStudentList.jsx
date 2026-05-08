@@ -39,7 +39,6 @@ export default function MasterStudentList() {
     try {
       setLoading(true);
       const data = await getMasterStudents();
-      // console.log("getMasterStudents",data);
       setStudents(data.students);
     } catch (error) {
       console.error("Error loading master students:", error);
@@ -52,20 +51,19 @@ export default function MasterStudentList() {
     e.preventDefault();
     setError("");
     setSuccess("");
-    console.log("Sending student:", newStudent); 
     try {
       await addMasterStudent({
-  name: newStudent.name.trim(),
+        name: newStudent.name.trim(),
 
-    enrollmentNumber: newStudent.enrollmentNumber.trim(),
-    department: newStudent.department.trim(),
-  });
+        enrollmentNumber: newStudent.enrollmentNumber.trim(),
+        department: newStudent.department.trim(),
+      });
       setSuccess("Student added successfully!");
       setNewStudent({ name: "", enrollmentNumber: "", department: "" });
       setTimeout(() => setShowAddModal(false), 1500);
       loadStudents();
     } catch (err) {
-        console.log("ERROR:", err.response?.data);
+      console.log("ERROR:", err.response?.data);
       setError(err.message || "Failed to add student");
     }
   };
@@ -97,7 +95,7 @@ export default function MasterStudentList() {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h3 className="text-2xl font-black text-slate-900  tracking-tight">
+          <h3 className="text-xl md:text-2xl font-black text-slate-900  tracking-tight">
             Master Student List
           </h3>
           <p className="text-slate-500 font-medium text-sm">
@@ -140,16 +138,16 @@ export default function MasterStudentList() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50/50 border-b border-slate-100">
-                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <th className="px-4 md:px-8 py-4 md:py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   Student Details
                 </th>
-                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <th className="px-4 md:px-8 py-4 md:py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   Enrollment No.
                 </th>
-                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <th className="px-4 md:px-8 py-4 md:py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   Department
                 </th>
-                <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">
+                <th className="px-4 md:px-8 py-4 md:py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">
                   Actions
                 </th>
               </tr>
@@ -157,7 +155,7 @@ export default function MasterStudentList() {
             <tbody className="divide-y divide-slate-50">
               {loading ? (
                 <tr>
-                  <td colSpan={4} className="px-8 py-12 text-center">
+                  <td colSpan={4} className="px-4 md:px-8 py-12 text-center">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
                   </td>
                 </tr>
@@ -165,7 +163,7 @@ export default function MasterStudentList() {
                 <tr>
                   <td
                     colSpan={4}
-                    className="px-8 py-12 text-center text-slate-400 font-medium "
+                    className="px-4 md:px-8 py-12 text-center text-slate-400 font-medium "
                   >
                     No students found in the master list.
                   </td>
@@ -176,7 +174,7 @@ export default function MasterStudentList() {
                     key={student._id}
                     className="hover:bg-slate-50/50 transition-colors group"
                   >
-                    <td className="px-8 py-6">
+                    <td className="px-4 md:px-8 py-4 md:py-6">
                       <div className="flex items-center gap-4">
                         <div className="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 font-black text-sm ">
                           {student.name.charAt(0)}
@@ -186,17 +184,17 @@ export default function MasterStudentList() {
                         </span>
                       </div>
                     </td>
-                    <td className="px-8 py-6">
+                    <td className="px-4 md:px-8 py-4 md:py-6">
                       <span className="text-xs font-bold text-slate-500 font-mono">
                         {student.enrollmentNumber}
                       </span>
                     </td>
-                    <td className="px-8 py-6">
+                    <td className="px-4 md:px-8 py-4 md:py-6">
                       <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-black uppercase tracking-wider">
                         {student.department}
                       </span>
                     </td>
-                    <td className="px-8 py-6 text-right">
+                    <td className="px-4 md:px-8 py-4 md:py-6 text-right">
                       <button
                         onClick={() => handleDelete(student._id)}
                         className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"
@@ -211,7 +209,6 @@ export default function MasterStudentList() {
           </table>
         </div>
       </div>
-
 
       {/* Add Modal */}
       <AnimatePresence>

@@ -130,10 +130,6 @@ export default function HiringPartners() {
               <h4 className="font-black text-xl text-slate-900 mb-1">
                 {c.name}
               </h4>
-
-              {/* <p className="text-xs font-bold text-indigo-700 hover:underline cursor-pointer mb-2">
-                {c.email}
-              </p> */}
               <a
                 href={`mailto:${c.email}?subject=Regarding Job Application&body=Hello ${c.name},`}
                 className="text-sm text-blue-600 hover:underline"
@@ -178,11 +174,6 @@ export default function HiringPartners() {
             <h3 className="text-lg font-bold text-slate-900 mb-2">
               Delete Company?
             </h3>
-
-            {/* <p className="text-sm text-slate-500 mb-6">
-              Are you sure you want to delete this company? This action cannot
-              be undone.
-            </p> */}
             <p>
               Deleting this company will also remove all its jobs and
               applications. This action cannot be undone.

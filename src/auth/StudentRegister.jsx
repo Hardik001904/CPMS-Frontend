@@ -61,7 +61,6 @@ const StudentRegister = () => {
           }
 
           const res = await register(values);
-          console.log(res.data);
           toast.success("Register successfully");
           navigate("/login");
         } catch (err) {

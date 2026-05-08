@@ -8,7 +8,7 @@ import {
   ArrowRight,
   Shield,
 } from "lucide-react";
-import { Footer } from "../components/Layout";
+import { Footer, PublicNavbar } from "../components/Layout";
 import { appLogo, appName } from "../App";
 import { fetchSummaryStats } from "../services/statsService";
 
@@ -20,7 +20,6 @@ const LandingPage = () => {
     const loadStats = async () => {
       try {
         const data = await fetchSummaryStats();
-        console.log("STATS DATA:", data);
         setStats(data);
       } catch (error) {
         console.error("Error fetching stats", error);
@@ -66,7 +65,8 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       {/* NAVBAR */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
+      <PublicNavbar />
+      {/* <nav className="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-20 items-center">
             <Link to="/" className="flex items-center gap-2.5 group">
@@ -108,7 +108,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </nav> */}
 
       {/* HERO */}
       <section className="bg-gradient-to-br from-[#020617] via-[#0F172A] to-[#1E3A8A] py-24 relative overflow-hidden text-white">
@@ -143,7 +143,6 @@ const LandingPage = () => {
       </section>
 
       {/* PLACEMENT OVERVIEW (MATCHED UI) */}
-      {/* <section className="py-24 bg-gradient-to-br from-blue-50 via-slate-50 to-indigo-50 relative overflow-hidden"> */}
       <section className="py-24 bg-gradient-to-br from-slate-100 via-blue-50 to-slate-200 relative overflow-hidden border-y border-slate-200">
         <div className="absolute top-10 left-10 w-72 h-72 bg-blue-300/30 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-10 right-10 w-72 h-72 bg-indigo-300/30 rounded-full blur-[120px]"></div>
@@ -160,7 +159,10 @@ const LandingPage = () => {
 
           <div className="grid md:grid-cols-4 gap-8">
             {summaryStats.map((item, index) => (
-              <div className="p-8 rounded-3xl bg-white shadow-xl border border-blue-100 hover:-translate-y-2 transition-all text-center">
+              <div
+                key={index}
+                className="p-8 rounded-3xl bg-white shadow-xl border border-blue-100 hover:-translate-y-2 transition-all text-center"
+              >
                 <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 mb-5 mx-auto">
                   {item.icon}
                 </div>
@@ -177,7 +179,7 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-      {/* ✅ PLACEMENT OVERVIEW (MATCHED UI) */}
+      {/* PLACEMENT OVERVIEW (MATCHED UI) */}
       {/* <section className="py-24 bg-slate-50 reveal">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -215,7 +217,7 @@ const LandingPage = () => {
                 ))}
               </div> */}
 
-      {/* ✅ Placement % (Styled clean) */}
+      {/* Placement % (Styled clean) */}
       {/* {stats && (
                 <div className="mt-16 text-center">
                   <h3 className="text-xl font-semibold mb-4">
@@ -252,7 +254,6 @@ const LandingPage = () => {
             Everything needed for modern campus recruitment
           </p>
         </div>
-        {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Feature Cards */}
           <div className="grid md:grid-cols-3 gap-12 text-center">
