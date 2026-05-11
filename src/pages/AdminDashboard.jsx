@@ -177,14 +177,14 @@ const AdminDashboard = () => {
           user={user}
           onLogout={logout}
         />
-        <div className="p-4  md:p-8 max-w-7xl mx-auto ">
+        <div className="p-4 z-5 md:p-8 max-w-7xl mx-auto ">
           <Routes>
             <Route
               path="overview"
               element={
                 <div className="space-y-6 md:space-y-6 animate-in fade-in duration-700">
                   {/* Hero Banner */}
-                  <div className="bg-[#0a0f1d] rounded-2xl md:rounded-[3rem] p-6 md:p-14 text-white shadow-2xl relative overflow-hidden border border-white/5">
+                  <div className="bg-[#0a0f1d]  z-5 rounded-2xl md:rounded-[3rem] p-6 md:p-14 text-white shadow-2xl relative overflow-hidden border border-white/5">
                     <div className="relative z-10 ">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-[0.2em] border border-emerald-500/20 mb-5 md:mb-8">
                         <ShieldCheck className="w-3.5 h-3.5" /> Core Status:

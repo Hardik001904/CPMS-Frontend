@@ -171,7 +171,7 @@ const StudentDashboard = () => {
             <Route
               path="overview"
               element={
-                <div className="space-y-8 animate-in fade-in duration-500">
+                <div className="space-y-8 z-5 animate-in fade-in duration-500">
                   <div className="bg-indigo-600 rounded-[2.5rem] z-5 p-10 text-white shadow-2xl relative overflow-hidden">
                     <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-6">
                       <div>

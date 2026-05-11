@@ -208,7 +208,7 @@ const CompanyDashboard = ({
               element={
                 <div className="space-y-6 md:space-y-8 animate-in fade-in duration-700">
                   {/* Hero Banner */}
-                  <div className="bg-[#0a0f1d] rounded-2xl md:rounded-[2.5rem] p-6  md:p-10 text-white flex flex-col lg:flex-row justify-between lg:items-center gap-6 shadow-2xl relative overflow-hidden">
+                  <div className="bg-[#0a0f1d] z-5 rounded-2xl md:rounded-[2.5rem] p-6  md:p-10 text-white flex flex-col lg:flex-row justify-between lg:items-center gap-6 shadow-2xl relative overflow-hidden">
                     <div className="relative z-10">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] border border-blue-500/20 mb-4 md:mb-6">
                         <Activity className="w-3.5 h-3.5 animate-pulse" />{" "}
